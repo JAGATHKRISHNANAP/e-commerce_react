@@ -2231,7 +2231,7 @@
 
 
 
-
+// src/components/pages/dashorard.jsx
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Header from '../components/homepagecomponent/AppHeaders'
@@ -2404,10 +2404,15 @@ const Homepage = () => {
     }, 3000)
   }
 
-  // Navigate to product details page instead of opening modal
+  // // Navigate to product details page instead of opening modal
+  // const handleViewDetails = (product) => {
+  //   navigate(`/product/${product.id}`)
+  // }
+
   const handleViewDetails = (product) => {
-    navigate(`/product/${product.id}`)
-  }
+  // Navigate to product details page using the product_id
+  navigate(`/product/${product.product_id}`);
+};
 
   const handleShopNow = () => {
     // Scroll to products section
@@ -2563,7 +2568,7 @@ const Homepage = () => {
             loading={loading}
             error={error}
             onAddToCart={handleAddToCart}
-            onViewDetails={handleViewDetails}
+            onViewDetails={handleViewDetails} // This will now navigate correctly
             totalCount={pagination.total_count}
             currentPage={pagination.page}
             totalPages={pagination.total_pages}
