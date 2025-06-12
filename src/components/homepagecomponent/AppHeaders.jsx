@@ -1086,7 +1086,7 @@ const Header = ({ onSearch, searchQuery }) => {
 
   return (
     <>
-      <style>
+      {/* <style>
         {`
           @import url('https://fonts.googleapis.com/css2?family=Amazon+Ember:wght@400;500;700&display=swap');
           
@@ -1131,7 +1131,7 @@ const Header = ({ onSearch, searchQuery }) => {
             }
           }
         `}
-      </style>
+      </style> */}
 
       <header className="header-container" style={{
         position: 'sticky',

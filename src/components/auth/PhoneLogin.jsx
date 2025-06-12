@@ -46,16 +46,16 @@ const PhoneLogin = () => {
   }
 
   const countries = [
-    { code: '+1', flag: '🇺🇸', name: 'United States' },
-    { code: '+44', flag: '🇬🇧', name: 'United Kingdom' },
+    // { code: '+1', flag: '🇺🇸', name: 'United States' },
+    // { code: '+44', flag: '🇬🇧', name: 'United Kingdom' },
     { code: '+91', flag: '🇮🇳', name: 'India' },
-    { code: '+33', flag: '🇫🇷', name: 'France' },
-    { code: '+49', flag: '🇩🇪', name: 'Germany' },
-    { code: '+81', flag: '🇯🇵', name: 'Japan' },
-    { code: '+86', flag: '🇨🇳', name: 'China' },
-    { code: '+61', flag: '🇦🇺', name: 'Australia' },
-    { code: '+55', flag: '🇧🇷', name: 'Brazil' },
-    { code: '+34', flag: '🇪🇸', name: 'Spain' }
+    // { code: '+33', flag: '🇫🇷', name: 'France' },
+    // { code: '+49', flag: '🇩🇪', name: 'Germany' },
+    // { code: '+81', flag: '🇯🇵', name: 'Japan' },
+    // { code: '+86', flag: '🇨🇳', name: 'China' },
+    // { code: '+61', flag: '🇦🇺', name: 'Australia' },
+    // { code: '+55', flag: '🇧🇷', name: 'Brazil' },
+    // { code: '+34', flag: '🇪🇸', name: 'Spain' }
   ]
 
   return (

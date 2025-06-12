@@ -46,7 +46,7 @@ const ProductCard = ({ product, onAddToCart, onViewDetails }) => {
         overflow: 'hidden',
         background: '#f8f9fa'
       }}>
-        {!imageError && product.image_url ? (
+        {/* {!imageError && product.image_url ? (
           <img
             src={product.image_url}
             alt={product.name}
@@ -72,7 +72,7 @@ const ProductCard = ({ product, onAddToCart, onViewDetails }) => {
           }}>
             📦
           </div>
-        )}
+        )} */}
 
         {/* Stock Status Badge */}
         <div style={{
