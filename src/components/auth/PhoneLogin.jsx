@@ -1,3 +1,4 @@
+//src/components/auth/PhoneLogin.jsx
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Phone, ArrowRight, Shield, Smartphone, CheckCircle } from 'lucide-react'

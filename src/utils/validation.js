@@ -1,4 +1,4 @@
-// Phone number validation
+//src/utils/validation.js
 export const validatePhoneNumber = (phoneNumber) => {
   if (!phoneNumber || phoneNumber.trim() === '') {
     return { isValid: false, error: 'Phone number is required' }

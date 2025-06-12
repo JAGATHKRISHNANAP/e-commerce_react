@@ -878,11 +878,11 @@ const FixedProductFilters = ({ onFiltersChange, filters }) => {
                 isExpanded={expandedSections.price}
                 onToggle={() => toggleSection('price')}
               >
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
                   <div style={{
                     display: 'grid',
                     gridTemplateColumns: '1fr auto 1fr',
-                    gap: '8px',
+                    gap: '10px',
                     alignItems: 'center'
                   }}>
                     <div>
@@ -893,7 +893,7 @@ const FixedProductFilters = ({ onFiltersChange, filters }) => {
                         onChange={(e) => handleFilterChange('min_price', e.target.value)}
                         style={{
                           width: '100%',
-                          padding: '6px 8px',
+                          padding: '6px 1px',
                           border: '1px solid #d5d9d9',
                           borderRadius: '4px',
                           fontSize: '14px',
@@ -909,7 +909,7 @@ const FixedProductFilters = ({ onFiltersChange, filters }) => {
                         }}
                       />
                     </div>
-                    <span style={{ color: '#565959', fontSize: '14px' }}>to</span>
+                    <span style={{ color: '#565959', fontSize: '12px' }}>to</span>
                     <div>
                       <input
                         type="number"
@@ -918,7 +918,7 @@ const FixedProductFilters = ({ onFiltersChange, filters }) => {
                         onChange={(e) => handleFilterChange('max_price', e.target.value)}
                         style={{
                           width: '100%',
-                          padding: '6px 8px',
+                          padding: '6px 1px',
                           border: '1px solid #d5d9d9',
                           borderRadius: '4px',
                           fontSize: '14px',
