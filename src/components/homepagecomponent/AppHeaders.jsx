@@ -1013,6 +1013,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { logout } from '../../redux/slices/authSlices'
 import LoadingSpinner from '../ui/LoadingSpinner'
 import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
 
 const Header = ({ onSearch, searchQuery }) => {
   const dispatch = useDispatch()
@@ -1022,9 +1023,15 @@ const Header = ({ onSearch, searchQuery }) => {
   const [searchInput, setSearchInput] = useState(searchQuery || '')
   const [searchSuggestions, setSearchSuggestions] = useState([])
   const [showSuggestions, setShowSuggestions] = useState(false)
+
+  const [cartCount, setCartCount] = useState(0);
   const dropdownRef = useRef(null)
   const searchRef = useRef(null)
+  
 
+  console.log('Header rendered with searchQuery:', user)
+  sessionStorage.setItem("customer_id", user?.customer_id);
+  // const customer_id = user?.customer_id;
   const handleLogout = async () => {
     if (window.confirm('Are you sure you want to logout?')) {
       dispatch(logout())
@@ -1038,6 +1045,34 @@ const Header = ({ onSearch, searchQuery }) => {
       setShowSuggestions(false)
     }
   }
+
+
+    useEffect(() => {
+    const fetchCartCount = async () => {
+      try {
+        const token = localStorage.getItem('token'); // Token should only be the JWT
+        if (!token) {
+          console.warn('No token found in localStorage');
+          return;
+        }
+
+        const response = await axios.get('http://localhost:8000/api/v1/cart/count', {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
+        // console.log('Cart count response:', response.data);
+
+        setCartCount(response.data.total_items);
+      } catch (error) {
+        console.error('Failed to fetch cart count:', error);
+      }
+    };
+
+    fetchCartCount();
+  }, []);
+
+  console.log('Cart count:', cartCount);
 
   const handleSearchInputChange = async (e) => {
     const value = e.target.value
@@ -1334,7 +1369,9 @@ const Header = ({ onSearch, searchQuery }) => {
                 justifyContent: 'center',
                 fontWeight: '700'
               }}>
-                0
+                {/* 0 */}
+
+                {cartCount}
               </span>
             </button>
 
@@ -1455,6 +1492,7 @@ const Header = ({ onSearch, searchQuery }) => {
                           color: '#111',
                           margin: '0 0 4px 0'
                         }}>
+                          {/* {user?.name || 'User'} */}
                           {user?.name || 'User'}
                         </p>
                         <p style={{

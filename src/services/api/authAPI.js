@@ -400,6 +400,7 @@ export const authAPI = {
         otp: otp,
       })
       return response.data
+      
     } catch (error) {
       throw error.response?.data || error
     }

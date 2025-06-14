@@ -15,6 +15,8 @@ export const cartAPI = {
     }
   },
 
+  
+
   // Get cart
   getCart: async () => {
     try {
@@ -67,3 +69,32 @@ export const cartAPI = {
     }
   }
 }
+
+
+
+
+export const getCustomerId = () => {
+  const customerId = sessionStorage.getItem('customer_id');
+  return customerId ? parseInt(customerId) : null;
+};
+
+// Get auth token if you're using authentication
+export const getAuthToken = () => {
+  return sessionStorage.getItem('auth_token') || localStorage.getItem('auth_token');
+};
+
+// Create headers with auth if available
+export const createHeaders = (includeAuth = false) => {
+  const headers = {
+    'Content-Type': 'application/json',
+  };
+  
+  if (includeAuth) {
+    const token = getAuthToken();
+    if (token) {
+      headers['Authorization'] = `Bearer ${token}`;
+    }
+  }
+  
+  return headers;
+};
