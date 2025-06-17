@@ -292,6 +292,7 @@ import YourOrderPage from './pages/YourOrderPage'
 import ProductDetailsPage from './pages/ProductDetailsPage'
 import YourAdressPage from './pages/YourAdressPage'
 import AddToCartPage from './pages/AddToCartPage'
+import CheckOutPage from './pages/CheckOutPage'
 
 // Simple 404 component
 const NotFound = () => {
@@ -454,6 +455,18 @@ const AppRouter = () => {
         element={
           <ProtectedRoute>
             <CardUsageExamples />
+          </ProtectedRoute>
+        } 
+      />
+
+      {/* chack out page */}
+
+
+            <Route 
+        path="/checkout" 
+        element={
+          <ProtectedRoute>
+            <CheckOutPage />
           </ProtectedRoute>
         } 
       />

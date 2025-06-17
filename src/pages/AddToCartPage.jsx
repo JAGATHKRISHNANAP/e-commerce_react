@@ -838,11 +838,17 @@ const CartPage = () => {
   const { cartData, loading, error, refetch, removeItem,onUpdateItem } = useCart();
   const [removingProductId, setRemovingProductId] = useState(null);
 
+  // const handleProceedToCheckout = () => {
+  //   showToast('Proceeding to checkout...', 'info');
+  //   console.log('Proceeding to checkout with cart:', cartData);
+  //   // navigate('/checkout');
+  // };
   const handleProceedToCheckout = () => {
-    showToast('Proceeding to checkout...', 'info');
-    console.log('Proceeding to checkout with cart:', cartData);
-    // navigate('/checkout');
-  };
+  showToast('Proceeding to checkout...', 'info');
+  console.log('Proceeding to checkout with cart:', cartData);
+  navigate('/checkout', { state: { cart: cartData } });
+};
+
 
   const handleContinueShopping = () => {
     navigate('/dashboard');
