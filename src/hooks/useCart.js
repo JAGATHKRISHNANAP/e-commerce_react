@@ -269,6 +269,37 @@ export const useCart = () => {
     }
   };
 
+
+
+const onUpdateItem = async (productId, quantity) => {
+  try {
+    setActionLoading(true);
+    const response = await fetch(`http://localhost:8000/api/v1/cart/item/${productId}`, {
+      method: 'PUT',
+      headers: {
+        ...getAuthHeaders(),
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ quantity }),  // ✅ Pass updated quantity here
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to update item quantity');
+    }
+
+    await fetchCartData(); // Refresh the cart
+    return true;
+  } catch (error) {
+    console.error('Error updating item quantity:', error);
+    throw error;
+  } finally {
+    setActionLoading(false);
+  }
+};
+
+
+
+
   useEffect(() => {
     fetchCartData();
   }, []);
@@ -280,6 +311,7 @@ export const useCart = () => {
     actionLoading,
     refetch: fetchCartData,
     removeItem,
-    clearCart
+    clearCart,
+    onUpdateItem
   };
 };

@@ -634,8 +634,184 @@
 
 
 
+// // src/pages/CartPage.jsx - Main Cart Page Component
+// import React from 'react';
+// import { useNavigate } from 'react-router-dom';
+// import {
+//   Box,
+//   Container,
+//   Typography,
+//   Grid,
+//   Stack,
+//   Breadcrumbs,
+//   Link
+// } from '@mui/material';
+// import { Home, NavigateNext, ShoppingCart } from '@mui/icons-material';
+
+// import Header from '../components/homepagecomponent/AppHeaders';
+// import CartItem from '../components/cart/CartItem';
+// import CartSummary from '../components/cart/CartSummary';
+// import EmptyCart from '../components/cart/EmptyCart';
+// import LoadingSpinner from '../components/ui/LoadingSpinner';
+// import ErrorMessage from '../components/ui/ErrorMessage';
+// import { useCart } from '../hooks/useCart';
+// import { showToast } from '../components/ui/Toast';
+
+// const CartPage = () => {
+//   const navigate = useNavigate();
+//   const { cartData, loading, error, refetch } = useCart();
+
+//   const handleProceedToCheckout = () => {
+//     // TODO: Implement checkout flow
+//     showToast('Proceeding to checkout...', 'info');
+//     console.log('Proceeding to checkout with cart:', cartData);
+//     // navigate('/checkout');
+//   };
+
+//   const handleContinueShopping = () => {
+//     navigate('/dashboard');
+//   };
+
+//   const handleClearCart = () => {
+//     // TODO: Implement clear cart functionality
+//     showToast('Clear cart functionality to be implemented', 'info');
+//     console.log('Clearing cart...');
+//   };
+
+//   const handleGoHome = () => {
+//     navigate('/dashboard');
+//   };
+
+//   // Loading state
+//   if (loading) {
+//     return (
+//       <Box sx={{ minHeight: '100vh', bgcolor: '#f9fafb' }}>
+//         <Header />
+//         <LoadingSpinner message="Loading your cart..." />
+//       </Box>
+//     );
+//   }
+
+//   // Error state
+//   if (error) {
+//     return (
+//       <Box sx={{ minHeight: '100vh', bgcolor: '#f9fafb' }}>
+//         <Header />
+//         <ErrorMessage
+//           error={error}
+//           title="Failed to load cart"
+//           onRetry={refetch}
+//           onGoHome={handleGoHome}
+//         />
+//       </Box>
+//     );
+//   }
+
+//   // Check if cart is empty
+//   const isEmpty = !cartData?.items || cartData.items.length === 0;
+
+//   return (
+//     <Box sx={{ minHeight: '100vh', bgcolor: '#f9fafb' }}>
+//       <Header />
+      
+//       <Container maxWidth="sx" sx={{ py: 1}}>  
+        
+//         {/* Breadcrumb */}
+//         <Breadcrumbs 
+//           separator={<NavigateNext fontSize="small" />} 
+//           sx={{ mb: 1 }}
+//         >
+//           <Link
+//             component="button"
+//             variant="body2"
+//             onClick={handleGoHome}
+//             sx={{ 
+//               textDecoration: 'none',
+//               display: 'flex',
+//               alignItems: 'center',
+//               gap: 0.5
+//             }}
+//           >
+//             <Home sx={{ fontSize: 16 }} />
+//             Home
+//           </Link>
+//           <Typography 
+//             color="text.primary" 
+//             variant="body2"
+//             sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}
+//           >
+//             <ShoppingCart sx={{ fontSize: 16 }} />
+//             Shopping Cart
+//           </Typography>
+//         </Breadcrumbs>
+//                 {/* Page Header */}
+//         {/* <Box sx={{ mb: 4 }}> */}
+//           <Typography
+//             variant="h4"
+//             sx={{
+//               fontWeight: 700,
+//               color: 'text.primary',
+//               mb: 1,
+//               display: 'flex',
+//               alignItems: 'center',
+//               gap: 1
+//             }}
+//           >
+//             {/* <ShoppingCart /> */}
+//             {/* Shopping Cart */}
+          
+          
+//           {!isEmpty && (
+//             <Typography variant="body1" color="text.secondary">
+//               {cartData.items.length} {cartData.items.length === 1 ? 'item' : 'items'} in your cart
+//             </Typography>
+//           )}
+//           </Typography>
+//         {/* </Box> */}
+
+//               <Container 
+//   maxWidth="sx" 
+//   sx={{ py: 1, px: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}
+// >
+
+
+
+//         {/* Main Content */}
+//         {isEmpty ? (
+//           <EmptyCart onContinueShopping={handleContinueShopping} />
+//         ) : (
+//           <Grid container spacing={5}>
+//             {/* Cart Items */}
+//             <Grid item xs={12} lg={8} xl={8}>
+//               <Stack spacing={0}>
+//                 {cartData.items.map((item, index) => (
+//                   <CartItem key={`${item.product.product_id}-${index}`} item={item} />
+//                 ))}
+//               </Stack>
+//             </Grid>
+
+//             {/* Cart Summary */}
+//             <Grid item xs={12} lg={4} xl={4}>
+//               <CartSummary
+//                 cartData={cartData}
+//                 onProceedToCheckout={handleProceedToCheckout}
+//                 onContinueShopping={handleContinueShopping}
+//                 onClearCart={handleClearCart}
+//               />
+//             </Grid>
+//           </Grid>
+//         )}
+//         </Container>
+//       </Container>
+//     </Box>
+//   );
+// };
+
+// export default CartPage;
+
+
 // src/pages/CartPage.jsx - Main Cart Page Component
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   Box,
@@ -659,10 +835,10 @@ import { showToast } from '../components/ui/Toast';
 
 const CartPage = () => {
   const navigate = useNavigate();
-  const { cartData, loading, error, refetch } = useCart();
+  const { cartData, loading, error, refetch, removeItem,onUpdateItem } = useCart();
+  const [removingProductId, setRemovingProductId] = useState(null);
 
   const handleProceedToCheckout = () => {
-    // TODO: Implement checkout flow
     showToast('Proceeding to checkout...', 'info');
     console.log('Proceeding to checkout with cart:', cartData);
     // navigate('/checkout');
@@ -673,7 +849,6 @@ const CartPage = () => {
   };
 
   const handleClearCart = () => {
-    // TODO: Implement clear cart functionality
     showToast('Clear cart functionality to be implemented', 'info');
     console.log('Clearing cart...');
   };
@@ -682,7 +857,17 @@ const CartPage = () => {
     navigate('/dashboard');
   };
 
-  // Loading state
+  const handleRemoveItem = async (productId) => {
+    try {
+      setRemovingProductId(productId);
+      await removeItem(productId);
+    } catch (error) {
+      showToast(error.message, 'error');
+    } finally {
+      setRemovingProductId(null);
+    }
+  };
+
   if (loading) {
     return (
       <Box sx={{ minHeight: '100vh', bgcolor: '#f9fafb' }}>
@@ -692,7 +877,15 @@ const CartPage = () => {
     );
   }
 
-  // Error state
+
+  const handleUpdateQuantity = async (productId, newQuantity) => {
+  try {
+    await onUpdateItem(productId, newQuantity);
+  } catch (error) {
+    showToast('Failed to update quantity', 'error');
+  }
+};
+
   if (error) {
     return (
       <Box sx={{ minHeight: '100vh', bgcolor: '#f9fafb' }}>
@@ -707,25 +900,19 @@ const CartPage = () => {
     );
   }
 
-  // Check if cart is empty
   const isEmpty = !cartData?.items || cartData.items.length === 0;
 
   return (
     <Box sx={{ minHeight: '100vh', bgcolor: '#f9fafb' }}>
       <Header />
-      
-      <Container maxWidth="sx" sx={{ py: 1}}>  
-        
-        {/* Breadcrumb */}
-        <Breadcrumbs 
-          separator={<NavigateNext fontSize="small" />} 
-          sx={{ mb: 1 }}
-        >
+
+      <Container maxWidth="sx" sx={{ py: 1 }}>
+        <Breadcrumbs separator={<NavigateNext fontSize="small" />} sx={{ mb: 1 }}>
           <Link
             component="button"
             variant="body2"
             onClick={handleGoHome}
-            sx={{ 
+            sx={{
               textDecoration: 'none',
               display: 'flex',
               alignItems: 'center',
@@ -735,8 +922,8 @@ const CartPage = () => {
             <Home sx={{ fontSize: 16 }} />
             Home
           </Link>
-          <Typography 
-            color="text.primary" 
+          <Typography
+            color="text.primary"
             variant="body2"
             sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}
           >
@@ -744,63 +931,59 @@ const CartPage = () => {
             Shopping Cart
           </Typography>
         </Breadcrumbs>
-                {/* Page Header */}
-        {/* <Box sx={{ mb: 4 }}> */}
-          <Typography
-            variant="h4"
-            sx={{
-              fontWeight: 700,
-              color: 'text.primary',
-              mb: 1,
-              display: 'flex',
-              alignItems: 'center',
-              gap: 1
-            }}
-          >
-            {/* <ShoppingCart /> */}
-            {/* Shopping Cart */}
-          
-          
+
+        <Typography
+          variant="h4"
+          sx={{
+            fontWeight: 700,
+            color: 'text.primary',
+            mb: 1,
+            display: 'flex',
+            alignItems: 'center',
+            gap: 1
+          }}
+        >
           {!isEmpty && (
             <Typography variant="body1" color="text.secondary">
               {cartData.items.length} {cartData.items.length === 1 ? 'item' : 'items'} in your cart
             </Typography>
           )}
-          </Typography>
-        {/* </Box> */}
+        </Typography>
 
-              <Container 
-  maxWidth="sx" 
-  sx={{ py: 1, px: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}
->
+        <Container
+          maxWidth="sx"
+          sx={{ py: 1, px: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}
+        >
+          {isEmpty ? (
+            <EmptyCart onContinueShopping={handleContinueShopping} />
+          ) : (
+            <Grid container spacing={5}>
+              {/* Cart Items */}
+              <Grid item xs={12} lg={8} xl={8}>
+                <Stack spacing={0}>
+                  {cartData.items.map((item, index) => (
+                    <CartItem
+                      key={`${item.product.product_id}-${index}`}
+                      item={item}
+                      onRemove={handleRemoveItem}
+                      onUpdateItem={handleUpdateQuantity}
+                      isRemoving={removingProductId === item.product.product_id}
+                    />
+                  ))}
+                </Stack>
+              </Grid>
 
-
-
-        {/* Main Content */}
-        {isEmpty ? (
-          <EmptyCart onContinueShopping={handleContinueShopping} />
-        ) : (
-          <Grid container spacing={5}>
-            {/* Cart Items */}
-            <Grid item xs={12} lg={8} xl={8}>
-              <Stack spacing={0}>
-                {cartData.items.map((item, index) => (
-                  <CartItem key={`${item.product.product_id}-${index}`} item={item} />
-                ))}
-              </Stack>
+              {/* Cart Summary */}
+              <Grid item xs={12} lg={4} xl={4}>
+                <CartSummary
+                  cartData={cartData}
+                  onProceedToCheckout={handleProceedToCheckout}
+                  onContinueShopping={handleContinueShopping}
+                  onClearCart={handleClearCart}
+                />
+              </Grid>
             </Grid>
-
-            {/* Cart Summary */}
-            <Grid item xs={12} lg={4} xl={4}>
-              <CartSummary
-                cartData={cartData}
-                onProceedToCheckout={handleProceedToCheckout}
-                onContinueShopping={handleContinueShopping}
-                onClearCart={handleClearCart}
-              />
-            </Grid>
-          </Grid>
-        )}
+          )}
         </Container>
       </Container>
     </Box>

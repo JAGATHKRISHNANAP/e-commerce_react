@@ -1014,6 +1014,7 @@ import { logout } from '../../redux/slices/authSlices'
 import LoadingSpinner from '../ui/LoadingSpinner'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import { cartAPI } from '../../services/api/cartAPI'
 
 const Header = ({ onSearch, searchQuery }) => {
   const dispatch = useDispatch()
@@ -1047,30 +1048,51 @@ const Header = ({ onSearch, searchQuery }) => {
   }
 
 
-    useEffect(() => {
-    const fetchCartCount = async () => {
-      try {
-        const token = localStorage.getItem('token'); // Token should only be the JWT
-        if (!token) {
-          console.warn('No token found in localStorage');
-          return;
-        }
+  //   useEffect(() => {
+  //   const fetchCartCount = async () => {
+  //     try {
+  //       const token = localStorage.getItem('token'); // Token should only be the JWT
+  //       if (!token) {
+  //         console.warn('No token found in localStorage');
+  //         return;
+  //       }
 
-        const response = await axios.get('http://localhost:8000/api/v1/cart/count', {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        });
-        // console.log('Cart count response:', response.data);
+  //       const response = await axios.get('http://localhost:8000/api/v1/cart/count', {
+  //         headers: {
+  //           Authorization: `Bearer ${token}`
+  //         }
+  //       });
+  //       // console.log('Cart count response:', response.data);
 
-        setCartCount(response.data.total_items);
-      } catch (error) {
-        console.error('Failed to fetch cart count:', error);
+  //       setCartCount(response.data.total_items);
+  //     } catch (error) {
+  //       console.error('Failed to fetch cart count:', error);
+  //     }
+  //   };
+
+  //   fetchCartCount();
+  // }, []);
+
+useEffect(() => {
+  const fetchCartCount = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        console.warn('No token found in localStorage');
+        return;
       }
-    };
 
-    fetchCartCount();
-  }, []);
+      const cartData = await cartAPI.getCartCount();
+      setCartCount(cartData.total_items);
+    } catch (error) {
+      console.error('Failed to fetch cart count:', error);
+    }
+  };
+
+  fetchCartCount();
+}, []);
+
+
 
   console.log('Cart count:', cartCount);
 
