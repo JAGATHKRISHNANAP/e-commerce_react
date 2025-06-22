@@ -249,7 +249,7 @@ const OrderSummary = ({ cartData }) => {
         borderRadius: 3,
         boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
         position: { md: 'sticky' },
-        top: { md: 24 },
+        top: { md: 10 },
         height: 'fit-content'
       }}
     >
@@ -369,14 +369,14 @@ const OrderSummary = ({ cartData }) => {
         </Box>
 
         {/* Security Badge */}
-        <Box sx={{ mt: 2, p: 2, bgcolor: 'success.50', borderRadius: 2 }}>
+        {/* <Box sx={{ mt: 2, p: 2, bgcolor: 'success.50', borderRadius: 2 }}>
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
             <Security sx={{ color: 'success.main', fontSize: 20 }} />
             <Typography variant="body2" fontWeight={600} color="success.main">
               Secure Checkout Protected
             </Typography>
           </Box>
-        </Box>
+        </Box> */}
       </CardContent>
     </Card>
   );

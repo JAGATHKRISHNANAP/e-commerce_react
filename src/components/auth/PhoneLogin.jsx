@@ -11,7 +11,7 @@ const PhoneLogin = () => {
   const dispatch = useDispatch()
   const { isLoading, error } = useSelector(state => state.auth)
   const [phoneNumber, setPhoneNumber] = useState('')
-  const [countryCode, setCountryCode] = useState('+1')
+  const [countryCode, setCountryCode] = useState('+91')
   const [phoneError, setPhoneError] = useState('')
   const [isFocused, setIsFocused] = useState(false)
 
