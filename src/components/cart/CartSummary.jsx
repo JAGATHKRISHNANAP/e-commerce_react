@@ -1,257 +1,3 @@
-// // // src/components/cart/CartSummary.jsx
-// // import React from 'react';
-// // import {
-// //   Card,
-// //   CardContent,
-// //   Typography,
-// //   Box,
-// //   Divider,
-// //   Button,
-// //   Stack,
-// //   Chip
-// // } from '@mui/material';
-// // import {
-// //   ShoppingCart,
-// //   CreditCard,
-// //   ArrowForward,
-// //   ShoppingBag,
-// //   Delete
-// // } from '@mui/icons-material';
-
-// // const CartSummary = ({ cartData, onProceedToCheckout, onContinueShopping, onClearCart }) => {
-// //   const calculateTotals = () => {
-// //     if (!cartData?.items || cartData.items.length === 0) {
-// //       return { itemCount: 0, totalQuantity: 0, totalAmount: 0 };
-// //     }
-
-// //     const itemCount = cartData.items.length;
-// //     const totalQuantity = cartData.items.reduce((sum, item) => sum + item.quantity, 0);
-// //     const totalAmount = cartData.items.reduce((sum, item) => {
-// //       return sum + (parseFloat(item.product.price) * item.quantity);
-// //     }, 0);
-
-// //     return { itemCount, totalQuantity, totalAmount };
-// //   };
-
-// //   const { itemCount, totalQuantity, totalAmount } = calculateTotals();
-
-// //   const formatPrice = (price) => {
-// //     return `₹${price.toLocaleString('en-IN', {
-// //       minimumFractionDigits: 2,
-// //       maximumFractionDigits: 2
-// //     })}`;
-// //   };
-
-// //   const isEmpty = !cartData?.items || cartData.items.length === 0;
-
-// //   return (
-// //     <Card
-// //       sx={{
-// //         borderRadius: 3,
-// //         boxShadow: '0 4px 20px rgba(0,0,0,0.1)',
-// //         border: '1px solid',
-// //         borderColor: 'grey.200',
-// //         position: { md: 'sticky' },
-// //         top: { md: 24 },
-// //         height: 'fit-content'
-// //       }}
-// //     >
-// //       <CardContent sx={{ p: 3 }}>
-// //         <Typography
-// //           variant="h6"
-// //           sx={{
-// //             fontWeight: 700,
-// //             mb: 3,
-// //             display: 'flex',
-// //             alignItems: 'center',
-// //             gap: 1,
-// //             color: 'text.primary'
-// //           }}
-// //         >
-// //           <ShoppingCart />
-// //           Order Summary
-// //         </Typography>
-
-// //         {!isEmpty ? (
-// //           <>
-// //             {/* Summary Details */}
-// //             <Stack spacing={2.5}>
-// //               {/* Item Stats */}
-// //               <Box>
-// //                 <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
-// //                   <Typography variant="body2" color="text.secondary">
-// //                     Items ({itemCount})
-// //                   </Typography>
-// //                   <Chip
-// //                     label={`${totalQuantity} qty`}
-// //                     size="small"
-// //                     color="primary"
-// //                     variant="outlined"
-// //                   />
-// //                 </Box>
-                
-// //                 <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-// //                   <Typography variant="body2" color="text.secondary">
-// //                     Subtotal
-// //                   </Typography>
-// //                   <Typography variant="body2" fontWeight={500}>
-// //                     {formatPrice(totalAmount)}
-// //                   </Typography>
-// //                 </Box>
-// //               </Box>
-
-// //               <Divider />
-
-// //               {/* Delivery & Other Charges (Placeholder) */}
-// //               <Box>
-// //                 <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
-// //                   <Typography variant="body2" color="text.secondary">
-// //                     Delivery
-// //                   </Typography>
-// //                   <Typography variant="body2" color="success.main" fontWeight={500}>
-// //                     FREE
-// //                   </Typography>
-// //                 </Box>
-                
-// //                 <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-// //                   <Typography variant="body2" color="text.secondary">
-// //                     Taxes & Fees
-// //                   </Typography>
-// //                   <Typography variant="body2" color="text.secondary">
-// //                     Calculated at checkout
-// //                   </Typography>
-// //                 </Box>
-// //               </Box>
-
-// //               <Divider sx={{ borderStyle: 'dashed' }} />
-
-// //               {/* Total Amount */}
-// //               <Box sx={{ bgcolor: 'grey.50', p: 2, borderRadius: 2 }}>
-// //                 <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-// //                   <Typography variant="h6" fontWeight={700}>
-// //                     Total Amount
-// //                   </Typography>
-// //                   <Typography
-// //                     variant="h5"
-// //                     sx={{
-// //                       fontWeight: 700,
-// //                       color: 'error.main'
-// //                     }}
-// //                   >
-// //                     {formatPrice(totalAmount)}
-// //                   </Typography>
-// //                 </Box>
-// //                 <Typography variant="caption" color="text.secondary" sx={{ mt: 1, display: 'block' }}>
-// //                   Inclusive of all taxes
-// //                 </Typography>
-// //               </Box>
-
-// //               {/* Action Buttons */}
-// //               <Stack spacing={2}>
-// //                 <Button
-// //                   variant="contained"
-// //                   size="large"
-// //                   fullWidth
-// //                   onClick={onProceedToCheckout}
-// //                   endIcon={<CreditCard />}
-// //                   sx={{
-// //                     py: 1.5,
-// //                     borderRadius: 2,
-// //                     textTransform: 'none',
-// //                     fontSize: '1rem',
-// //                     fontWeight: 600,
-// //                     background: 'linear-gradient(45deg, #FF6B35 30%, #FF8E53 90%)',
-// //                     '&:hover': {
-// //                       background: 'linear-gradient(45deg, #E55A2B 30%, #FF7043 90%)',
-// //                       transform: 'translateY(-2px)',
-// //                       boxShadow: '0 8px 25px rgba(255,107,53,0.4)'
-// //                     }
-// //                   }}
-// //                 >
-// //                   Proceed to Checkout
-// //                 </Button>
-
-// //                 <Button
-// //                   variant="outlined"
-// //                   size="large"
-// //                   fullWidth
-// //                   onClick={onContinueShopping}
-// //                   startIcon={<ShoppingBag />}
-// //                   sx={{
-// //                     py: 1.5,
-// //                     borderRadius: 2,
-// //                     textTransform: 'none',
-// //                     fontSize: '0.95rem',
-// //                     fontWeight: 500,
-// //                     borderColor: 'primary.main',
-// //                     color: 'primary.main',
-// //                     '&:hover': {
-// //                       borderColor: 'primary.dark',
-// //                       bgcolor: 'primary.50'
-// //                     }
-// //                   }}
-// //                 >
-// //                   Continue Shopping
-// //                 </Button>
-
-// //                 <Button
-// //                   variant="text"
-// //                   size="medium"
-// //                   fullWidth
-// //                   onClick={onClearCart}
-// //                   startIcon={<Delete />}
-// //                   sx={{
-// //                     py: 1,
-// //                     borderRadius: 2,
-// //                     textTransform: 'none',
-// //                     fontSize: '0.9rem',
-// //                     color: 'error.main',
-// //                     '&:hover': {
-// //                       bgcolor: 'error.50'
-// //                     }
-// //                   }}
-// //                 >
-// //                   Clear Cart
-// //                 </Button>
-// //               </Stack>
-// //             </Stack>
-// //           </>
-// //         ) : (
-// //           /* Empty Cart Summary */
-// //           <Box sx={{ textAlign: 'center', py: 3 }}>
-// //             <Typography variant="body2" color="text.secondary" gutterBottom>
-// //               Your cart is empty
-// //             </Typography>
-// //             <Button
-// //               variant="contained"
-// //               onClick={onContinueShopping}
-// //               startIcon={<ShoppingBag />}
-// //               sx={{
-// //                 mt: 2,
-// //                 borderRadius: 2,
-// //                 textTransform: 'none'
-// //               }}
-// //             >
-// //               Start Shopping
-// //             </Button>
-// //           </Box>
-// //         )}
-// //       </CardContent>
-// //     </Card>
-// //   );
-// // };
-
-// // export default CartSummary;
-
-
-
-
-
-
-
-
-
-
 // // src/components/cart/CartSummary.jsx
 // import React, { useState } from 'react';
 // import {
@@ -668,7 +414,10 @@
 
 
 
-// src/components/cart/CartSummary.jsx
+
+
+
+// src/components/cart/OrderSummary.jsx
 import React, { useState } from 'react';
 import {
   Card,
@@ -687,14 +436,15 @@ import {
   CircularProgress
 } from '@mui/material';
 import {
-  ShoppingCart,
   CreditCard,
   ShoppingBag,
   Delete,
-  Receipt
+  Shield,
+  LocalOffer,
+  Verified
 } from '@mui/icons-material';
 
-const CartSummary = ({ 
+const OrderSummary = ({ 
   cartData, 
   onProceedToCheckout, 
   onContinueShopping, 
@@ -711,7 +461,9 @@ const CartSummary = ({
         subtotal: 0,
         taxExclusive: 0,
         taxInclusive: 0,
-        grandTotal: 0
+        grandTotal: 0,
+        discount: 0,
+        savings: 0
       };
     }
 
@@ -725,7 +477,13 @@ const CartSummary = ({
     const taxRate = 0.18;
     const taxExclusive = subtotal / (1 + taxRate);
     const taxInclusive = subtotal - taxExclusive;
-    const grandTotal = subtotal; // Since tax is already included
+    
+    // Example calculations for invoice
+    const discount = subtotal * 0.15; // 15% discount example
+    const platformFee = 29;
+    const deliveryFee = 0; // Free delivery
+    const savings = discount + (subtotal > 499 ? 40 : 0); // Free delivery saves ₹40
+    const grandTotal = subtotal - discount + platformFee + deliveryFee+taxInclusive;
 
     return { 
       itemCount, 
@@ -733,7 +491,11 @@ const CartSummary = ({
       subtotal,
       taxExclusive,
       taxInclusive,
-      grandTotal
+      grandTotal,
+      discount,
+      platformFee,
+      deliveryFee,
+      savings
     };
   };
 
@@ -743,13 +505,17 @@ const CartSummary = ({
     subtotal,
     taxExclusive,
     taxInclusive,
-    grandTotal
+    grandTotal,
+    discount,
+    platformFee,
+    deliveryFee,
+    savings
   } = calculateTotals();
 
   const formatPrice = (price) => {
-    return `₹${price.toLocaleString('en-IN', {
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2
+    return `₹${Math.abs(price).toLocaleString('en-IN', {
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0
     })}`;
   };
 
@@ -766,171 +532,237 @@ const CartSummary = ({
     }
   };
 
+  // Row component for consistent styling
+  const PriceRow = ({ label, amount, isDiscount = false, isBold = false, icon = null }) => (
+    <Box sx={{ 
+      display: 'flex', 
+      justifyContent: 'space-between', 
+      alignItems: 'center',
+      py: 1.5
+    }}>
+      <Typography 
+        variant="body2" 
+        sx={{ 
+          color: '#6B7280',
+          fontWeight: isBold ? 600 : 400,
+          fontSize: isBold ? '1rem' : '0.9rem',
+          display: 'flex',
+          alignItems: 'center',
+          gap: 0.5
+        }}
+      >
+        {icon && icon}
+        {label}
+      </Typography>
+      <Typography 
+        variant="body2" 
+        sx={{ 
+          color: isDiscount ? '#16A34A' : (isBold ? '#111827' : '#374151'),
+          fontWeight: isBold ? 700 : 500,
+          fontSize: isBold ? '1rem' : '0.9rem'
+        }}
+      >
+        {isDiscount && amount > 0 ? '−' : ''}{formatPrice(amount)}
+      </Typography>
+    </Box>
+  );
+
   return (
     <>
       <Card
+        elevation={0}
         sx={{
-          borderRadius: 4,
-          boxShadow: '0 8px 32px rgba(0,0,0,0.12)',
-          border: '1px solid',
-          borderColor: 'grey.200',
+          borderRadius: 2,
+          border: '1px solid #E5E7EB',
           position: { md: 'sticky' },
           top: { md: 24 },
           height: 'fit-content',
-          background: 'linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%)'
+          backgroundColor: '#FFFFFF',
+          boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)'
         }}
       >
-        <CardContent sx={{ p: 4 }}>
-          <Typography
-            variant="h5"
-            sx={{
-              fontWeight: 700,
-              mb: 3,
-              display: 'flex',
-              alignItems: 'center',
-              gap: 1.5,
-              color: 'text.primary'
-            }}
-          >
-            <Receipt sx={{ color: 'primary.main' }} />
-            Order Summary
-          </Typography>
-
+        <CardContent sx={{ p: 0 }}>
           {!isEmpty ? (
             <>
-              {/* Product List */}
-              <Box sx={{ mb: 3 }}>
-                <Typography variant="h6" sx={{ fontWeight: 600, mb: 2, color: 'text.primary' }}>
-                  Items ({itemCount})
+              {/* Header */}
+              <Box sx={{ p: 3, pb: 2 }}>
+                <Typography
+                  variant="h6"
+                  sx={{
+                    fontWeight: 600,
+                    color: '#111827',
+                    fontSize: '1.125rem',
+                    mb: 0.5
+                  }}
+                >
+                  PRICE DETAILS
                 </Typography>
-                <Stack spacing={1.5}>
-                  {cartData.items.map((item, index) => {
-                    const itemTotal = parseFloat(item.product.price) * item.quantity;
-                    return (
-                      <Box
-                        key={`${item.product.product_id}-${index}`}
-                        sx={{
-                          p: 2,
-                          bgcolor: 'white',
-                          borderRadius: 2,
-                          border: '1px solid',
-                          borderColor: 'grey.200'
-                        }}
-                      >
-                        <Typography
-                          variant="body2"
-                          sx={{
-                            fontWeight: 600,
-                            color: 'text.primary',
-                            mb: 0.5,
-                            display: '-webkit-box',
-                            WebkitLineClamp: 2,
-                            WebkitBoxOrient: 'vertical',
-                            overflow: 'hidden'
+                <Typography variant="body2" sx={{ color: '#6B7280' }}>
+                  {itemCount} {itemCount === 1 ? 'Item' : 'Items'}
+                </Typography>
+              </Box>
+
+              <Divider sx={{ borderColor: '#F3F4F6' }} />
+
+              {/* Price Breakdown */}
+              <Box sx={{ px: 3, py: 2 }}>
+                <Stack spacing={0}>
+                  {/* Subtotal */}
+                  <PriceRow 
+                    label={`Total MRP (${totalQuantity} ${totalQuantity === 1 ? 'item' : 'items'})`}
+                    amount={subtotal}
+                  />
+
+                  {/* Discount */}
+                  {discount > 0 && (
+                    <PriceRow 
+                      label="Discount on MRP"
+                      amount={discount}
+                      isDiscount={true}
+                      icon={<LocalOffer sx={{ fontSize: 16, color: '#16A34A' }} />}
+                    />
+                  )}
+
+                  {/* Platform Fee */}
+                  <PriceRow 
+                    label="Platform Fee"
+                    amount={platformFee}
+                  />
+
+                  {/* Delivery Charges */}
+                  <Box sx={{ 
+                    display: 'flex', 
+                    justifyContent: 'space-between', 
+                    alignItems: 'center',
+                    py: 1.5
+                  }}>
+                    <Typography 
+                      variant="body2" 
+                      sx={{ 
+                        color: '#6B7280',
+                        fontSize: '0.9rem'
+                      }}
+                    >
+                      Delivery Charges
+                    </Typography>
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                      {subtotal > 499 && (
+                        <Typography 
+                          variant="body2" 
+                          sx={{ 
+                            color: '#6B7280',
+                            textDecoration: 'line-through',
+                            fontSize: '0.85rem'
                           }}
                         >
-                          {item.product.name}
+                          ₹40
                         </Typography>
-                        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                          <Typography variant="body2" color="text.secondary">
-                            {formatPrice(parseFloat(item.product.price))} × {item.quantity}
-                          </Typography>
-                          <Typography variant="body2" fontWeight={600} color="error.main">
-                            {formatPrice(itemTotal)}
-                          </Typography>
-                        </Box>
-                      </Box>
-                    );
-                  })}
+                      )}
+                      <Chip
+                        label="FREE"
+                        size="small"
+                        sx={{
+                          backgroundColor: '#16A34A',
+                          color: 'white',
+                          fontWeight: 600,
+                          fontSize: '0.75rem',
+                          height: 24
+                        }}
+                      />
+                    </Box>
+                  </Box>
+
+                  {/* Tax */}
+                  <PriceRow 
+                    label="Total Tax"
+                    amount={taxInclusive}
+                  />
                 </Stack>
               </Box>
 
-              <Divider sx={{ mb: 3, borderStyle: 'dashed' }} />
+              <Divider sx={{ borderColor: '#E5E7EB', mx: 3 }} />
 
-              {/* Calculation Details */}
-              <Stack spacing={2.5}>
-                {/* Subtotal */}
-                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <Typography variant="body1" color="text.secondary">
-                    Subtotal ({totalQuantity} items)
+              {/* Total Amount */}
+              <Box sx={{ px: 3, py: 2.5 }}>
+                <Box sx={{ 
+                  display: 'flex', 
+                  justifyContent: 'space-between', 
+                  alignItems: 'center',
+                  mb: 2
+                }}>
+                  <Typography 
+                    variant="h6" 
+                    sx={{ 
+                      color: '#111827',
+                      fontWeight: 700,
+                      fontSize: '1.125rem'
+                    }}
+                  >
+                    Total Amount
                   </Typography>
-                  <Typography variant="body1" fontWeight={600}>
-                    {formatPrice(subtotal)}
+                  <Typography
+                    variant="h6"
+                    sx={{
+                      fontWeight: 700,
+                      color: '#111827',
+                      fontSize: '1.25rem'
+                    }}
+                  >
+                    {formatPrice(grandTotal)}
                   </Typography>
                 </Box>
 
-                {/* Tax Breakdown */}
-                <Box sx={{ bgcolor: 'grey.50', p: 2, borderRadius: 2 }}>
-                  <Typography variant="body2" sx={{ fontWeight: 600, mb: 1, color: 'text.primary' }}>
-                    Tax Breakdown
-                  </Typography>
-                  
-                  <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
-                    <Typography variant="body2" color="text.secondary">
-                      Amount (Tax Exclusive)
-                    </Typography>
-                    <Typography variant="body2" fontWeight={500}>
-                      {formatPrice(taxExclusive)}
-                    </Typography>
-                  </Box>
-                  
-                  <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <Typography variant="body2" color="text.secondary">
-                      GST (18%)
-                    </Typography>
-                    <Typography variant="body2" fontWeight={500} color="warning.main">
-                      {formatPrice(taxInclusive)}
-                    </Typography>
-                  </Box>
-                </Box>
-
-                {/* Delivery */}
-                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <Typography variant="body1" color="text.secondary">
-                    Delivery Charges
-                  </Typography>
-                  <Chip
-                    label="FREE"
-                    size="small"
-                    color="success"
-                    variant="filled"
-                    sx={{ fontWeight: 600 }}
-                  />
-                </Box>
-
-                <Divider sx={{ borderStyle: 'dashed', borderColor: 'primary.main' }} />
-
-                {/* Grand Total */}
-                <Box 
-                  sx={{ 
-                    bgcolor: 'primary.50', 
-                    p: 3, 
-                    borderRadius: 3,
-                    border: '2px solid',
-                    borderColor: 'primary.main'
-                  }}
-                >
-                  <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <Typography variant="h6" fontWeight={700} color="primary.main">
-                      Grand Total
-                    </Typography>
-                    <Typography
-                      variant="h4"
-                      sx={{
-                        fontWeight: 800,
-                        color: 'error.main'
+                {/* Savings Message */}
+                {savings > 0 && (
+                  <Box sx={{
+                    backgroundColor: '#F0FDF4',
+                    border: '1px solid #BBF7D0',
+                    borderRadius: 1,
+                    p: 2,
+                    mb: 2
+                  }}>
+                    <Typography 
+                      variant="body2" 
+                      sx={{ 
+                        color: '#16A34A',
+                        fontWeight: 600,
+                        fontSize: '0.9rem'
                       }}
                     >
-                      {formatPrice(grandTotal)}
+                      You will save {formatPrice(savings)} on this order
                     </Typography>
                   </Box>
-                  <Typography variant="caption" color="text.secondary" sx={{ mt: 1, display: 'block' }}>
-                    Inclusive of all taxes & charges
+                )}
+
+                {/* Security Message */}
+                <Box sx={{ 
+                  display: 'flex', 
+                  alignItems: 'flex-start', 
+                  gap: 1,
+                  backgroundColor: '#F9FAFB',
+                  p: 2,
+                  borderRadius: 1,
+                  border: '1px solid #F3F4F6'
+                }}>
+                  <Shield sx={{ fontSize: 18, color: '#6B7280', mt: 0.1 }} />
+                  <Typography 
+                    variant="caption" 
+                    sx={{ 
+                      color: '#6B7280',
+                      lineHeight: 1.4,
+                      fontSize: '0.8rem'
+                    }}
+                  >
+                    Safe and Secure Payments. Easy returns. 100% Authentic products.
                   </Typography>
                 </Box>
+              </Box>
 
-                {/* Action Buttons */}
-                <Stack spacing={2} sx={{ mt: 3 }}>
+              <Divider sx={{ borderColor: '#F3F4F6' }} />
+
+              {/* Action Buttons */}
+              <Box sx={{ p: 3 }}>
+                <Stack spacing={2}>
                   <Button
                     variant="contained"
                     size="large"
@@ -938,88 +770,120 @@ const CartSummary = ({
                     onClick={onProceedToCheckout}
                     endIcon={<CreditCard />}
                     sx={{
-                      py: 2,
-                      borderRadius: 3,
-                      textTransform: 'none',
-                      fontSize: '1.1rem',
-                      fontWeight: 700,
-                      background: 'linear-gradient(45deg, #FF6B35 30%, #FF8E53 90%)',
-                      boxShadow: '0 4px 20px rgba(255,107,53,0.3)',
-                      '&:hover': {
-                        background: 'linear-gradient(45deg, #E55A2B 30%, #FF7043 90%)',
-                        transform: 'translateY(-2px)',
-                        boxShadow: '0 8px 30px rgba(255,107,53,0.4)'
-                      }
-                    }}
-                  >
-                    Proceed to Checkout
-                  </Button>
-
-                  <Button
-                    variant="outlined"
-                    size="large"
-                    fullWidth
-                    onClick={onContinueShopping}
-                    startIcon={<ShoppingBag />}
-                    sx={{
-                      py: 1.5,
-                      borderRadius: 3,
+                      py: 1.75,
+                      borderRadius: 1.5,
                       textTransform: 'none',
                       fontSize: '1rem',
                       fontWeight: 600,
-                      borderColor: 'primary.main',
-                      borderWidth: 2,
-                      color: 'primary.main',
+                      backgroundColor: '#111827',
+                      color: 'white',
+                      boxShadow: 'none',
                       '&:hover': {
-                        borderColor: 'primary.dark',
-                        borderWidth: 2,
-                        bgcolor: 'primary.50',
-                        transform: 'translateY(-1px)'
+                        backgroundColor: '#374151',
+                        boxShadow: 'none'
                       }
                     }}
                   >
-                    Continue Shopping
+                    PLACE ORDER
                   </Button>
 
-                  <Button
-                    variant="text"
-                    size="medium"
-                    fullWidth
-                    onClick={handleClearCartClick}
-                    startIcon={isClearing ? <CircularProgress size={16} /> : <Delete />}
-                    disabled={isClearing}
-                    sx={{
-                      py: 1.5,
-                      borderRadius: 3,
-                      textTransform: 'none',
-                      fontSize: '0.95rem',
-                      fontWeight: 500,
-                      color: 'error.main',
-                      '&:hover': {
-                        bgcolor: 'error.50'
-                      }
-                    }}
-                  >
-                    {isClearing ? 'Clearing Cart...' : 'Clear Cart'}
-                  </Button>
+                  <Stack direction="row" spacing={1.5}>
+                    <Button
+                      variant="outlined"
+                      size="medium"
+                      fullWidth
+                      onClick={onContinueShopping}
+                      startIcon={<ShoppingBag />}
+                      sx={{
+                        py: 1.25,
+                        borderRadius: 1.5,
+                        textTransform: 'none',
+                        fontSize: '0.9rem',
+                        fontWeight: 500,
+                        borderColor: '#D1D5DB',
+                        color: '#6B7280',
+                        '&:hover': {
+                          borderColor: '#9CA3AF',
+                          backgroundColor: '#F9FAFB'
+                        }
+                      }}
+                    >
+                      Continue Shopping
+                    </Button>
+
+                    <Button
+                      variant="outlined"
+                      size="medium"
+                      onClick={handleClearCartClick}
+                      startIcon={isClearing ? <CircularProgress size={16} /> : <Delete />}
+                      disabled={isClearing}
+                      sx={{
+                        py: 1.25,
+                        px: 2,
+                        borderRadius: 1.5,
+                        textTransform: 'none',
+                        fontSize: '0.9rem',
+                        fontWeight: 500,
+                        borderColor: '#D1D5DB',
+                        color: '#6B7280',
+                        minWidth: 'auto',
+                        '&:hover': {
+                          borderColor: '#9CA3AF',
+                          backgroundColor: '#F9FAFB'
+                        }
+                      }}
+                    >
+                      {isClearing ? '' : 'Clear'}
+                    </Button>
+                  </Stack>
                 </Stack>
-              </Stack>
+              </Box>
             </>
           ) : (
-            /* Empty Cart Summary */
-            <Box sx={{ textAlign: 'center', py: 4 }}>
-              <Typography variant="body1" color="text.secondary" gutterBottom>
+            /* Empty Cart State */
+            <Box sx={{ textAlign: 'center', py: 6, px: 3 }}>
+              <ShoppingBag 
+                sx={{ 
+                  fontSize: 48, 
+                  color: '#D1D5DB', 
+                  mb: 2
+                }} 
+              />
+              <Typography 
+                variant="h6" 
+                sx={{ 
+                  color: '#6B7280',
+                  fontWeight: 600,
+                  mb: 1,
+                  fontSize: '1.125rem'
+                }}
+              >
                 Your cart is empty
+              </Typography>
+              <Typography 
+                variant="body2" 
+                sx={{ 
+                  color: '#9CA3AF',
+                  mb: 3,
+                  fontSize: '0.9rem'
+                }}
+              >
+                Add items to get started
               </Typography>
               <Button
                 variant="contained"
                 onClick={onContinueShopping}
                 startIcon={<ShoppingBag />}
                 sx={{
-                  mt: 2,
-                  borderRadius: 3,
+                  borderRadius: 1.5,
                   textTransform: 'none',
-                  px: 3
+                  px: 3,
+                  py: 1.5,
+                  backgroundColor: '#111827',
+                  fontWeight: 600,
+                  '&:hover': {
+                    backgroundColor: '#374151'
+                  }
                 }}
               >
                 Start Shopping
@@ -1035,31 +899,51 @@ const CartSummary = ({
         onClose={() => setShowClearDialog(false)}
         PaperProps={{
           sx: {
-            borderRadius: 3,
+            borderRadius: 2,
             minWidth: { xs: '90%', sm: 400 }
           }
         }}
       >
-        <DialogTitle sx={{ fontWeight: 600 }}>
+        <DialogTitle sx={{ 
+          fontWeight: 600, 
+          color: '#111827',
+          fontSize: '1.125rem'
+        }}>
           Clear Cart
         </DialogTitle>
         <DialogContent>
-          <DialogContentText sx={{ fontSize: '1rem', lineHeight: 1.6 }}>
+          <DialogContentText sx={{ 
+            fontSize: '0.95rem', 
+            lineHeight: 1.5,
+            color: '#6B7280'
+          }}>
             Are you sure you want to remove all items from your cart? This action cannot be undone.
           </DialogContentText>
         </DialogContent>
         <DialogActions sx={{ p: 3, pt: 1 }}>
           <Button 
             onClick={() => setShowClearDialog(false)}
-            sx={{ textTransform: 'none', borderRadius: 2 }}
+            sx={{ 
+              textTransform: 'none', 
+              borderRadius: 1.5,
+              color: '#6B7280',
+              fontWeight: 500
+            }}
           >
             Cancel
           </Button>
           <Button 
             onClick={handleClearCartConfirm}
             variant="contained"
-            color="error"
-            sx={{ textTransform: 'none', borderRadius: 2 }}
+            sx={{ 
+              textTransform: 'none', 
+              borderRadius: 1.5,
+              backgroundColor: '#DC2626',
+              fontWeight: 600,
+              '&:hover': {
+                backgroundColor: '#B91C1C'
+              }
+            }}
           >
             Clear Cart
           </Button>
@@ -1069,4 +953,4 @@ const CartSummary = ({
   );
 };
 
-export default CartSummary;
+export default OrderSummary;

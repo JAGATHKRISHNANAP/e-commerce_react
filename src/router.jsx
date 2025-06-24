@@ -293,6 +293,7 @@ import ProductDetailsPage from './pages/ProductDetailsPage'
 import YourAdressPage from './pages/YourAdressPage'
 import AddToCartPage from './pages/AddToCartPage'
 import CheckOutPage from './pages/CheckOutPage'
+import OrderConfirmationPage from './pages/OrderConfirmationPage'
 
 // Simple 404 component
 const NotFound = () => {
@@ -470,6 +471,17 @@ const AppRouter = () => {
           </ProtectedRoute>
         } 
       />
+
+                  <Route 
+        path="/order-confirmation/:orderId" 
+        element={
+          <ProtectedRoute>
+            <OrderConfirmationPage />
+          </ProtectedRoute>
+        } 
+      />
+
+      
       
       {/* Catch all unknown routes */}
       <Route path="*" element={<NotFound />} />
