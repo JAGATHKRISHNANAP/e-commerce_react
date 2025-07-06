@@ -1538,6 +1538,7 @@ const ProductDetailsPage = () => {
   
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
+  console.log('product details ID:', product);
   const [error, setError] = useState(null);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [quantity, setQuantity] = useState(1);
@@ -1931,10 +1932,13 @@ const ProductDetailsPage = () => {
               color: '#e74c3c',
               marginBottom: '20px'
             }}>
-              ₹{parseFloat(product.price).toLocaleString('en-IN', {
+              ₹{(product.base_price / 100).toFixed(2)}
+
+
+              {/* ₹{parseFloat(product.price).toLocaleString('en-IN', {
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2
-              })}
+              })} */}
             </div>
 
             {/* Stock Status */}

@@ -1013,7 +1013,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { logout } from '../../redux/slices/authSlices'
 import LoadingSpinner from '../ui/LoadingSpinner'
 import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
+// import axios from 'axios'
 import { cartAPI } from '../../services/api/cartAPI'
 
 const Header = ({ onSearch, searchQuery }) => {

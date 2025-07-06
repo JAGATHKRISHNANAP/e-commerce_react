@@ -121,7 +121,7 @@ const ProductCard = ({ product, onViewDetails }) => {
   const [isAdded, setIsAdded] = useState(false);
 
   const getImage = () => {
-    if (product.primary_image) return product.primary_image;
+    if (product.primary_image_url) return product.primary_image_url;
     if (product.images?.length > 0) {
       const primary = product.images.find(img => img.is_primary);
       return primary?.image_url || product.images[0].image_url;
@@ -280,7 +280,7 @@ const ProductCard = ({ product, onViewDetails }) => {
             fontWeight: '700', 
             color: '#e74c3c'
           }}>
-            ₹{parseFloat(product.price).toFixed(2)}
+            ₹{(product.base_price / 100).toFixed(2)}
           </div>
           {product.storage_capacity && (
             <span style={{

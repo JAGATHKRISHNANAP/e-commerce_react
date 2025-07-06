@@ -2246,6 +2246,8 @@ const Homepage = () => {
   
   // State management
   const [products, setProducts] = useState([])
+  console.log('products', products)
+  console.log('products length', products.length)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const [searchQuery, setSearchQuery] = useState('')
