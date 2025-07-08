@@ -1008,13 +1008,636 @@
 
 
 
+// import React, { useState, useRef, useEffect } from 'react'
+// import { useSelector, useDispatch } from 'react-redux'
+// import { logout } from '../../redux/slices/authSlices'
+// import LoadingSpinner from '../ui/LoadingSpinner'
+// import { useNavigate } from 'react-router-dom'
+// // import axios from 'axios'
+// import { cartAPI } from '../../services/api/cartAPI'
+
+// const Header = ({ onSearch, searchQuery }) => {
+//   const dispatch = useDispatch()
+//   const navigate = useNavigate()  
+//   const { user, isLoading } = useSelector(state => state.auth)
+//   const [showProfileDropdown, setShowProfileDropdown] = useState(false)
+//   const [searchInput, setSearchInput] = useState(searchQuery || '')
+//   const [searchSuggestions, setSearchSuggestions] = useState([])
+//   const [showSuggestions, setShowSuggestions] = useState(false)
+
+//   const [cartCount, setCartCount] = useState(0);
+//   const dropdownRef = useRef(null)
+//   const searchRef = useRef(null)
+  
+
+//   console.log('Header rendered with searchQuery:', user)
+//   sessionStorage.setItem("customer_id", user?.customer_id);
+//   // const customer_id = user?.customer_id;
+//   const handleLogout = async () => {
+//     if (window.confirm('Are you sure you want to logout?')) {
+//       dispatch(logout())
+//     }
+//   }
+
+//   const handleSearch = (e) => {
+//     e.preventDefault()
+//     if (searchInput.trim()) {
+//       onSearch(searchInput.trim())
+//       setShowSuggestions(false)
+//     }
+//   }
+
+
+//   //   useEffect(() => {
+//   //   const fetchCartCount = async () => {
+//   //     try {
+//   //       const token = localStorage.getItem('token'); // Token should only be the JWT
+//   //       if (!token) {
+//   //         console.warn('No token found in localStorage');
+//   //         return;
+//   //       }
+
+//   //       const response = await axios.get('http://localhost:8000/api/v1/cart/count', {
+//   //         headers: {
+//   //           Authorization: `Bearer ${token}`
+//   //         }
+//   //       });
+//   //       // console.log('Cart count response:', response.data);
+
+//   //       setCartCount(response.data.total_items);
+//   //     } catch (error) {
+//   //       console.error('Failed to fetch cart count:', error);
+//   //     }
+//   //   };
+
+//   //   fetchCartCount();
+//   // }, []);
+
+// useEffect(() => {
+//   const fetchCartCount = async () => {
+//     try {
+//       const token = localStorage.getItem('token');
+//       if (!token) {
+//         console.warn('No token found in localStorage');
+//         return;
+//       }
+
+//       const cartData = await cartAPI.getCartCount();
+//       setCartCount(cartData.total_items);
+//     } catch (error) {
+//       console.error('Failed to fetch cart count:', error);
+//     }
+//   };
+
+//   fetchCartCount();
+// }, []);
+
+
+
+//   console.log('Cart count:', cartCount);
+
+//   const handleSearchInputChange = async (e) => {
+//     const value = e.target.value
+//     setSearchInput(value)
+    
+//     if (value.length >= 2) {
+//       try {
+//         const response = await fetch(`http://localhost:8000/api/v1/api/search/suggestions?q=${encodeURIComponent(value)}`)
+//         if (response.ok) {
+//           const suggestions = await response.json()
+//           setSearchSuggestions(suggestions)
+//           setShowSuggestions(true)
+//         }
+//       } catch (error) {
+//         console.error('Error fetching suggestions:', error)
+//       }
+//     } else {
+//       setShowSuggestions(false)
+//     }
+//   }
+
+//   const handleSuggestionClick = (suggestion) => {
+//     setSearchInput(suggestion)
+//     setShowSuggestions(false)
+//     onSearch(suggestion)
+//   }
+
+//   const handleCartClick = () => {
+//     navigate('/cart')
+//   }
+
+//   // Close dropdowns when clicking outside
+//   useEffect(() => {
+//     const handleClickOutside = (event) => {
+//       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+//         setShowProfileDropdown(false)
+//       }
+//       if (searchRef.current && !searchRef.current.contains(event.target)) {
+//         setShowSuggestions(false)
+//       }
+//     }
+
+//     document.addEventListener('mousedown', handleClickOutside)
+//     return () => document.removeEventListener('mousedown', handleClickOutside)
+//   }, [])
+
+//   return (
+//     <>
+//       {/* <style>
+//         {`
+//           @import url('https://fonts.googleapis.com/css2?family=Amazon+Ember:wght@400;500;700&display=swap');
+          
+//           .header-container {
+//             font-family: 'Amazon Ember', Arial, sans-serif;
+//           }
+          
+//           .profile-dropdown-enter {
+//             animation: dropdownSlideIn 0.2s ease-out;
+//           }
+          
+//           @keyframes dropdownSlideIn {
+//             from {
+//               opacity: 0;
+//               transform: translateY(-10px) scale(0.95);
+//             }
+//             to {
+//               opacity: 1;
+//               transform: translateY(0) scale(1);
+//             }
+//           }
+          
+//           .search-suggestion:hover {
+//             background: linear-gradient(90deg, #f3f3f3 0%, #e8f4fd 100%) !important;
+//           }
+          
+//           @media (max-width: 768px) {
+//             .header-search {
+//               max-width: 200px;
+//             }
+//             .header-logo h1 {
+//               display: none;
+//             }
+//             .profile-text {
+//               display: none;
+//             }
+//           }
+          
+//           @media (max-width: 480px) {
+//             .header-search {
+//               max-width: 150px;
+//             }
+//           }
+//         `}
+//       </style> */}
+
+//       <header className="header-container" style={{
+//         position: 'sticky',
+//         top: 0,
+//         zIndex: 1000,
+//         background: '#232f3e',
+//         boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)',
+//         borderBottom: '1px solid #3c4043'
+//       }}>
+//         <div style={{
+//           maxWidth: '1400px',
+//           margin: '0 auto',
+//           padding: '12px 24px',
+//           display: 'flex',
+//           alignItems: 'center',
+//           gap: '20px'
+//         }}>
+//           {/* Logo */}
+//           <div className="header-logo" style={{
+//             display: 'flex',
+//             alignItems: 'center',
+//             gap: '12px',
+//             minWidth: 'fit-content'
+//           }}>
+//             <div style={{
+//               width: '40px',
+//               height: '40px',
+//               background: 'linear-gradient(135deg, #ff9900 0%, #ffad33 100%)',
+//               borderRadius: '6px',
+//               display: 'flex',
+//               alignItems: 'center',
+//               justifyContent: 'center',
+//               fontSize: '20px',
+//               boxShadow: '0 2px 4px rgba(255, 153, 0, 0.3)'
+//             }}>
+//               🛒
+//             </div>
+//             <h1 style={{
+//               fontSize: '22px',
+//               fontWeight: '700',
+//               color: '#fff',
+//               margin: '0',
+//               letterSpacing: '-0.5px'
+//             }}>
+//               E-commerce
+//             </h1>
+//           </div>
+
+//           {/* Search Bar */}
+//           <div ref={searchRef} className="header-search" style={{
+//             flex: 1,
+//             position: 'relative',
+//             maxWidth: '1000px'
+//           }}>
+//             <form onSubmit={handleSearch} style={{
+//               display: 'flex',
+//               alignItems: 'center',
+//               background: '#fff',
+//               borderRadius: '4px',
+//               border: '2px solid transparent',
+//               overflow: 'hidden',
+//               transition: 'border-color 0.2s ease'
+//             }}
+//             onFocus={(e) => {
+//               e.currentTarget.style.borderColor = '#ff9900'
+//             }}
+//             onBlur={(e) => {
+//               e.currentTarget.style.borderColor = 'transparent'
+//             }}
+//             >
+//               <input
+//                 type="text"
+//                 placeholder="Search e-Commerce"
+//                 value={searchInput}
+//                 onChange={handleSearchInputChange}
+//                 style={{
+//                   flex: 1,
+//                   padding: '10px 16px',
+//                   border: 'none',
+//                   fontSize: '14px',
+//                   outline: 'none',
+//                   background: 'transparent',
+//                   color: '#111'
+//                 }}
+//               />
+//               <button
+//                 type="submit"
+//                 style={{
+//                   padding: '10px 16px',
+//                   background: '#febd69',
+//                   color: '#111',
+//                   border: 'none',
+//                   cursor: 'pointer',
+//                   display: 'flex',
+//                   alignItems: 'center',
+//                   gap: '6px',
+//                   fontSize: '14px',
+//                   fontWeight: '500',
+//                   transition: 'background 0.2s ease'
+//                 }}
+//                 onMouseOver={(e) => {
+//                   e.target.style.background = '#ff9900'
+//                 }}
+//                 onMouseOut={(e) => {
+//                   e.target.style.background = '#febd69'
+//                 }}
+//               >
+//                 🔍
+//               </button>
+//             </form>
+
+//             {/* Search Suggestions */}
+//             {showSuggestions && searchSuggestions.length > 0 && (
+//               <div style={{
+//                 position: 'absolute',
+//                 top: '100%',
+//                 left: 0,
+//                 right: 0,
+//                 background: '#fff',
+//                 border: '1px solid #ddd',
+//                 borderTop: 'none',
+//                 borderRadius: '0 0 4px 4px',
+//                 boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+//                 zIndex: 1001,
+//                 maxHeight: '300px',
+//                 overflowY: 'auto'
+//               }}>
+//                 {searchSuggestions.map((suggestion, index) => (
+//                   <div
+//                     key={index}
+//                     className="search-suggestion"
+//                     onClick={() => handleSuggestionClick(suggestion)}
+//                     style={{
+//                       padding: '10px 16px',
+//                       cursor: 'pointer',
+//                       borderBottom: index < searchSuggestions.length - 1 ? '1px solid #eee' : 'none',
+//                       fontSize: '14px',
+//                       color: '#111',
+//                       display: 'flex',
+//                       alignItems: 'center',
+//                       gap: '10px'
+//                     }}
+//                   >
+//                     <span style={{ opacity: 0.6 }}>🔍</span>
+//                     <span>{suggestion}</span>
+//                   </div>
+//                 ))}
+//               </div>
+//             )}
+//           </div>
+
+//           {/* Right Side Actions */}
+//           <div style={{
+//             display: 'flex',
+//             alignItems: 'center',
+//             gap: '16px',
+//             marginLeft: 'auto'
+//           }}>
+//             {/* Cart Icon */}
+//             <button 
+//               onClick={handleCartClick}
+//               style={{
+//                 padding: '8px 12px',
+//                 background: 'transparent',
+//                 color: '#fff',
+//                 border: '1px solid #5a6c7d',
+//                 borderRadius: '4px',
+//                 cursor: 'pointer',
+//                 fontSize: '14px',
+//                 display: 'flex',
+//                 alignItems: 'center',
+//                 gap: '6px',
+//                 position: 'relative',
+//                 transition: 'all 0.2s ease',
+//                 fontWeight: '500'
+//               }}
+//               onMouseOver={(e) => {
+//                 e.target.style.borderColor = '#ff9900'
+//                 e.target.style.color = '#ff9900'
+//               }}
+//               onMouseOut={(e) => {
+//                 e.target.style.borderColor = '#5a6c7d'
+//                 e.target.style.color = '#fff'
+//               }}
+//             >
+//               <span style={{ fontSize: '16px' }}>🛒</span>
+//               <span className="cart-text" style={{ fontSize: '12px' }}>Cart</span>
+//               <span style={{
+//                 position: 'absolute',
+//                 top: '-6px',
+//                 right: '-6px',
+//                 background: '#ff9900',
+//                 color: '#232f3e',
+//                 borderRadius: '50%',
+//                 width: '18px',
+//                 height: '18px',
+//                 fontSize: '11px',
+//                 display: 'flex',
+//                 alignItems: 'center',
+//                 justifyContent: 'center',
+//                 fontWeight: '700'
+//               }}>
+//                 {/* 0 */}
+
+//                 {cartCount}
+//               </span>
+//             </button>
+
+//             {/* Profile Dropdown - Enhanced Right Positioning */}
+//             <div ref={dropdownRef} style={{ 
+//               position: 'relative',
+//               marginLeft: '8px'
+//             }}>
+//               <button
+//                 onClick={() => setShowProfileDropdown(!showProfileDropdown)}
+//                 style={{
+//                   display: 'flex',
+//                   alignItems: 'center',
+//                   gap: '8px',
+//                   padding: '6px 12px',
+//                   background: 'transparent',
+//                   border: '1px solid #5a6c7d',
+//                   borderRadius: '4px',
+//                   cursor: 'pointer',
+//                   color: '#fff',
+//                   transition: 'all 0.2s ease',
+//                   fontSize: '14px'
+//                 }}
+//                 onMouseOver={(e) => {
+//                   e.target.style.borderColor = '#ff9900'
+//                   e.target.style.color = '#ff9900'
+//                 }}
+//                 onMouseOut={(e) => {
+//                   if (!showProfileDropdown) {
+//                     e.target.style.borderColor = '#5a6c7d'
+//                     e.target.style.color = '#fff'
+//                   }
+//                 }}
+//               >
+//                 <div style={{
+//                   width: '24px',
+//                   height: '24px',
+//                   background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+//                   borderRadius: '50%',
+//                   display: 'flex',
+//                   alignItems: 'center',
+//                   justifyContent: 'center',
+//                   color: '#fff',
+//                   fontWeight: '700',
+//                   fontSize: '12px'
+//                 }}>
+//                   {user?.name ? user.name.charAt(0).toUpperCase() : '👤'}
+//                 </div>
+//                 <div className="profile-text" style={{ 
+//                   textAlign: 'left',
+//                   lineHeight: '1.2'
+//                 }}>
+//                   <div style={{
+//                     fontSize: '12px',
+//                     fontWeight: '500',
+//                     margin: '0'
+//                   }}>
+//                     Hello, {user?.name?.split(' ')[0] || 'User'}
+//                   </div>
+//                   <div style={{
+//                     fontSize: '11px',
+//                     opacity: 0.8,
+//                     margin: '0',
+//                     fontWeight: '700'
+//                   }}>
+//                     Account & Lists ▼
+//                   </div>
+//                 </div>
+//               </button>
+
+//               {/* Enhanced Dropdown Menu - Right Aligned */}
+//               {showProfileDropdown && (
+//                 <div 
+//                   className="profile-dropdown-enter"
+//                   style={{
+//                     position: 'absolute',
+//                     top: '100%',
+//                     right: '0', // Right aligned dropdown
+//                     background: '#fff',
+//                     borderRadius: '4px',
+//                     boxShadow: '0 4px 16px rgba(0, 0, 0, 0.15)',
+//                     marginTop: '8px',
+//                     minWidth: '280px',
+//                     zIndex: 1001,
+//                     border: '1px solid #ddd',
+//                     overflow: 'hidden'
+//                   }}
+//                 >
+//                   {/* User Info Header */}
+//                   <div style={{
+//                     padding: '16px 20px',
+//                     borderBottom: '1px solid #eee',
+//                     background: '#f7f7f7'
+//                   }}>
+//                     <div style={{
+//                       display: 'flex',
+//                       alignItems: 'center',
+//                       gap: '12px'
+//                     }}>
+//                       <div style={{
+//                         width: '40px',
+//                         height: '40px',
+//                         background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+//                         borderRadius: '50%',
+//                         display: 'flex',
+//                         alignItems: 'center',
+//                         justifyContent: 'center',
+//                         color: '#fff',
+//                         fontWeight: '700',
+//                         fontSize: '16px'
+//                       }}>
+//                         {user?.name ? user.name.charAt(0).toUpperCase() : '👤'}
+//                       </div>
+//                       <div>
+//                         <p style={{
+//                           fontSize: '16px',
+//                           fontWeight: '600',
+//                           color: '#111',
+//                           margin: '0 0 4px 0'
+//                         }}>
+//                           {/* {user?.name || 'User'} */}
+//                           {user?.name || 'User'}
+//                         </p>
+//                         <p style={{
+//                           fontSize: '13px',
+//                           color: '#666',
+//                           margin: '0'
+//                         }}>
+//                           {user?.email || user?.phoneNumber || 'user@example.com'}
+//                         </p>
+//                       </div>
+//                     </div>
+//                   </div>
+                  
+//                   {/* Menu Items */}
+//                   <div style={{ padding: '8px 0' }}>
+//                     {[
+//                        { icon: '👤', label: 'Your Account', action: () => {
+//                         navigate('/your-account')
+//                         setShowProfileDropdown(false)
+//                       }},
+//                       { icon: '📦', label: 'Your Orders', action: () => {} },
+//                       { icon: '❤️', label: 'Your Wish List', action: () => {} },
+//                       { icon: '🔄', label: 'Your Subscriptions', action: () => {} },
+//                       { icon: '💳', label: 'Payment Options', action: () => {} },
+//                       { icon: '⚙️', label: 'Account Settings', action: () => {} }
+//                     ].map((item, index) => (
+//                       <button
+//                         key={index}
+//                         onClick={item.action}
+//                         style={{
+//                           width: '100%',
+//                           padding: '12px 20px',
+//                           background: 'none',
+//                           border: 'none',
+//                           textAlign: 'left',
+//                           cursor: 'pointer',
+//                           display: 'flex',
+//                           alignItems: 'center',
+//                           gap: '12px',
+//                           fontSize: '14px',
+//                           color: '#111',
+//                           transition: 'background 0.2s ease'
+//                         }}
+//                         onMouseOver={(e) => {
+//                           e.target.style.background = '#f3f3f3'
+//                         }}
+//                         onMouseOut={(e) => {
+//                           e.target.style.background = 'none'
+//                         }}
+//                       >
+//                         <span style={{ fontSize: '16px', opacity: 0.7 }}>{item.icon}</span>
+//                         <span style={{ fontWeight: '400' }}>{item.label}</span>
+//                       </button>
+//                     ))}
+                    
+//                     <div style={{
+//                       height: '1px',
+//                       background: '#eee',
+//                       margin: '8px 0'
+//                     }} />
+                    
+//                     <button
+//                       onClick={handleLogout}
+//                       disabled={isLoading}
+//                       style={{
+//                         width: '100%',
+//                         padding: '12px 20px',
+//                         background: 'none',
+//                         border: 'none',
+//                         textAlign: 'left',
+//                         cursor: isLoading ? 'not-allowed' : 'pointer',
+//                         display: 'flex',
+//                         alignItems: 'center',
+//                         gap: '12px',
+//                         fontSize: '14px',
+//                         color: '#d73027',
+//                         opacity: isLoading ? 0.7 : 1,
+//                         fontWeight: '500',
+//                         transition: 'background 0.2s ease'
+//                       }}
+//                       onMouseOver={(e) => {
+//                         if (!isLoading) {
+//                           e.target.style.background = '#fff5f5'
+//                         }
+//                       }}
+//                       onMouseOut={(e) => {
+//                         e.target.style.background = 'none'
+//                       }}
+//                     >
+//                       {isLoading ? (
+//                         <>
+//                           <LoadingSpinner size="small" color="#d73027" />
+//                           <span>Signing out...</span>
+//                         </>
+//                       ) : (
+//                         <>
+//                           <span style={{ fontSize: '16px' }}>🚪</span>
+//                           <span>Sign Out</span>
+//                         </>
+//                       )}
+//                     </button>
+//                   </div>
+//                 </div>
+//               )}
+//             </div>
+//           </div>
+//         </div>
+//       </header>
+//     </>
+//   )
+// }
+
+// export default Header
+
+
+
 import React, { useState, useRef, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { logout } from '../../redux/slices/authSlices'
 import LoadingSpinner from '../ui/LoadingSpinner'
 import { useNavigate } from 'react-router-dom'
-// import axios from 'axios'
 import { cartAPI } from '../../services/api/cartAPI'
+import { searchAPI } from '../../services/api/searchapiss' // Add this import
 
 const Header = ({ onSearch, searchQuery }) => {
   const dispatch = useDispatch()
@@ -1024,15 +1647,20 @@ const Header = ({ onSearch, searchQuery }) => {
   const [searchInput, setSearchInput] = useState(searchQuery || '')
   const [searchSuggestions, setSearchSuggestions] = useState([])
   const [showSuggestions, setShowSuggestions] = useState(false)
-
-  const [cartCount, setCartCount] = useState(0);
+  const [isLoadingSuggestions, setIsLoadingSuggestions] = useState(false)
+  const [cartCount, setCartCount] = useState(0)
+  
   const dropdownRef = useRef(null)
   const searchRef = useRef(null)
-  
+  const suggestionTimeoutRef = useRef(null)
 
-  console.log('Header rendered with searchQuery:', user)
-  sessionStorage.setItem("customer_id", user?.customer_id);
-  // const customer_id = user?.customer_id;
+  // Store customer_id in session storage
+  useEffect(() => {
+    if (user?.customer_id) {
+      sessionStorage.setItem("customer_id", user.customer_id);
+    }
+  }, [user?.customer_id]);
+
   const handleLogout = async () => {
     if (window.confirm('Are you sure you want to logout?')) {
       dispatch(logout())
@@ -1042,84 +1670,83 @@ const Header = ({ onSearch, searchQuery }) => {
   const handleSearch = (e) => {
     e.preventDefault()
     if (searchInput.trim()) {
-      onSearch(searchInput.trim())
+      // Call the onSearch prop if provided (for backward compatibility)
+      if (onSearch) {
+        onSearch(searchInput.trim())
+      }
+      
+      // Navigate to search results page with query
+      navigate(`/search?q=${encodeURIComponent(searchInput.trim())}`)
       setShowSuggestions(false)
     }
   }
 
+  // Fetch cart count
+  useEffect(() => {
+    const fetchCartCount = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        if (!token) {
+          console.warn('No token found in localStorage');
+          return;
+        }
 
-  //   useEffect(() => {
-  //   const fetchCartCount = async () => {
-  //     try {
-  //       const token = localStorage.getItem('token'); // Token should only be the JWT
-  //       if (!token) {
-  //         console.warn('No token found in localStorage');
-  //         return;
-  //       }
-
-  //       const response = await axios.get('http://localhost:8000/api/v1/cart/count', {
-  //         headers: {
-  //           Authorization: `Bearer ${token}`
-  //         }
-  //       });
-  //       // console.log('Cart count response:', response.data);
-
-  //       setCartCount(response.data.total_items);
-  //     } catch (error) {
-  //       console.error('Failed to fetch cart count:', error);
-  //     }
-  //   };
-
-  //   fetchCartCount();
-  // }, []);
-
-useEffect(() => {
-  const fetchCartCount = async () => {
-    try {
-      const token = localStorage.getItem('token');
-      if (!token) {
-        console.warn('No token found in localStorage');
-        return;
+        const cartData = await cartAPI.getCartCount();
+        setCartCount(cartData.total_items);
+      } catch (error) {
+        console.error('Failed to fetch cart count:', error);
       }
+    };
 
-      const cartData = await cartAPI.getCartCount();
-      setCartCount(cartData.total_items);
-    } catch (error) {
-      console.error('Failed to fetch cart count:', error);
-    }
-  };
+    fetchCartCount();
+  }, []);
 
-  fetchCartCount();
-}, []);
-
-
-
-  console.log('Cart count:', cartCount);
-
+  // Enhanced search input handler with debounced Elasticsearch suggestions
   const handleSearchInputChange = async (e) => {
     const value = e.target.value
     setSearchInput(value)
     
+    // Clear previous timeout
+    if (suggestionTimeoutRef.current) {
+      clearTimeout(suggestionTimeoutRef.current)
+    }
+    
     if (value.length >= 2) {
-      try {
-        const response = await fetch(`http://localhost:8000/api/v1/api/search/suggestions?q=${encodeURIComponent(value)}`)
-        if (response.ok) {
-          const suggestions = await response.json()
+      setIsLoadingSuggestions(true)
+      
+      // Debounce the API call to Elasticsearch
+      suggestionTimeoutRef.current = setTimeout(async () => {
+        try {
+          // Use the proper Elasticsearch suggestions API
+          const suggestions = await searchAPI.getSuggestions(value, 8)
           setSearchSuggestions(suggestions)
-          setShowSuggestions(true)
+          setShowSuggestions(suggestions.length > 0)
+          setIsLoadingSuggestions(false)
+        } catch (error) {
+          console.error('Error fetching Elasticsearch suggestions:', error)
+          setSearchSuggestions([])
+          setShowSuggestions(false)
+          setIsLoadingSuggestions(false)
         }
-      } catch (error) {
-        console.error('Error fetching suggestions:', error)
-      }
+      }, 300) // 300ms debounce
     } else {
       setShowSuggestions(false)
+      setSearchSuggestions([])
+      setIsLoadingSuggestions(false)
     }
   }
 
   const handleSuggestionClick = (suggestion) => {
     setSearchInput(suggestion)
     setShowSuggestions(false)
-    onSearch(suggestion)
+    
+    // Call the onSearch prop if provided (for backward compatibility)
+    if (onSearch) {
+      onSearch(suggestion)
+    }
+    
+    // Navigate to search results page
+    navigate(`/search?q=${encodeURIComponent(suggestion)}`)
   }
 
   const handleCartClick = () => {
@@ -1138,58 +1765,17 @@ useEffect(() => {
     }
 
     document.addEventListener('mousedown', handleClickOutside)
-    return () => document.removeEventListener('mousedown', handleClickOutside)
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+      // Clean up timeout on unmount
+      if (suggestionTimeoutRef.current) {
+        clearTimeout(suggestionTimeoutRef.current)
+      }
+    }
   }, [])
 
   return (
     <>
-      {/* <style>
-        {`
-          @import url('https://fonts.googleapis.com/css2?family=Amazon+Ember:wght@400;500;700&display=swap');
-          
-          .header-container {
-            font-family: 'Amazon Ember', Arial, sans-serif;
-          }
-          
-          .profile-dropdown-enter {
-            animation: dropdownSlideIn 0.2s ease-out;
-          }
-          
-          @keyframes dropdownSlideIn {
-            from {
-              opacity: 0;
-              transform: translateY(-10px) scale(0.95);
-            }
-            to {
-              opacity: 1;
-              transform: translateY(0) scale(1);
-            }
-          }
-          
-          .search-suggestion:hover {
-            background: linear-gradient(90deg, #f3f3f3 0%, #e8f4fd 100%) !important;
-          }
-          
-          @media (max-width: 768px) {
-            .header-search {
-              max-width: 200px;
-            }
-            .header-logo h1 {
-              display: none;
-            }
-            .profile-text {
-              display: none;
-            }
-          }
-          
-          @media (max-width: 480px) {
-            .header-search {
-              max-width: 150px;
-            }
-          }
-        `}
-      </style> */}
-
       <header className="header-container" style={{
         position: 'sticky',
         top: 0,
@@ -1206,13 +1792,16 @@ useEffect(() => {
           alignItems: 'center',
           gap: '20px'
         }}>
-          {/* Logo */}
+          {/* Logo - Make it clickable to go home */}
           <div className="header-logo" style={{
             display: 'flex',
             alignItems: 'center',
             gap: '12px',
-            minWidth: 'fit-content'
-          }}>
+            minWidth: 'fit-content',
+            cursor: 'pointer'
+          }}
+          onClick={() => navigate('/')}
+          >
             <div style={{
               width: '40px',
               height: '40px',
@@ -1237,7 +1826,7 @@ useEffect(() => {
             </h1>
           </div>
 
-          {/* Search Bar */}
+          {/* Enhanced Search Bar with Elasticsearch */}
           <div ref={searchRef} className="header-search" style={{
             flex: 1,
             position: 'relative',
@@ -1261,7 +1850,7 @@ useEffect(() => {
             >
               <input
                 type="text"
-                placeholder="Search e-Commerce"
+                placeholder="Search products, brands, categories..."
                 value={searchInput}
                 onChange={handleSearchInputChange}
                 style={{
@@ -1276,12 +1865,13 @@ useEffect(() => {
               />
               <button
                 type="submit"
+                disabled={isLoadingSuggestions}
                 style={{
                   padding: '10px 16px',
-                  background: '#febd69',
+                  background: isLoadingSuggestions ? '#ddd' : '#febd69',
                   color: '#111',
                   border: 'none',
-                  cursor: 'pointer',
+                  cursor: isLoadingSuggestions ? 'not-allowed' : 'pointer',
                   display: 'flex',
                   alignItems: 'center',
                   gap: '6px',
@@ -1290,18 +1880,22 @@ useEffect(() => {
                   transition: 'background 0.2s ease'
                 }}
                 onMouseOver={(e) => {
-                  e.target.style.background = '#ff9900'
+                  if (!isLoadingSuggestions) {
+                    e.target.style.background = '#ff9900'
+                  }
                 }}
                 onMouseOut={(e) => {
-                  e.target.style.background = '#febd69'
+                  if (!isLoadingSuggestions) {
+                    e.target.style.background = '#febd69'
+                  }
                 }}
               >
-                🔍
+                {isLoadingSuggestions ? '⏳' : '🔍'}
               </button>
             </form>
 
-            {/* Search Suggestions */}
-            {showSuggestions && searchSuggestions.length > 0 && (
+            {/* Enhanced Search Suggestions from Elasticsearch */}
+            {(showSuggestions || isLoadingSuggestions) && (
               <div style={{
                 position: 'absolute',
                 top: '100%',
@@ -1311,31 +1905,84 @@ useEffect(() => {
                 border: '1px solid #ddd',
                 borderTop: 'none',
                 borderRadius: '0 0 4px 4px',
-                boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+                boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
                 zIndex: 1001,
-                maxHeight: '300px',
+                maxHeight: '400px',
                 overflowY: 'auto'
               }}>
-                {searchSuggestions.map((suggestion, index) => (
-                  <div
-                    key={index}
-                    className="search-suggestion"
-                    onClick={() => handleSuggestionClick(suggestion)}
-                    style={{
-                      padding: '10px 16px',
-                      cursor: 'pointer',
-                      borderBottom: index < searchSuggestions.length - 1 ? '1px solid #eee' : 'none',
-                      fontSize: '14px',
-                      color: '#111',
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '10px'
-                    }}
-                  >
-                    <span style={{ opacity: 0.6 }}>🔍</span>
-                    <span>{suggestion}</span>
+                {isLoadingSuggestions ? (
+                  <div style={{
+                    padding: '16px',
+                    textAlign: 'center',
+                    color: '#666',
+                    fontSize: '14px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '8px'
+                  }}>
+                    <LoadingSpinner size="small" color="#ff9900" />
+                    <span>Loading suggestions...</span>
                   </div>
-                ))}
+                ) : searchSuggestions.length > 0 ? (
+                  <>
+                    <div style={{
+                      padding: '8px 16px',
+                      background: '#f8f9fa',
+                      borderBottom: '1px solid #eee',
+                      fontSize: '12px',
+                      color: '#666',
+                      fontWeight: '500',
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.5px'
+                    }}>
+                      Search Suggestions
+                    </div>
+                    {searchSuggestions.map((suggestion, index) => (
+                      <div
+                        key={index}
+                        className="search-suggestion"
+                        onClick={() => handleSuggestionClick(suggestion)}
+                        style={{
+                          padding: '12px 16px',
+                          cursor: 'pointer',
+                          borderBottom: index < searchSuggestions.length - 1 ? '1px solid #f0f0f0' : 'none',
+                          fontSize: '14px',
+                          color: '#111',
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '12px',
+                          transition: 'all 0.2s ease'
+                        }}
+                        onMouseOver={(e) => {
+                          e.target.style.background = '#f8f9fa'
+                          e.target.style.paddingLeft = '20px'
+                        }}
+                        onMouseOut={(e) => {
+                          e.target.style.background = 'transparent'
+                          e.target.style.paddingLeft = '16px'
+                        }}
+                      >
+                        <span style={{ opacity: 0.5, fontSize: '12px' }}>🔍</span>
+                        <span style={{ flex: 1 }}>{suggestion}</span>
+                        <span style={{ 
+                          opacity: 0.3, 
+                          fontSize: '12px',
+                          transform: 'rotate(-45deg)'
+                        }}>↗</span>
+                      </div>
+                    ))}
+                  </>
+                ) : (
+                  <div style={{
+                    padding: '16px',
+                    textAlign: 'center',
+                    color: '#666',
+                    fontSize: '14px'
+                  }}>
+                    No suggestions found
+                  </div>
+                )}
               </div>
             )}
           </div>
@@ -1347,7 +1994,7 @@ useEffect(() => {
             gap: '16px',
             marginLeft: 'auto'
           }}>
-            {/* Cart Icon */}
+            {/* Enhanced Cart Icon */}
             <button 
               onClick={handleCartClick}
               style={{
@@ -1376,28 +2023,30 @@ useEffect(() => {
             >
               <span style={{ fontSize: '16px' }}>🛒</span>
               <span className="cart-text" style={{ fontSize: '12px' }}>Cart</span>
-              <span style={{
-                position: 'absolute',
-                top: '-6px',
-                right: '-6px',
-                background: '#ff9900',
-                color: '#232f3e',
-                borderRadius: '50%',
-                width: '18px',
-                height: '18px',
-                fontSize: '11px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontWeight: '700'
-              }}>
-                {/* 0 */}
-
-                {cartCount}
-              </span>
+              {cartCount > 0 && (
+                <span style={{
+                  position: 'absolute',
+                  top: '-6px',
+                  right: '-6px',
+                  background: '#ff9900',
+                  color: '#232f3e',
+                  borderRadius: '50%',
+                  minWidth: '18px',
+                  height: '18px',
+                  fontSize: '11px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontWeight: '700',
+                  padding: '0 2px',
+                  animation: cartCount > 0 ? 'pulse 0.3s ease-in-out' : 'none'
+                }}>
+                  {cartCount > 99 ? '99+' : cartCount}
+                </span>
+              )}
             </button>
 
-            {/* Profile Dropdown - Enhanced Right Positioning */}
+            {/* Profile Dropdown - Same as before */}
             <div ref={dropdownRef} style={{ 
               position: 'relative',
               marginLeft: '8px'
@@ -1464,14 +2113,14 @@ useEffect(() => {
                 </div>
               </button>
 
-              {/* Enhanced Dropdown Menu - Right Aligned */}
+              {/* Profile Dropdown Menu */}
               {showProfileDropdown && (
                 <div 
                   className="profile-dropdown-enter"
                   style={{
                     position: 'absolute',
                     top: '100%',
-                    right: '0', // Right aligned dropdown
+                    right: '0',
                     background: '#fff',
                     borderRadius: '4px',
                     boxShadow: '0 4px 16px rgba(0, 0, 0, 0.15)',
@@ -1514,7 +2163,6 @@ useEffect(() => {
                           color: '#111',
                           margin: '0 0 4px 0'
                         }}>
-                          {/* {user?.name || 'User'} */}
                           {user?.name || 'User'}
                         </p>
                         <p style={{
@@ -1531,12 +2179,18 @@ useEffect(() => {
                   {/* Menu Items */}
                   <div style={{ padding: '8px 0' }}>
                     {[
-                       { icon: '👤', label: 'Your Account', action: () => {
+                      { icon: '👤', label: 'Your Account', action: () => {
                         navigate('/your-account')
                         setShowProfileDropdown(false)
                       }},
-                      { icon: '📦', label: 'Your Orders', action: () => {} },
-                      { icon: '❤️', label: 'Your Wish List', action: () => {} },
+                      { icon: '📦', label: 'Your Orders', action: () => {
+                        navigate('/orders')
+                        setShowProfileDropdown(false)
+                      }},
+                      { icon: '❤️', label: 'Your Wish List', action: () => {
+                        navigate('/wishlist')
+                        setShowProfileDropdown(false)
+                      }},
                       { icon: '🔄', label: 'Your Subscriptions', action: () => {} },
                       { icon: '💳', label: 'Payment Options', action: () => {} },
                       { icon: '⚙️', label: 'Account Settings', action: () => {} }
@@ -1623,6 +2277,17 @@ useEffect(() => {
           </div>
         </div>
       </header>
+      
+      {/* Add CSS animation for cart pulse effect */}
+      <style>
+        {`
+          @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+          }
+        `}
+      </style>
     </>
   )
 }

@@ -1818,30 +1818,36 @@ const ProductDetailsPage = () => {
             marginBottom: '20px',
             boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)'
           }}>
-            <div style={{ height: '400px', position: 'relative' }}>
-              <ProductImage
-                src={getSelectedImage()}
-                alt={product.name}
-                style={{ height: '100%', borderRadius: '12px' }}
-              />
-              
-              {/* Zoom indicator */}
-              <div style={{
-                position: 'absolute',
-                bottom: '12px',
-                right: '12px',
-                background: 'rgba(0, 0, 0, 0.7)',
-                color: 'white',
-                padding: '6px 10px',
-                borderRadius: '16px',
-                fontSize: '12px',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '4px'
-              }}>
-                🔍 Click to zoom
-              </div>
-            </div>
+<div style={{ height: '700px', position: 'relative' }}>
+  <img
+    src={getSelectedImage()}
+    alt={product.name}
+    style={{
+      width: '100%',
+      height: '100%',
+      objectFit: 'cover', // or 'contain' based on your need
+      borderRadius: '12px'
+    }}
+  />
+
+  {/* Zoom indicator */}
+  <div style={{
+    position: 'absolute',
+    bottom: '12px',
+    right: '12px',
+    background: 'rgba(0, 0, 0, 0.7)',
+    color: 'white',
+    padding: '6px 10px',
+    borderRadius: '16px',
+    fontSize: '12px',
+    display: 'flex',
+    alignItems: 'center',
+    gap: '4px'
+  }}>
+    🔍 Click to zoom
+  </div>
+</div>
+
           </div>
 
           {/* Thumbnail Gallery */}
