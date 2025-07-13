@@ -1,13 +1,14 @@
 // src/services/api/searchAPI.js
 import axios from 'axios';
 
-const API_BASE_URL = 'http://localhost:8000/api/v1';
+// Global base URL variable
+const API_BASE_URL = 'http://localhost:8000';
 
 // Create axios instance with auth
 const createAuthAxios = () => {
   const token = localStorage.getItem('token');
   return axios.create({
-    baseURL: API_BASE_URL,
+    baseURL: `${API_BASE_URL}/api/v1`,
     headers: {
       'Authorization': token ? `Bearer ${token}` : '',
       'Content-Type': 'application/json'
@@ -190,17 +191,17 @@ export const searchUtils = {
 
   // Format price for display
   formatPrice: (price) => {
-    if (typeof price !== 'number') return '$0.00';
-    return new Intl.NumberFormat('en-US', {
+    if (typeof price !== 'number') return '₹0.00';
+    return new Intl.NumberFormat('en-IN', {
       style: 'currency',
-      currency: 'USD'
+      currency: 'INR'
     }).format(price);
   },
 
   // Format large numbers (for result counts)
   formatNumber: (num) => {
     if (typeof num !== 'number') return '0';
-    return new Intl.NumberFormat('en-US').format(num);
+    return new Intl.NumberFormat('en-IN').format(num);
   },
 
   // Generate search result sharing text
