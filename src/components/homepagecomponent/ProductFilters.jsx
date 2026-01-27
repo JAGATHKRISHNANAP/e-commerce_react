@@ -109,7 +109,7 @@
 //   const handleFilterChange = (key, value) => {
 //     // Clean and validate the value
 //     let cleanValue = value
-    
+
 //     if (key === 'subcategory_id' || key === 'category_id') {
 //       // Ensure IDs are proper integers or empty strings
 //       if (value === '' || value === null || value === undefined) {
@@ -120,20 +120,20 @@
 //         cleanValue = parseInt(value, 10).toString()
 //       }
 //     }
-    
+
 //     const newFilters = { ...localFilters, [key]: cleanValue }
-    
+
 //     // If category changes, clear subcategory
 //     if (key === 'category_id' && cleanValue !== localFilters.category_id) {
 //       newFilters.subcategory_id = ''
 //     }
-    
+
 //     console.log('Filter change:', key, 'from', localFilters[key], 'to', cleanValue)
 //     console.log('New filters:', newFilters)
-    
+
 //     setLocalFilters(newFilters)
 //     onFiltersChange(newFilters)
-    
+
 //     // Apply filters immediately
 //     applyFilters(newFilters)
 //   }
@@ -142,11 +142,11 @@
 //     try {
 //       // Build query parameters
 //       const params = new URLSearchParams()
-      
+
 //       // Add pagination (always start from page 1 when filters change)
 //       params.append('page', '1')
 //       params.append('per_page', '20')
-      
+
 //       // Add filters only if they have valid values
 //       if (filters.category_id && filters.category_id !== '' && !isNaN(filters.category_id)) {
 //         params.append('category_id', filters.category_id)
@@ -166,13 +166,13 @@
 //       if (filters.sort_order) {
 //         params.append('sort_order', filters.sort_order)
 //       }
-      
+
 //       const apiUrl = `http://localhost:8000/api/v1/products?${params.toString()}`
 //       console.log('API call:', apiUrl)
-      
+
 //       // Make API call to fetch filtered products
 //       const response = await fetch(apiUrl)
-      
+
 //       if (response.ok) {
 //         const data = await response.json()
 //         console.log('API response:', data)
@@ -207,13 +207,13 @@
 //       sort_by: 'name',
 //       sort_order: 'asc'
 //     }
-    
+
 //     // Clear subcategories list
 //     setSubcategories([])
-    
+
 //     setLocalFilters(clearedFilters)
 //     onFiltersChange(clearedFilters)
-    
+
 //     // Apply cleared filters
 //     applyFilters(clearedFilters)
 //   }
@@ -377,7 +377,7 @@
 //           {expanded ? '−' : '+'}
 //         </span>
 //       </div>
-      
+
 //       {expanded && (
 //         <div style={{ padding: '8px 20px 16px' }}>
 //           {/* Clear subcategory option */}
@@ -431,10 +431,12 @@ import React, { useState, useEffect } from 'react'
 import CategoryFilter from '../FilterSection/CategoryFilter'
 import PriceFilter from '../FilterSection/PriceFilter'
 import SortFilter from '../FilterSection/SortFilter'
+import SpecificationFilter from './SpecificationFilter'
 
 const FixedProductFilters = ({ onFiltersChange, filters }) => {
   const [categories, setCategories] = useState([])
   const [subcategories, setSubcategories] = useState([])
+  const [specificationFilters, setSpecificationFilters] = useState({})
   const [priceRange, setPriceRange] = useState({ min: 0, max: 10000 })
   const [localFilters, setLocalFilters] = useState({
     category_id: '',
@@ -443,6 +445,7 @@ const FixedProductFilters = ({ onFiltersChange, filters }) => {
     max_price: '',
     sort_by: 'name',
     sort_order: 'asc',
+    specifications: {}, // New state for dynamic filters
     ...filters
   })
   const [isMinimized, setIsMinimized] = useState(false)
@@ -451,7 +454,8 @@ const FixedProductFilters = ({ onFiltersChange, filters }) => {
     category: true,
     subcategory: true,
     price: true,
-    sort: true
+    sort: true,
+    specs: {} // Expand state for dynamic specs
   })
 
   useEffect(() => {
@@ -468,14 +472,17 @@ const FixedProductFilters = ({ onFiltersChange, filters }) => {
   useEffect(() => {
     fetchCategories()
     fetchPriceRange()
+    fetchSpecificationFilters() // Fetch dynamic filters
   }, [])
 
   // Fetch subcategories when category changes
   useEffect(() => {
     if (localFilters.category_id && localFilters.category_id !== '') {
       fetchSubcategories(localFilters.category_id)
+      fetchSpecificationFilters(localFilters.category_id, null)
     } else {
       setSubcategories([])
+      fetchSpecificationFilters(null, null) // Fetch globally if no category
       if (localFilters.subcategory_id && localFilters.subcategory_id !== '') {
         const clearedFilters = { ...localFilters, subcategory_id: '' }
         setLocalFilters(clearedFilters)
@@ -483,6 +490,13 @@ const FixedProductFilters = ({ onFiltersChange, filters }) => {
       }
     }
   }, [localFilters.category_id])
+
+  // When subcategory changes, re-fetch specs
+  useEffect(() => {
+    if (localFilters.subcategory_id) {
+      fetchSpecificationFilters(localFilters.category_id, localFilters.subcategory_id)
+    }
+  }, [localFilters.subcategory_id])
 
   const fetchCategories = async () => {
     try {
@@ -518,21 +532,37 @@ const FixedProductFilters = ({ onFiltersChange, filters }) => {
           min: Math.floor(data.min_price),
           max: Math.ceil(data.max_price)
         })
-        console.log('Price range fetched:', data)
       }
     } catch (error) {
       console.error('Error fetching price range:', error)
-      // Set default values if API fails
-      setPriceRange({ min: 0, max: 10000 })
+    }
+  }
+
+  const fetchSpecificationFilters = async (catId = null, subcatId = null) => {
+    try {
+      const params = new URLSearchParams()
+      if (catId) params.append('category_id', catId)
+      if (subcatId) params.append('subcategory_id', subcatId)
+
+      const response = await fetch(`http://localhost:8000/api/v1/products/filters?${params}`)
+      if (response.ok) {
+        const data = await response.json()
+        setSpecificationFilters(data)
+        // Initialize expanded state for new specs
+        setExpandedSections(prev => ({
+          ...prev,
+          specs: Object.keys(data).reduce((acc, key) => ({ ...acc, [key]: true }), {})
+        }))
+      }
+    } catch (error) {
+      console.error('Error fetching specifications:', error)
     }
   }
 
   const handleFilterChange = (key, value) => {
-    console.log(`Filter change: ${key} = ${value}`)
-    
     // Clean and validate the value
     let cleanValue = value
-    
+
     if (key === 'subcategory_id' || key === 'category_id') {
       // Ensure IDs are proper integers or empty strings
       if (value === '' || value === null || value === undefined) {
@@ -543,45 +573,43 @@ const FixedProductFilters = ({ onFiltersChange, filters }) => {
         cleanValue = parseInt(value, 10).toString()
       }
     } else if (key === 'min_price' || key === 'max_price') {
-      // Handle price values
       if (value === '' || value === null || value === undefined) {
         cleanValue = ''
       } else {
         const numValue = parseFloat(value)
-        if (isNaN(numValue) || numValue < 0) {
-          cleanValue = ''
-        } else {
-          cleanValue = numValue.toString()
-        }
+        cleanValue = (isNaN(numValue) || numValue < 0) ? '' : numValue.toString()
       }
     }
-    
+
     const newFilters = { ...localFilters, [key]: cleanValue }
-    
-    // If category changes, clear subcategory
+
+    // If category changes, clear subcategory and specs
     if (key === 'category_id' && cleanValue !== localFilters.category_id) {
       newFilters.subcategory_id = ''
+      newFilters.specifications = {}
     }
-    
-    console.log('New filters:', newFilters)
-    
+
     setLocalFilters(newFilters)
-    
-    // Don't call the parent onChange immediately for price fields to avoid too many API calls
+
     if (key === 'min_price' || key === 'max_price') {
-      // Use a timeout to debounce price changes
-      if (window.priceFilterTimeout) {
-        clearTimeout(window.priceFilterTimeout)
-      }
-      
-      window.priceFilterTimeout = setTimeout(() => {
-        console.log('Applying price filter after debounce')
-        onFiltersChange(newFilters)
-      }, 800) // 800ms delay
+      if (window.priceFilterTimeout) clearTimeout(window.priceFilterTimeout)
+      window.priceFilterTimeout = setTimeout(() => onFiltersChange(newFilters), 800)
     } else {
-      // Apply other filters immediately
       onFiltersChange(newFilters)
     }
+  }
+
+  const handleSpecificationChange = (specName, value) => {
+    const newSpecs = { ...localFilters.specifications }
+    if (value) {
+      newSpecs[specName] = value
+    } else {
+      delete newSpecs[specName]
+    }
+
+    const newFilters = { ...localFilters, specifications: newSpecs }
+    setLocalFilters(newFilters)
+    onFiltersChange(newFilters)
   }
 
   const clearFilters = () => {
@@ -591,17 +619,15 @@ const FixedProductFilters = ({ onFiltersChange, filters }) => {
       min_price: '',
       max_price: '',
       sort_by: 'name',
-      sort_order: 'asc'
+      sort_order: 'asc',
+      specifications: {}
     }
-    
-    // Clear subcategories list
+
     setSubcategories([])
-    
-    // Clear any pending price filter timeout
-    if (window.priceFilterTimeout) {
-      clearTimeout(window.priceFilterTimeout)
-    }
-    
+    fetchSpecificationFilters(null, null) // Reset detailed filters
+
+    if (window.priceFilterTimeout) clearTimeout(window.priceFilterTimeout)
+
     setLocalFilters(clearedFilters)
     onFiltersChange(clearedFilters)
   }
@@ -613,8 +639,18 @@ const FixedProductFilters = ({ onFiltersChange, filters }) => {
     }))
   }
 
+  const toggleSpecSection = (specName) => {
+    setExpandedSections(prev => ({
+      ...prev,
+      specs: {
+        ...prev.specs,
+        [specName]: !prev.specs[specName]
+      }
+    }))
+  }
+
   const activeFiltersCount = Object.values(localFilters).filter(
-    value => value !== '' && value !== 'name' && value !== 'asc'
+    value => value !== '' && value !== 'name' && value !== 'asc' && (typeof value !== 'object' || Object.keys(value).length > 0)
   ).length
 
   const getResponsiveStyles = () => {
@@ -702,7 +738,7 @@ const FixedProductFilters = ({ onFiltersChange, filters }) => {
               toggle={() => toggleSection('category')}
             />
 
-            {/* Subcategory Filter - Only show if category is selected AND subcategories exist */}
+            {/* Subcategory Filter */}
             {localFilters.category_id && localFilters.category_id !== '' && subcategories.length > 0 && (
               <SubcategoryFilter
                 subcategories={subcategories}
@@ -712,6 +748,19 @@ const FixedProductFilters = ({ onFiltersChange, filters }) => {
                 toggle={() => toggleSection('subcategory')}
               />
             )}
+
+            {/* Dynamic Specification Filters */}
+            {Object.entries(specificationFilters).map(([specName, options]) => (
+              <SpecificationFilter
+                key={specName}
+                name={specName}
+                options={options}
+                selectedValue={localFilters.specifications?.[specName] || ''}
+                onChange={handleSpecificationChange}
+                expanded={expandedSections.specs?.[specName]}
+                toggle={() => toggleSpecSection(specName)}
+              />
+            ))}
 
             {/* Price Filter */}
             <PriceFilter
@@ -764,7 +813,7 @@ const SubcategoryFilter = ({ subcategories, selectedSubcategory, onChange, expan
           {expanded ? '−' : '+'}
         </span>
       </div>
-      
+
       {expanded && (
         <div style={{ padding: '8px 20px 16px' }}>
           <label style={{ display: 'block', marginBottom: '8px', cursor: 'pointer' }}>

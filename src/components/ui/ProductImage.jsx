@@ -1,14 +1,14 @@
 // src/components/ui/ProductImage.jsx
 import React, { useState } from 'react';
 
-const ProductImage = ({ 
-  src, 
-  alt, 
-  className = "", 
+const ProductImage = ({
+  src,
+  alt,
+  className = "",
   style = {},
   fallbackSrc = "/api/placeholder/300/300",
   onError,
-  ...props 
+  ...props
 }) => {
   const [imageSrc, setImageSrc] = useState(src);
   const [isLoading, setIsLoading] = useState(true);
@@ -23,11 +23,11 @@ const ProductImage = ({
     console.error(`Failed to load image: ${imageSrc}`);
     setIsLoading(false);
     setHasError(true);
-    
+
     if (imageSrc !== fallbackSrc) {
       setImageSrc(fallbackSrc);
     }
-    
+
     if (onError) {
       onError();
     }
@@ -58,7 +58,7 @@ const ProductImage = ({
           }} />
         </div>
       )}
-      
+
       <img
         src={imageSrc}
         alt={alt}
@@ -68,12 +68,13 @@ const ProductImage = ({
           width: '100%',
           height: '100%',
           objectFit: 'cover',
+          objectPosition: 'top center',
           display: isLoading ? 'none' : 'block',
           borderRadius: '8px'
         }}
         {...props}
       />
-      
+
       {hasError && imageSrc === fallbackSrc && (
         <div style={{
           position: 'absolute',
@@ -95,7 +96,7 @@ const ProductImage = ({
           <span style={{ fontSize: '12px' }}>Image not available</span>
         </div>
       )}
-      
+
       <style jsx>{`
         @keyframes spin {
           0% { transform: rotate(0deg); }

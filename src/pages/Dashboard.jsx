@@ -461,13 +461,13 @@
 // // // //       if (searchQuery) params.append('search', searchQuery)
 
 // // // //       const response = await fetch(`http://localhost:8000/api/v1/api/products?${params}`)
-      
+
 // // // //       if (!response.ok) {
 // // // //         throw new Error(`HTTP error! status: ${response.status}`)
 // // // //       }
 
 // // // //       const data = await response.json()
-      
+
 // // // //       setProducts(data.products || [])
 // // // //       setPagination(prev => ({
 // // // //         ...prev,
@@ -793,13 +793,13 @@
 // // // //       if (searchQuery) params.append('search', searchQuery)
 
 // // // //       const response = await fetch(`http://localhost:8000/api/v1/api/products?${params}`)
-      
+
 // // // //       if (!response.ok) {
 // // // //         throw new Error(`HTTP error! status: ${response.status}`)
 // // // //       }
 
 // // // //       const data = await response.json()
-      
+
 // // // //       setProducts(data.products || [])
 // // // //       setPagination(prev => ({
 // // // //         ...prev,
@@ -838,7 +838,7 @@
 
 // // // //   const handleAddToCart = (product) => {
 // // // //     console.log('Add to cart:', product)
-    
+
 // // // //     // Create a more sophisticated notification
 // // // //     const notification = document.createElement('div')
 // // // //     notification.style.cssText = `
@@ -856,7 +856,7 @@
 // // // //       animation: slideInRight 0.3s ease-out;
 // // // //       max-width: 300px;
 // // // //     `
-    
+
 // // // //     notification.innerHTML = `
 // // // //       <div style="display: flex; align-items: center; gap: 12px;">
 // // // //         <span style="font-size: 20px;">✅</span>
@@ -866,9 +866,9 @@
 // // // //         </div>
 // // // //       </div>
 // // // //     `
-    
+
 // // // //     document.body.appendChild(notification)
-    
+
 // // // //     // Add animation styles
 // // // //     const style = document.createElement('style')
 // // // //     style.textContent = `
@@ -894,7 +894,7 @@
 // // // //       }
 // // // //     `
 // // // //     document.head.appendChild(style)
-    
+
 // // // //     // Remove notification after 3 seconds
 // // // //     setTimeout(() => {
 // // // //       notification.style.animation = 'slideOutRight 0.3s ease-in'
@@ -1225,13 +1225,13 @@
 // // // //       if (searchQuery) params.append('search', searchQuery)
 
 // // // //       const response = await fetch(`http://localhost:8000/api/v1/api/products?${params}`)
-      
+
 // // // //       if (!response.ok) {
 // // // //         throw new Error(`HTTP error! status: ${response.status}`)
 // // // //       }
 
 // // // //       const data = await response.json()
-      
+
 // // // //       setProducts(data.products || [])
 // // // //       setPagination(prev => ({
 // // // //         ...prev,
@@ -1270,7 +1270,7 @@
 
 // // // //   const handleAddToCart = (product) => {
 // // // //     console.log('Add to cart:', product)
-    
+
 // // // //     // Create a more sophisticated notification
 // // // //     const notification = document.createElement('div')
 // // // //     notification.style.cssText = `
@@ -1288,7 +1288,7 @@
 // // // //       animation: slideInRight 0.3s ease-out;
 // // // //       max-width: 300px;
 // // // //     `
-    
+
 // // // //     notification.innerHTML = `
 // // // //       <div style="display: flex; align-items: center; gap: 12px;">
 // // // //         <span style="font-size: 20px;">✅</span>
@@ -1298,9 +1298,9 @@
 // // // //         </div>
 // // // //       </div>
 // // // //     `
-    
+
 // // // //     document.body.appendChild(notification)
-    
+
 // // // //     // Add animation styles
 // // // //     const style = document.createElement('style')
 // // // //     style.textContent = `
@@ -1326,7 +1326,7 @@
 // // // //       }
 // // // //     `
 // // // //     document.head.appendChild(style)
-    
+
 // // // //     // Remove notification after 3 seconds
 // // // //     setTimeout(() => {
 // // // //       notification.style.animation = 'slideOutRight 0.3s ease-in'
@@ -1643,7 +1643,7 @@
 // // // //               margin-left: 80px !important;
 // // // //             }
 // // // //           }
-          
+
 // // // //           @media (max-width: 480px) {
 // // // //             main {
 // // // //               margin-left: 70px !important;
@@ -1729,13 +1729,13 @@
 // // // //       if (searchQuery) params.append('search', searchQuery)
 
 // // // //       const response = await fetch(`http://localhost:8000/api/v1/products?${params}`)
-      
+
 // // // //       if (!response.ok) {
 // // // //         throw new Error(`HTTP error! status: ${response.status}`)
 // // // //       }
 
 // // // //       const data = await response.json()
-      
+
 // // // //       setProducts(data.products || [])
 // // // //       setPagination(prev => ({
 // // // //         ...prev,
@@ -1774,7 +1774,7 @@
 
 // // // //   const handleAddToCart = (product) => {
 // // // //     console.log('Add to cart:', product)
-    
+
 // // // //     // Create a more sophisticated notification
 // // // //     const notification = document.createElement('div')
 // // // //     notification.style.cssText = `
@@ -1792,7 +1792,7 @@
 // // // //       animation: slideInRight 0.3s ease-out;
 // // // //       max-width: 300px;
 // // // //     `
-    
+
 // // // //     notification.innerHTML = `
 // // // //       <div style="display: flex; align-items: center; gap: 12px;">
 // // // //         <span style="font-size: 20px;">✅</span>
@@ -1802,9 +1802,9 @@
 // // // //         </div>
 // // // //       </div>
 // // // //     `
-    
+
 // // // //     document.body.appendChild(notification)
-    
+
 // // // //     // Add animation styles
 // // // //     const style = document.createElement('style')
 // // // //     style.textContent = `
@@ -1830,7 +1830,7 @@
 // // // //       }
 // // // //     `
 // // // //     document.head.appendChild(style)
-    
+
 // // // //     // Remove notification after 3 seconds
 // // // //     setTimeout(() => {
 // // // //       notification.style.animation = 'slideOutRight 0.3s ease-in'
@@ -2141,7 +2141,7 @@
 // // // //       <style>
 // // // //         {`
 // // // //           @import url('https://fonts.googleapis.com/css2?family=Amazon+Ember:wght@400;500;700&display=swap');
-          
+
 // // // //           @media (max-width: 768px) {
 // // // //             main {
 // // // //               padding: 16px 16px 120px 16px !important;
@@ -2151,7 +2151,7 @@
 // // // //               margin-left: 0 !important;
 // // // //               padding-bottom: 120px !important;
 // // // //             }
-            
+
 // // // //             #all-products {
 // // // //               margin-bottom: 20px;
 // // // //             }
@@ -2160,12 +2160,12 @@
 // // // //               padding: 20px !important;
 // // // //             }
 // // // //           }
-          
+
 // // // //           @media (max-width: 480px) {
 // // // //             main {
 // // // //               padding: 12px 12px 130px 12px !important;
 // // // //             }
-            
+
 // // // //             .quick-stats {
 // // // //               grid-template-columns: 1fr !important;
 // // // //             }
@@ -2243,7 +2243,7 @@
 
 // // // const Homepage = () => {
 // // //   const navigate = useNavigate()
-  
+
 // // //   // State management
 // // //   const [products, setProducts] = useState([])
 // // //   console.log('products', products)
@@ -2290,13 +2290,13 @@
 // // //       if (searchQuery) params.append('search', searchQuery)
 
 // // //       const response = await fetch(`http://localhost:8000/api/v1/products?${params}`)
-      
+
 // // //       if (!response.ok) {
 // // //         throw new Error(`HTTP error! status: ${response.status}`)
 // // //       }
 
 // // //       const data = await response.json()
-      
+
 // // //       setProducts(data.products || [])
 // // //       setPagination(prev => ({
 // // //         ...prev,
@@ -2335,7 +2335,7 @@
 
 // // //   const handleAddToCart = (product) => {
 // // //     console.log('Add to cart:', product)
-    
+
 // // //     // Create a more sophisticated notification
 // // //     const notification = document.createElement('div')
 // // //     notification.style.cssText = `
@@ -2353,7 +2353,7 @@
 // // //       animation: slideInRight 0.3s ease-out;
 // // //       max-width: 300px;
 // // //     `
-    
+
 // // //     notification.innerHTML = `
 // // //       <div style="display: flex; align-items: center; gap: 12px;">
 // // //         <span style="font-size: 20px;">✅</span>
@@ -2363,9 +2363,9 @@
 // // //         </div>
 // // //       </div>
 // // //     `
-    
+
 // // //     document.body.appendChild(notification)
-    
+
 // // //     // Add animation styles
 // // //     const style = document.createElement('style')
 // // //     style.textContent = `
@@ -2391,7 +2391,7 @@
 // // //       }
 // // //     `
 // // //     document.head.appendChild(style)
-    
+
 // // //     // Remove notification after 3 seconds
 // // //     setTimeout(() => {
 // // //       notification.style.animation = 'slideOutRight 0.3s ease-in'
@@ -2686,7 +2686,7 @@
 // // //       <style>
 // // //         {`
 // // //           @import url('https://fonts.googleapis.com/css2?family=Amazon+Ember:wght@400;500;700&display=swap');
-          
+
 // // //           @media (max-width: 768px) {
 // // //             main {
 // // //               padding: 16px 16px 120px 16px !important;
@@ -2696,7 +2696,7 @@
 // // //               margin-left: 0 !important;
 // // //               padding-bottom: 120px !important;
 // // //             }
-            
+
 // // //             #all-products {
 // // //               margin-bottom: 20px;
 // // //             }
@@ -2705,12 +2705,12 @@
 // // //               padding: 20px !important;
 // // //             }
 // // //           }
-          
+
 // // //           @media (max-width: 480px) {
 // // //             main {
 // // //               padding: 12px 12px 130px 12px !important;
 // // //             }
-            
+
 // // //             .quick-stats {
 // // //               grid-template-columns: 1fr !important;
 // // //             }
@@ -2761,7 +2761,7 @@
 // // //               transform: translateX(0);
 // // //             }
 // // //           }
-          
+
 // // //           @keyframes slideOutRight {
 // // //             from {
 // // //               opacity: 1;
@@ -2794,7 +2794,7 @@
 
 // // const Homepage = () => {
 // //   const navigate = useNavigate()
-  
+
 // //   // State management
 // //   const [products, setProducts] = useState([])
 // //   console.log('products', products)
@@ -2843,13 +2843,13 @@
 // //       if (searchQuery) params.append('search', searchQuery)
 
 // //       const response = await fetch(`http://localhost:8000/api/v1/products?${params}`)
-      
+
 // //       if (!response.ok) {
 // //         throw new Error(`HTTP error! status: ${response.status}`)
 // //       }
 
 // //       const data = await response.json()
-      
+
 // //       setProducts(data.products || [])
 // //       setPagination(prev => ({
 // //         ...prev,
@@ -2876,7 +2876,7 @@
 // //     console.log('Filters changed:', newFilters)
 // //     setFilters(newFilters)
 // //     setPagination(prev => ({ ...prev, page: 1 })) // Reset to first page
-    
+
 // //     // If filtered data is provided from the filter component, use it directly
 // //     if (filteredData) {
 // //       setProducts(filteredData.products || filteredData.data || filteredData)
@@ -2901,7 +2901,7 @@
 
 // //   const handleAddToCart = (product) => {
 // //     console.log('Add to cart:', product)
-    
+
 // //     // Create a more sophisticated notification
 // //     const notification = document.createElement('div')
 // //     notification.style.cssText = `
@@ -2919,7 +2919,7 @@
 // //       animation: slideInRight 0.3s ease-out;
 // //       max-width: 300px;
 // //     `
-    
+
 // //     notification.innerHTML = `
 // //       <div style="display: flex; align-items: center; gap: 12px;">
 // //         <span style="font-size: 20px;">✅</span>
@@ -2929,9 +2929,9 @@
 // //         </div>
 // //       </div>
 // //     `
-    
+
 // //     document.body.appendChild(notification)
-    
+
 // //     // Add animation styles
 // //     const style = document.createElement('style')
 // //     style.textContent = `
@@ -2957,7 +2957,7 @@
 // //       }
 // //     `
 // //     document.head.appendChild(style)
-    
+
 // //     // Remove notification after 3 seconds
 // //     setTimeout(() => {
 // //       notification.style.animation = 'slideOutRight 0.3s ease-in'
@@ -3299,7 +3299,7 @@
 // //       <style>
 // //         {`
 // //           @import url('https://fonts.googleapis.com/css2?family=Amazon+Ember:wght@400;500;700&display=swap');
-          
+
 // //           @media (max-width: 768px) {
 // //             main {
 // //               padding: 16px 16px 120px 16px !important;
@@ -3309,7 +3309,7 @@
 // //               margin-left: 0 !important;
 // //               padding-bottom: 120px !important;
 // //             }
-            
+
 // //             #all-products {
 // //               margin-bottom: 20px;
 // //             }
@@ -3318,12 +3318,12 @@
 // //               padding: 20px !important;
 // //             }
 // //           }
-          
+
 // //           @media (max-width: 480px) {
 // //             main {
 // //               padding: 12px 12px 130px 12px !important;
 // //             }
-            
+
 // //             .quick-stats {
 // //               grid-template-columns: 1fr !important;
 // //             }
@@ -3374,7 +3374,7 @@
 // //               transform: translateX(0);
 // //             }
 // //           }
-          
+
 // //           @keyframes slideOutRight {
 // //             from {
 // //               opacity: 1;
@@ -3408,7 +3408,7 @@
 
 // const Homepage = () => {
 //   const navigate = useNavigate()
-  
+
 //   // State management
 //   const [products, setProducts] = useState([])
 //   console.log('products', products)
@@ -3461,13 +3461,13 @@
 //       if (searchQuery) params.append('search', searchQuery)
 
 //       const response = await fetch(`http://localhost:8000/api/v1/products?${params}`)
-      
+
 //       if (!response.ok) {
 //         throw new Error(`HTTP error! status: ${response.status}`)
 //       }
 
 //       const data = await response.json()
-      
+
 //       setProducts(data.products || [])
 //       setPagination(prev => ({
 //         ...prev,
@@ -3495,7 +3495,7 @@
 //     console.log('Filters changed:', newFilters)
 //     setFilters(newFilters)
 //     setPagination(prev => ({ ...prev, page: 1 })) // Reset to first page
-    
+
 //     // If filtered data is provided from the filter component, use it directly
 //     if (filteredData) {
 //       setProducts(filteredData.products || filteredData.data || filteredData)
@@ -3520,7 +3520,7 @@
 
 //   const handleAddToCart = (product) => {
 //     console.log('Add to cart:', product)
-    
+
 //     // Create a more sophisticated notification
 //     const notification = document.createElement('div')
 //     notification.style.cssText = `
@@ -3538,7 +3538,7 @@
 //       animation: slideInRight 0.3s ease-out;
 //       max-width: 300px;
 //     `
-    
+
 //     notification.innerHTML = `
 //       <div style="display: flex; align-items: center; gap: 12px;">
 //         <span style="font-size: 20px;">✅</span>
@@ -3548,9 +3548,9 @@
 //         </div>
 //       </div>
 //     `
-    
+
 //     document.body.appendChild(notification)
-    
+
 //     // Add animation styles
 //     const style = document.createElement('style')
 //     style.textContent = `
@@ -3576,7 +3576,7 @@
 //       }
 //     `
 //     document.head.appendChild(style)
-    
+
 //     // Remove notification after 3 seconds
 //     setTimeout(() => {
 //       notification.style.animation = 'slideOutRight 0.3s ease-in'
@@ -3920,7 +3920,7 @@
 //       <style>
 //         {`
 //           @import url('https://fonts.googleapis.com/css2?family=Amazon+Ember:wght@400;500;700&display=swap');
-          
+
 //           @media (max-width: 768px) {
 //             main {
 //               padding: 16px 16px 120px 16px !important;
@@ -3930,7 +3930,7 @@
 //               margin-left: 0 !important;
 //               padding-bottom: 120px !important;
 //             }
-            
+
 //             #all-products {
 //               margin-bottom: 20px;
 //             }
@@ -3939,12 +3939,12 @@
 //               padding: 20px !important;
 //             }
 //           }
-          
+
 //           @media (max-width: 480px) {
 //             main {
 //               padding: 12px 12px 130px 12px !important;
 //             }
-            
+
 //             .quick-stats {
 //               grid-template-columns: 1fr !important;
 //             }
@@ -3995,7 +3995,7 @@
 //               transform: translateX(0);
 //             }
 //           }
-          
+
 //           @keyframes slideOutRight {
 //             from {
 //               opacity: 1;
@@ -4038,7 +4038,7 @@
 
 // const Homepage = () => {
 //   const navigate = useNavigate()
-  
+
 //   // State management
 //   const [products, setProducts] = useState([])
 //   console.log('products', products)
@@ -4114,7 +4114,7 @@
 //       console.log('API URL:', apiUrl)
 
 //       const response = await fetch(apiUrl)
-      
+
 //       if (!response.ok) {
 //         const errorText = await response.text()
 //         console.error('API Error Response:', errorText)
@@ -4123,7 +4123,7 @@
 
 //       const data = await response.json()
 //       console.log('API Response:', data)
-      
+
 //       setProducts(data.products || [])
 //       setPagination(prev => ({
 //         ...prev,
@@ -4150,7 +4150,7 @@
 
 //   const handleFiltersChange = (newFilters, filteredData = null) => {
 //     console.log('Filters changed from:', filters, 'to:', newFilters)
-    
+
 //     // Validate and clean filters
 //     const cleanedFilters = {
 //       ...newFilters,
@@ -4164,11 +4164,11 @@
 //       sort_by: newFilters.sort_by || 'name',
 //       sort_order: newFilters.sort_order || 'asc'
 //     }
-    
+
 //     console.log('Cleaned filters:', cleanedFilters)
 //     setFilters(cleanedFilters)
 //     setPagination(prev => ({ ...prev, page: 1 })) // Reset to first page
-    
+
 //     // If filtered data is provided from the filter component, use it directly
 //     if (filteredData && filteredData.products) {
 //       console.log('Using provided filtered data:', filteredData)
@@ -4199,7 +4199,7 @@
 
 //   const handleAddToCart = (product) => {
 //     console.log('Add to cart:', product)
-    
+
 //     // Create a more sophisticated notification
 //     const notification = document.createElement('div')
 //     notification.style.cssText = `
@@ -4217,7 +4217,7 @@
 //       animation: slideInRight 0.3s ease-out;
 //       max-width: 300px;
 //     `
-    
+
 //     notification.innerHTML = `
 //       <div style="display: flex; align-items: center; gap: 12px;">
 //         <span style="font-size: 20px;">✅</span>
@@ -4227,9 +4227,9 @@
 //         </div>
 //       </div>
 //     `
-    
+
 //     document.body.appendChild(notification)
-    
+
 //     // Remove notification after 3 seconds
 //     setTimeout(() => {
 //       notification.style.animation = 'slideOutRight 0.3s ease-in'
@@ -4375,10 +4375,10 @@
 //               </span>
 //               {Object.entries(filters).map(([key, value]) => {
 //                 if (!value || value === '' || key === 'sort_by' || key === 'sort_order') return null
-                
+
 //                 const displayValue = getFilterDisplayValue(key, value)
 //                 if (!displayValue) return null
-                
+
 //                 return (
 //                   <span key={key} style={{
 //                     padding: '4px 8px',
@@ -4545,7 +4545,7 @@
 //       <style>
 //         {`
 //           @import url('https://fonts.googleapis.com/css2?family=Amazon+Ember:wght@400;500;700&display=swap');
-          
+
 //           @media (max-width: 768px) {
 //             main {
 //               padding: 16px 16px 120px 16px !important;
@@ -4555,7 +4555,7 @@
 //               margin-left: 0 !important;
 //               padding-bottom: 120px !important;
 //             }
-            
+
 //             #all-products {
 //               margin-bottom: 20px;
 //             }
@@ -4564,12 +4564,12 @@
 //               padding: 20px !important;
 //             }
 //           }
-          
+
 //           @media (max-width: 480px) {
 //             main {
 //               padding: 12px 12px 130px 12px !important;
 //             }
-            
+
 //             .quick-stats {
 //               grid-template-columns: 1fr !important;
 //             }
@@ -4620,7 +4620,7 @@
 //               transform: translateX(0);
 //             }
 //           }
-          
+
 //           @keyframes slideOutRight {
 //             from {
 //               opacity: 1;
@@ -4653,7 +4653,7 @@ import ProfessionalSidebar from '../components/homepagecomponent/ProfessionalSid
 
 const Homepage = () => {
   const navigate = useNavigate()
-  
+
   // State management
   const [products, setProducts] = useState([])
   const [loading, setLoading] = useState(true)
@@ -4666,7 +4666,8 @@ const Homepage = () => {
     min_price: '',
     max_price: '',
     sort_by: 'name',
-    sort_order: 'asc'
+    sort_order: 'asc',
+    specifications: {}
   })
   const [pagination, setPagination] = useState({
     page: 1,
@@ -4684,7 +4685,7 @@ const Homepage = () => {
         setSidebarOpen(true)
       }
     }
-    
+
     checkScreenSize()
     window.addEventListener('resize', checkScreenSize)
     return () => window.removeEventListener('resize', checkScreenSize)
@@ -4732,6 +4733,12 @@ const Homepage = () => {
           params.append('max_price', maxPrice.toString())
         }
       }
+
+      // Add specifications filter
+      if (filtersToUse.specifications && Object.keys(filtersToUse.specifications).length > 0) {
+        params.append('filters', JSON.stringify(filtersToUse.specifications))
+      }
+
       if (searchQuery && searchQuery.trim() !== '') {
         params.append('search', searchQuery.trim())
       }
@@ -4740,7 +4747,7 @@ const Homepage = () => {
       console.log('API URL:', apiUrl)
 
       const response = await fetch(apiUrl)
-      
+
       if (!response.ok) {
         const errorText = await response.text()
         console.error('API Error Response:', errorText)
@@ -4749,7 +4756,7 @@ const Homepage = () => {
 
       const data = await response.json()
       console.log('API Response:', data)
-      
+
       setProducts(data.products || [])
       setPagination(prev => ({
         ...prev,
@@ -4776,7 +4783,7 @@ const Homepage = () => {
 
   const handleFiltersChange = (newFilters, filteredData = null) => {
     console.log('Filters changed:', newFilters)
-    
+
     const cleanedFilters = {
       ...newFilters,
       category_id: newFilters.category_id || '',
@@ -4784,12 +4791,13 @@ const Homepage = () => {
       min_price: newFilters.min_price && !isNaN(parseFloat(newFilters.min_price)) ? newFilters.min_price : '',
       max_price: newFilters.max_price && !isNaN(parseFloat(newFilters.max_price)) ? newFilters.max_price : '',
       sort_by: newFilters.sort_by || 'name',
-      sort_order: newFilters.sort_order || 'asc'
+      sort_order: newFilters.sort_order || 'asc',
+      specifications: newFilters.specifications || {}
     }
-    
+
     setFilters(cleanedFilters)
     setPagination(prev => ({ ...prev, page: 1 }))
-    
+
     if (filteredData && filteredData.products) {
       setProducts(filteredData.products || [])
       setPagination(prev => ({
@@ -4814,7 +4822,7 @@ const Homepage = () => {
 
   const handleAddToCart = (product) => {
     console.log('Add to cart:', product)
-    
+
     // Enhanced notification
     const notification = document.createElement('div')
     notification.style.cssText = `
@@ -4833,7 +4841,7 @@ const Homepage = () => {
       max-width: 320px;
       border: 1px solid rgba(255, 255, 255, 0.1);
     `
-    
+
     notification.innerHTML = `
       <div style="display: flex; align-items: center; gap: 12px;">
         <div style="
@@ -4852,9 +4860,9 @@ const Homepage = () => {
         </div>
       </div>
     `
-    
+
     document.body.appendChild(notification)
-    
+
     setTimeout(() => {
       notification.style.animation = 'slideOutRight 0.4s cubic-bezier(0.4, 0, 0.2, 1)'
       setTimeout(() => {
@@ -4895,9 +4903,9 @@ const Homepage = () => {
     }
   }
 
-  const activeFiltersCount = Object.entries(filters).filter(([key, value]) => 
-    value && value !== '' && key !== 'sort_by' && key !== 'sort_order'
-  ).length
+  const activeFiltersCount = Object.entries(filters).filter(([key, value]) =>
+    value && value !== '' && key !== 'sort_by' && key !== 'sort_order' && key !== 'specifications'
+  ).length + (filters.specifications ? Object.keys(filters.specifications).length : 0)
 
   return (
     <div style={{
@@ -4906,7 +4914,7 @@ const Homepage = () => {
       fontFamily: '"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
     }}>
       {/* Header */}
-      <Header 
+      <Header
         onSearch={handleSearch}
         searchQuery={searchQuery}
         onToggleSidebar={toggleSidebar}
@@ -5051,7 +5059,7 @@ const Homepage = () => {
                       </div>
                     )}
                   </div>
-                  
+
                   <div style={{
                     display: 'flex',
                     alignItems: 'center',
@@ -5067,7 +5075,7 @@ const Homepage = () => {
                     }}>
                       {pagination.total_count} products
                     </div>
-                    
+
                     {window.innerWidth <= 1024 && (
                       <button
                         onClick={toggleSidebar}
@@ -5111,20 +5119,20 @@ const Homepage = () => {
                     paddingTop: '16px',
                     borderTop: '1px solid #F3F4F6'
                   }}>
-                    <span style={{ 
-                      fontSize: '14px', 
-                      fontWeight: '600', 
+                    <span style={{
+                      fontSize: '14px',
+                      fontWeight: '600',
                       color: '#6B7280',
                       marginRight: '8px'
                     }}>
                       Active Filters:
                     </span>
                     {Object.entries(filters).map(([key, value]) => {
-                      if (!value || value === '' || key === 'sort_by' || key === 'sort_order') return null
-                      
+                      if (!value || value === '' || key === 'sort_by' || key === 'sort_order' || key === 'specifications') return null
+
                       const displayValue = getFilterDisplayValue(key, value)
                       if (!displayValue) return null
-                      
+
                       return (
                         <span key={key} style={{
                           padding: '4px 12px',
@@ -5139,6 +5147,21 @@ const Homepage = () => {
                         </span>
                       )
                     })}
+
+                    {/* Specifications Filters Display */}
+                    {filters.specifications && Object.entries(filters.specifications).map(([key, value]) => (
+                      <span key={`spec-${key}`} style={{
+                        padding: '4px 12px',
+                        background: '#F0FDF4', // Greenish tint for specs
+                        color: '#15803D',
+                        borderRadius: '16px',
+                        fontSize: '13px',
+                        fontWeight: '500',
+                        border: '1px solid #DCFCE7'
+                      }}>
+                        {key}: {value}
+                      </span>
+                    ))}
                     <button
                       onClick={() => {
                         const clearedFilters = {
@@ -5147,7 +5170,8 @@ const Homepage = () => {
                           min_price: '',
                           max_price: '',
                           sort_by: 'name',
-                          sort_order: 'asc'
+                          sort_order: 'asc',
+                          specifications: {}
                         }
                         setFilters(clearedFilters)
                         setPagination(prev => ({ ...prev, page: 1 }))
@@ -5209,14 +5233,14 @@ const Homepage = () => {
                   cursor: 'pointer',
                   border: '1px solid #F3F4F6'
                 }}
-                onMouseOver={(e) => {
-                  e.currentTarget.style.transform = 'translateY(-8px)'
-                  e.currentTarget.style.boxShadow = '0 10px 25px rgba(0, 0, 0, 0.15)'
-                }}
-                onMouseOut={(e) => {
-                  e.currentTarget.style.transform = 'translateY(0)'
-                  e.currentTarget.style.boxShadow = '0 1px 3px rgba(0, 0, 0, 0.1)'
-                }}
+                  onMouseOver={(e) => {
+                    e.currentTarget.style.transform = 'translateY(-8px)'
+                    e.currentTarget.style.boxShadow = '0 10px 25px rgba(0, 0, 0, 0.15)'
+                  }}
+                  onMouseOut={(e) => {
+                    e.currentTarget.style.transform = 'translateY(0)'
+                    e.currentTarget.style.boxShadow = '0 1px 3px rgba(0, 0, 0, 0.1)'
+                  }}
                 >
                   <div style={{
                     width: '64px',
