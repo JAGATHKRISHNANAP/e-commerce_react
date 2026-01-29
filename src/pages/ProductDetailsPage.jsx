@@ -9,7 +9,7 @@
 //   const { productId } = useParams(); // This matches :productId in the route
 //   const navigate = useNavigate();
 //   const dispatch = useDispatch();
-  
+
 //   const [product, setProduct] = useState(null);
 //   const [loading, setLoading] = useState(true);
 //   const [error, setError] = useState(null);
@@ -27,7 +27,7 @@
 //       setError(null);
 
 //       const response = await fetch(`http://localhost:8000/api/v1/products/${productId}`);
-      
+
 //       if (!response.ok) {
 //         if (response.status === 404) {
 //           throw new Error('Product not found');
@@ -37,7 +37,7 @@
 
 //       const data = await response.json();
 //       setProduct(data);
-      
+
 //       // Set first image as selected if images exist
 //       if (data.images && data.images.length > 0) {
 //         const primaryIndex = data.images.findIndex(img => img.is_primary);
@@ -77,7 +77,7 @@
 //       console.error(`Failed to load image: ${imageSrc}`);
 //       setIsLoading(false);
 //       setHasError(true);
-      
+
 //       if (onError) {
 //         onError();
 //       }
@@ -108,7 +108,7 @@
 //             }} />
 //           </div>
 //         )}
-        
+
 //         <img
 //           src={imageSrc}
 //           alt={alt}
@@ -122,7 +122,7 @@
 //             borderRadius: '8px'
 //           }}
 //         />
-        
+
 //         {hasError && (
 //           <div style={{
 //             position: 'absolute',
@@ -249,7 +249,7 @@
 //         gridTemplateColumns: window.innerWidth <= 768 ? '1fr' : '1fr 1fr',
 //         gap: '40px'
 //       }}>
-        
+
 //         {/* Image Gallery */}
 //         <div>
 //           {/* Main Image */}
@@ -266,7 +266,7 @@
 //                 alt={product.name}
 //                 style={{ height: '100%', borderRadius: '12px' }}
 //               />
-              
+
 //               {/* Zoom indicator */}
 //               <div style={{
 //                 position: 'absolute',
@@ -339,7 +339,7 @@
 //             padding: '32px',
 //             boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)'
 //           }}>
-            
+
 //             {/* Product Title */}
 //             <h1 style={{
 //               fontSize: '32px',
@@ -654,7 +654,7 @@
 //           0% { transform: rotate(0deg); }
 //           100% { transform: rotate(360deg); }
 //         }
-        
+
 //         @keyframes slideInRight {
 //           from {
 //             opacity: 0;
@@ -665,7 +665,7 @@
 //             transform: translateX(0);
 //           }
 //         }
-        
+
 //         @keyframes slideOutRight {
 //           from {
 //             opacity: 1;
@@ -731,11 +731,11 @@
 //   const { productId } = useParams();
 //   const navigate = useNavigate();
 //   const dispatch = useDispatch();
-  
+
 //   // Redux selectors
 //   const isAuthenticated = useSelector(selectIsAuthenticated);
 //   const isCartUpdating = useSelector(selectCartIsUpdating);
-  
+
 //   const [product, setProduct] = useState(null);
 //   const [loading, setLoading] = useState(true);
 //   const [error, setError] = useState(null);
@@ -755,7 +755,7 @@
 //       setError(null);
 
 //       const response = await fetch(`http://localhost:8000/api/v1/products/${productId}`);
-      
+
 //       if (!response.ok) {
 //         if (response.status === 404) {
 //           throw new Error('Product not found');
@@ -765,7 +765,7 @@
 
 //       const data = await response.json();
 //       setProduct(data);
-      
+
 //       // Set first image as selected if images exist
 //       if (data.images && data.images.length > 0) {
 //         const primaryIndex = data.images.findIndex(img => img.is_primary);
@@ -789,22 +789,22 @@
 //     }
 
 //     setIsAdding(true);
-    
+
 //     try {
 //       // Dispatch add to cart action
 //       await dispatch(addToCart({ 
 //         productId: parseInt(productId), 
 //         quantity: quantity 
 //       })).unwrap();
-      
+
 //       setIsAdded(true);
 //       showToast(`${quantity} × ${product.name} added to cart!`, 'success');
-      
+
 //       // Reset the added state after 2 seconds
 //       setTimeout(() => {
 //         setIsAdded(false);
 //       }, 2000);
-      
+
 //     } catch (error) {
 //       console.error('Failed to add to cart:', error);
 //       showToast(error || 'Failed to add to cart', 'error');
@@ -834,7 +834,7 @@
 //       console.error(`Failed to load image: ${imageSrc}`);
 //       setIsLoading(false);
 //       setHasError(true);
-      
+
 //       if (onError) {
 //         onError();
 //       }
@@ -865,7 +865,7 @@
 //             }} />
 //           </div>
 //         )}
-        
+
 //         <img
 //           src={imageSrc}
 //           alt={alt}
@@ -879,7 +879,7 @@
 //             borderRadius: '8px'
 //           }}
 //         />
-        
+
 //         {hasError && (
 //           <div style={{
 //             position: 'absolute',
@@ -1006,7 +1006,7 @@
 //         gridTemplateColumns: window.innerWidth <= 768 ? '1fr' : '1fr 1fr',
 //         gap: '40px'
 //       }}>
-        
+
 //         {/* Image Gallery */}
 //         <div>
 //           {/* Main Image */}
@@ -1023,7 +1023,7 @@
 //                 alt={product.name}
 //                 style={{ height: '100%', borderRadius: '12px' }}
 //               />
-              
+
 //               {/* Zoom indicator */}
 //               <div style={{
 //                 position: 'absolute',
@@ -1096,7 +1096,7 @@
 //             padding: '32px',
 //             boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)'
 //           }}>
-            
+
 //             {/* Product Title */}
 //             <h1 style={{
 //               fontSize: '32px',
@@ -1456,7 +1456,7 @@
 //           0% { transform: rotate(0deg); }
 //           100% { transform: rotate(360deg); }
 //         }
-        
+
 //         @keyframes slideInRight {
 //           from {
 //             opacity: 0;
@@ -1467,7 +1467,7 @@
 //             transform: translateX(0);
 //           }
 //         }
-        
+
 //         @keyframes slideOutRight {
 //           from {
 //             opacity: 1;
@@ -1531,11 +1531,11 @@ const ProductDetailsPage = () => {
   const { productId } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  
+
   // Redux selectors
   const isAuthenticated = useSelector(selectIsAuthenticated);
   const isCartUpdating = useSelector(selectCartIsUpdating);
-  
+
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   console.log('product details ID:', product);
@@ -1556,7 +1556,7 @@ const ProductDetailsPage = () => {
       setError(null);
 
       const response = await fetch(`http://localhost:8000/api/v1/products/${productId}`);
-      
+
       if (!response.ok) {
         if (response.status === 404) {
           throw new Error('Product not found');
@@ -1566,7 +1566,7 @@ const ProductDetailsPage = () => {
 
       const data = await response.json();
       setProduct(data);
-      
+
       // Set first image as selected if images exist
       if (data.images && data.images.length > 0) {
         const primaryIndex = data.images.findIndex(img => img.is_primary);
@@ -1590,22 +1590,22 @@ const ProductDetailsPage = () => {
     }
 
     setIsAdding(true);
-    
+
     try {
       // Dispatch add to cart action
-      await dispatch(addToCart({ 
-        productId: parseInt(productId), 
-        quantity: quantity 
+      await dispatch(addToCart({
+        productId: parseInt(productId),
+        quantity: quantity
       })).unwrap();
-      
+
       setIsAdded(true);
       showToast(`${quantity} × ${product.name} added to cart!`, 'success');
-      
+
       // Reset the added state after 2 seconds
       setTimeout(() => {
         setIsAdded(false);
       }, 2000);
-      
+
     } catch (error) {
       console.error('Failed to add to cart:', error);
       showToast(error || 'Failed to add to cart', 'error');
@@ -1635,7 +1635,7 @@ const ProductDetailsPage = () => {
       console.error(`Failed to load image: ${imageSrc}`);
       setIsLoading(false);
       setHasError(true);
-      
+
       if (onError) {
         onError();
       }
@@ -1666,7 +1666,7 @@ const ProductDetailsPage = () => {
             }} />
           </div>
         )}
-        
+
         <img
           src={imageSrc}
           alt={alt}
@@ -1680,7 +1680,7 @@ const ProductDetailsPage = () => {
             borderRadius: '8px'
           }}
         />
-        
+
         {hasError && (
           <div style={{
             position: 'absolute',
@@ -1708,8 +1708,8 @@ const ProductDetailsPage = () => {
 
   if (loading) {
     return (
-      <div style={{ 
-        minHeight: '100vh', 
+      <div style={{
+        minHeight: '100vh',
         background: '#f8f9fa',
         display: 'flex',
         alignItems: 'center',
@@ -1773,7 +1773,7 @@ const ProductDetailsPage = () => {
 
   return (
     <div style={{ minHeight: '100vh', background: '#f8f9fa' }}>
-     <Header /> 
+      <Header />
       {/* Breadcrumb */}
       <div style={{
         maxWidth: '1200px',
@@ -1782,7 +1782,7 @@ const ProductDetailsPage = () => {
         fontSize: '14px',
         color: '#666'
       }}>
-        <span 
+        <span
           onClick={() => navigate('/dashboard')}
           style={{ cursor: 'pointer', color: '#007bff' }}
         >
@@ -1807,7 +1807,7 @@ const ProductDetailsPage = () => {
         gridTemplateColumns: window.innerWidth <= 768 ? '1fr' : '1fr 1fr',
         gap: '40px'
       }}>
-        
+
         {/* Image Gallery */}
         <div>
           {/* Main Image */}
@@ -1818,35 +1818,35 @@ const ProductDetailsPage = () => {
             marginBottom: '20px',
             boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)'
           }}>
-<div style={{ height: '700px', position: 'relative' }}>
-  <img
-    src={getSelectedImage()}
-    alt={product.name}
-    style={{
-      width: '100%',
-      height: '100%',
-      objectFit: 'cover', // or 'contain' based on your need
-      borderRadius: '12px'
-    }}
-  />
+            <div style={{ height: '700px', position: 'relative' }}>
+              <img
+                src={getSelectedImage()}
+                alt={product.name}
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover', // or 'contain' based on your need
+                  borderRadius: '12px'
+                }}
+              />
 
-  {/* Zoom indicator */}
-  <div style={{
-    position: 'absolute',
-    bottom: '12px',
-    right: '12px',
-    background: 'rgba(0, 0, 0, 0.7)',
-    color: 'white',
-    padding: '6px 10px',
-    borderRadius: '16px',
-    fontSize: '12px',
-    display: 'flex',
-    alignItems: 'center',
-    gap: '4px'
-  }}>
-    🔍 Click to zoom
-  </div>
-</div>
+              {/* Zoom indicator */}
+              <div style={{
+                position: 'absolute',
+                bottom: '12px',
+                right: '12px',
+                background: 'rgba(0, 0, 0, 0.7)',
+                color: 'white',
+                padding: '6px 10px',
+                borderRadius: '16px',
+                fontSize: '12px',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '4px'
+              }}>
+                🔍 Click to zoom
+              </div>
+            </div>
 
           </div>
 
@@ -1903,7 +1903,7 @@ const ProductDetailsPage = () => {
             padding: '32px',
             boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)'
           }}>
-            
+
             {/* Product Title */}
             <h1 style={{
               fontSize: '32px',
@@ -1990,6 +1990,99 @@ const ProductDetailsPage = () => {
               </div>
             )}
 
+            {/* Variant Selector */}
+            {product.variants && product.variants.length > 0 && (() => {
+              // 1. Group variants by specification keys (e.g., Color, Size)
+              const variantOptions = {};
+              const allProducts = [product, ...product.variants]; // Include current product
+
+              allProducts.forEach(p => {
+                if (p.specifications) {
+                  Object.entries(p.specifications).forEach(([key, value]) => {
+                    if (!variantOptions[key]) {
+                      variantOptions[key] = new Set();
+                    }
+                    variantOptions[key].add(value);
+                  });
+                }
+              });
+
+              // Only show selectors for keys with multiple options (more than 1 value across variants)
+              const meaningfulKeys = Object.keys(variantOptions).filter(key =>
+                ['Color', 'Size', 'Colour', 'size', 'color'].includes(key) || variantOptions[key].size > 1
+              );
+
+              return meaningfulKeys.map(key => (
+                <div key={key} style={{ marginBottom: '24px' }}>
+                  <label style={{
+                    display: 'block',
+                    fontSize: '16px',
+                    fontWeight: '600',
+                    color: '#333',
+                    marginBottom: '8px',
+                    textTransform: 'capitalize'
+                  }}>
+                    {key}:
+                  </label>
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px' }}>
+                    {Array.from(variantOptions[key]).sort().map(value => {
+                      // Check if this specific option is selected
+                      const isSelected = product.specifications && product.specifications[key] === value;
+
+                      return (
+                        <button
+                          key={value}
+                          onClick={() => {
+                            if (isSelected) return;
+
+                            // Find best matching variant
+                            let bestMatch = null;
+                            let maxMatches = -1;
+
+                            // Find candidates with this primary selection
+                            const candidates = allProducts.filter(p =>
+                              p.specifications && p.specifications[key] === value
+                            );
+
+                            // From candidates, pick one that matches other current specs best
+                            for (const candidate of candidates) {
+                              let matches = 0;
+                              Object.keys(product.specifications || {}).forEach(k => {
+                                if (k !== key && candidate.specifications[k] === product.specifications[k]) {
+                                  matches++;
+                                }
+                              });
+
+                              if (matches > maxMatches) {
+                                maxMatches = matches;
+                                bestMatch = candidate;
+                              }
+                            }
+
+                            if (bestMatch) {
+                              navigate(`/product/${bestMatch.product_id}`);
+                            }
+                          }}
+                          style={{
+                            padding: '8px 16px',
+                            border: isSelected ? '2px solid #007bff' : '1px solid #e0e0e0',
+                            background: isSelected ? '#e3f2fd' : 'white',
+                            color: isSelected ? '#007bff' : '#333',
+                            borderRadius: '8px',
+                            cursor: 'pointer',
+                            fontWeight: isSelected ? '600' : '400',
+                            minWidth: '60px'
+                          }}
+                        >
+                          {value}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              ));
+            })()}
+
             {/* Quantity Selector */}
             {product.stock_quantity > 0 && (
               <div style={{ marginBottom: '24px' }}>
@@ -2072,9 +2165,9 @@ const ProductDetailsPage = () => {
                 style={{
                   flex: 1,
                   padding: '16px 24px',
-                  background: product.stock_quantity <= 0 
-                    ? '#ccc' 
-                    : isAdded 
+                  background: product.stock_quantity <= 0
+                    ? '#ccc'
+                    : isAdded
                       ? 'linear-gradient(135deg, #4caf50 0%, #66bb6a 100%)'
                       : 'linear-gradient(135deg, #28a745 0%, #20c997 100%)',
                   color: 'white',
@@ -2103,12 +2196,12 @@ const ProductDetailsPage = () => {
               >
                 {isAdding ? (
                   <>
-                    <Loader 
-                      style={{ 
-                        width: '20px', 
+                    <Loader
+                      style={{
+                        width: '20px',
                         height: '20px',
                         animation: 'spin 1s linear infinite'
-                      }} 
+                      }}
                     />
                     <span>Adding...</span>
                   </>
