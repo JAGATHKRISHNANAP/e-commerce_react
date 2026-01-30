@@ -30,7 +30,7 @@ const Header = ({ onSearch, searchQuery }) => {
   const handleSearchInputChange = async (e) => {
     const value = e.target.value
     setSearchInput(value)
-    
+
     if (value.length >= 2) {
       try {
         const response = await fetch(`http://localhost:8000/api/v1/api/search/suggestions?q=${encodeURIComponent(value)}`)
@@ -338,13 +338,13 @@ const Header = ({ onSearch, searchQuery }) => {
                     {user?.email || user?.phoneNumber || 'user@example.com'}
                   </p>
                 </div>
-                
+
                 <div style={{ padding: '8px 0' }}>
                   {[
-                    { icon: '👤', label: 'My Profile', action: () => {} },
-                    { icon: '📦', label: 'My Orders', action: () => {} },
-                    { icon: '❤️', label: 'Wishlist', action: () => {} },
-                    { icon: '⚙️', label: 'Settings', action: () => {} }
+                    { icon: '👤', label: 'My Profile', action: () => { } },
+                    { icon: '📦', label: 'My Orders', action: () => { } },
+                    { icon: '❤️', label: 'Wishlist', action: () => { } },
+                    { icon: '⚙️', label: 'Settings', action: () => { } }
                   ].map((item, index) => (
                     <button
                       key={index}
@@ -373,13 +373,13 @@ const Header = ({ onSearch, searchQuery }) => {
                       <span>{item.label}</span>
                     </button>
                   ))}
-                  
+
                   <div style={{
                     height: '1px',
                     background: '#eee',
                     margin: '8px 0'
                   }} />
-                  
+
                   <button
                     onClick={handleLogout}
                     disabled={isLoading}
