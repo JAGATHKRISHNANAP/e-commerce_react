@@ -860,8 +860,8 @@ const CartPage = () => {
         totalQuantity: 0,
         subtotal: 0,
         discount: 0,
-        platformFee: 0,
         deliveryFee: 0,
+        tax: 0,
         totalAmount: 0,
         savings: 0
       };
@@ -873,20 +873,23 @@ const CartPage = () => {
       return sum + (parseFloat(item.price_at_time || item.product.price) * item.quantity);
     }, 0);
 
-    // Calculate discounts and fees
-    const discount = subtotal * 0.15; // 15% discount example
-    const platformFee = 29;
-    const deliveryFee = subtotal > 499 ? 0 : 40;
-    const savings = discount + (deliveryFee === 0 ? 40 : 0);
-    const totalAmount = subtotal - discount + platformFee + deliveryFee;
+    // Calculate discounts and fees (Standardized with Backend)
+    const discount = subtotal * 0.15; // 15% discount
+    const taxableAmount = subtotal - discount;
+    const tax = taxableAmount * 0.18; // 18% GST on discounted amount
+    const deliveryFee = taxableAmount > 499 ? 0 : 40;
+
+    // Total
+    const totalAmount = taxableAmount + tax + deliveryFee;
+    const savings = discount + (deliveryFee === 0 && taxableAmount <= 499 ? 0 : 0); // Only count discount as savings mostly
 
     return {
       itemCount,
       totalQuantity,
       subtotal,
       discount,
-      platformFee,
       deliveryFee,
+      tax,
       totalAmount,
       savings
     };
@@ -897,8 +900,8 @@ const CartPage = () => {
     totalQuantity,
     subtotal,
     discount,
-    platformFee,
     deliveryFee,
+    tax,
     totalAmount,
     savings
   } = calculateTotals();
@@ -1424,9 +1427,11 @@ const CartPage = () => {
                           />
                         )}
 
+
+
                         <PriceRow
-                          label="Platform Fee"
-                          amount={platformFee}
+                          label="Total Tax (GST 18%)"
+                          amount={tax}
                         />
 
                         <Box sx={{

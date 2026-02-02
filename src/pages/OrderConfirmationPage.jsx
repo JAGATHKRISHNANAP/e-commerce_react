@@ -44,41 +44,40 @@ import Header from '../components/homepagecomponent/AppHeaders';
 import LoadingSpinner from '../components/ui/LoadingSpinner';
 import ErrorMessage from '../components/ui/ErrorMessage';
 import { showToast } from '../components/ui/Toast';
-// import { api } from '../services/api';
+import { orderAPI } from '../services/api/orderAPI';
 
 const OrderConfirmationPage = () => {
-    const API_BASE_URL = 'http://localhost:8000'
-    const { orderId } = useParams();
-    const location = useLocation();
-    const navigate = useNavigate();
-    
-    const [orderDetails, setOrderDetails] = useState(null);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
-    
-    // Get order details from navigation state if available
-    const navigationOrderDetails = location.state?.orderDetails;
-    const navigationOrderNumber = location.state?.orderNumber;
+  const { orderId } = useParams();
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const [orderDetails, setOrderDetails] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  // Get order details from navigation state if available (for immediate feedback)
+  const navigationOrderDetails = location.state?.orderDetails;
+  const navigationOrderNumber = location.state?.orderNumber;
 
   useEffect(() => {
     const fetchOrderDetails = async () => {
       try {
         setLoading(true);
         setError(null);
-        
-        // If we have order details from navigation, use them initially
-        if (navigationOrderDetails) {
-          setOrderDetails(navigationOrderDetails);
-          setLoading(false);
-          return;
-        }
-        
-        // Otherwise fetch from API
-        const response = await API_BASE_URL.get(`/api/v1/orders/${orderId}`);
-        setOrderDetails(response.data);
+
+        // Always fetch fresh details from API to ensure we have full product data
+        // (checkout response might be minimal)
+        const data = await orderAPI.getOrderDetails(orderId);
+        setOrderDetails(data);
+
       } catch (err) {
         console.error('Error fetching order details:', err);
-        setError(err.response?.data?.detail || 'Failed to load order details');
+        // Fallback to navigation state if API fails, but it might be incomplete
+        if (navigationOrderDetails) {
+          setOrderDetails(navigationOrderDetails);
+        } else {
+          setError(err.detail || 'Failed to load order details');
+        }
       } finally {
         setLoading(false);
       }
@@ -153,19 +152,19 @@ const OrderConfirmationPage = () => {
   return (
     <Box sx={{ minHeight: '100vh', bgcolor: '#F8FAFC' }}>
       <Header />
-      
+
       <Container maxWidth="lg" sx={{ py: { xs: 2, md: 4 } }}>
         {/* Breadcrumb Navigation */}
         <Box sx={{ mb: { xs: 3, md: 4 } }}>
-          <Breadcrumbs 
-            separator={<NavigateNext fontSize="small" />} 
+          <Breadcrumbs
+            separator={<NavigateNext fontSize="small" />}
             sx={{ mb: 2 }}
           >
             <Link
               component="button"
               variant="body2"
               onClick={() => navigate('/dashboard')}
-              sx={{ 
+              sx={{
                 textDecoration: 'none',
                 display: 'flex',
                 alignItems: 'center',
@@ -183,7 +182,7 @@ const OrderConfirmationPage = () => {
               component="button"
               variant="body2"
               onClick={() => navigate('/orders')}
-              sx={{ 
+              sx={{
                 textDecoration: 'none',
                 display: 'flex',
                 alignItems: 'center',
@@ -197,8 +196,8 @@ const OrderConfirmationPage = () => {
               <ShoppingBag sx={{ fontSize: 16 }} />
               Orders
             </Link>
-            <Typography 
-              color="#111827" 
+            <Typography
+              color="#111827"
               variant="body2"
               sx={{ fontWeight: 600, fontSize: '0.9rem' }}
             >
@@ -222,17 +221,17 @@ const OrderConfirmationPage = () => {
           >
             <Box sx={{ p: { xs: 4, md: 6 }, textAlign: 'center' }}>
               <Zoom in timeout={1000} style={{ transitionDelay: '300ms' }}>
-                <CheckCircleOutline sx={{ 
-                  fontSize: { xs: 64, md: 80 }, 
+                <CheckCircleOutline sx={{
+                  fontSize: { xs: 64, md: 80 },
                   mb: 3,
                   filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.1))'
                 }} />
               </Zoom>
-              
-              <Typography 
-                variant="h3" 
-                gutterBottom 
-                sx={{ 
+
+              <Typography
+                variant="h3"
+                gutterBottom
+                sx={{
                   fontWeight: 800,
                   fontSize: { xs: '2rem', md: '2.5rem' },
                   mb: 2
@@ -240,10 +239,10 @@ const OrderConfirmationPage = () => {
               >
                 Order Confirmed!
               </Typography>
-              
-              <Typography 
-                variant="h6" 
-                sx={{ 
+
+              <Typography
+                variant="h6"
+                sx={{
                   opacity: 0.9,
                   fontSize: { xs: '1.1rem', md: '1.25rem' },
                   fontWeight: 400,
@@ -254,9 +253,9 @@ const OrderConfirmationPage = () => {
               </Typography>
 
               {/* Order Number Display */}
-              <Box sx={{ 
-                display: 'inline-flex', 
-                alignItems: 'center', 
+              <Box sx={{
+                display: 'inline-flex',
+                alignItems: 'center',
                 gap: 2,
                 bgcolor: 'rgba(255,255,255,0.15)',
                 borderRadius: 2,
@@ -270,11 +269,11 @@ const OrderConfirmationPage = () => {
                 <Typography variant="h6" sx={{ fontWeight: 800, fontFamily: 'monospace' }}>
                   {orderNumber}
                 </Typography>
-                <IconButton 
+                <IconButton
                   onClick={handleCopyOrderNumber}
-                  sx={{ 
-                    color: 'white', 
-                    '&:hover': { bgcolor: 'rgba(255,255,255,0.1)' } 
+                  sx={{
+                    color: 'white',
+                    '&:hover': { bgcolor: 'rgba(255,255,255,0.1)' }
                   }}
                   size="small"
                 >
@@ -299,9 +298,9 @@ const OrderConfirmationPage = () => {
             <Typography variant="h6" sx={{ fontWeight: 700, mb: 3, color: '#111827' }}>
               Quick Actions
             </Typography>
-            
-            <Stack 
-              direction={{ xs: 'column', sm: 'row' }} 
+
+            <Stack
+              direction={{ xs: 'column', sm: 'row' }}
               spacing={2}
               sx={{ flexWrap: 'wrap' }}
             >
@@ -321,7 +320,7 @@ const OrderConfirmationPage = () => {
               >
                 Track Order
               </Button>
-              
+
               <Button
                 variant="outlined"
                 startIcon={<Print />}
@@ -339,7 +338,7 @@ const OrderConfirmationPage = () => {
               >
                 Print Receipt
               </Button>
-              
+
               <Button
                 variant="outlined"
                 startIcon={<Email />}
@@ -356,7 +355,7 @@ const OrderConfirmationPage = () => {
               >
                 Email Receipt
               </Button>
-              
+
               <Button
                 variant="outlined"
                 onClick={() => navigate('/dashboard')}
@@ -395,12 +394,12 @@ const OrderConfirmationPage = () => {
                   <Typography variant="h6" sx={{ fontWeight: 700, mb: 3, color: '#111827' }}>
                     Order Status
                   </Typography>
-                  
+
                   <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 3 }}>
                     <Chip
                       label={order?.order_status || 'Confirmed'}
                       color="success"
-                      sx={{ 
+                      sx={{
                         fontWeight: 600,
                         fontSize: '0.9rem',
                         px: 1
@@ -411,10 +410,10 @@ const OrderConfirmationPage = () => {
                     </Typography>
                   </Box>
 
-                  <Alert 
-                    severity="info" 
+                  <Alert
+                    severity="info"
                     icon={<LocalShipping />}
-                    sx={{ 
+                    sx={{
                       borderRadius: 2,
                       '& .MuiAlert-message': {
                         fontSize: '0.95rem'
@@ -444,23 +443,23 @@ const OrderConfirmationPage = () => {
                   <Typography variant="h6" sx={{ fontWeight: 700, mb: 3, color: '#111827' }}>
                     Order Items
                   </Typography>
-                  
+
                   <Stack spacing={2}>
                     {order?.order_items?.map((item, index) => (
                       <Box key={index}>
                         <Box sx={{ display: 'flex', gap: 3, alignItems: 'flex-start' }}>
                           <Avatar
                             variant="rounded"
-                            sx={{ 
-                              width: 64, 
-                              height: 64, 
+                            sx={{
+                              width: 64,
+                              height: 64,
                               bgcolor: '#F3F4F6',
                               color: '#6B7280'
                             }}
                           >
                             <ShoppingBag />
                           </Avatar>
-                          
+
                           <Box sx={{ flex: 1 }}>
                             <Typography variant="body1" sx={{ fontWeight: 600, mb: 0.5 }}>
                               {item.product_name}
@@ -472,7 +471,7 @@ const OrderConfirmationPage = () => {
                               Quantity: {item.quantity} × {formatCurrency(item.unit_price)}
                             </Typography>
                           </Box>
-                          
+
                           <Typography variant="h6" sx={{ fontWeight: 700 }}>
                             {formatCurrency(item.total_price)}
                           </Typography>
@@ -498,7 +497,7 @@ const OrderConfirmationPage = () => {
                     <LocationOn color="action" />
                     Delivery Address
                   </Typography>
-                  
+
                   {order?.delivery_address ? (
                     <Box>
                       <Typography variant="body1" sx={{ fontWeight: 600, mb: 0.5 }}>
@@ -551,7 +550,7 @@ const OrderConfirmationPage = () => {
                     <Receipt color="action" />
                     Order Summary
                   </Typography>
-                  
+
                   <Stack spacing={2}>
                     <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                       <Typography variant="body2" color="#6B7280">Subtotal</Typography>
@@ -559,21 +558,21 @@ const OrderConfirmationPage = () => {
                         {formatCurrency(order?.subtotal || 0)}
                       </Typography>
                     </Box>
-                    
+
                     <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                       <Typography variant="body2" color="#6B7280">Tax</Typography>
                       <Typography variant="body2" sx={{ fontWeight: 600 }}>
                         {formatCurrency(order?.tax_amount || 0)}
                       </Typography>
                     </Box>
-                    
+
                     <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                       <Typography variant="body2" color="#6B7280">Shipping</Typography>
                       <Typography variant="body2" sx={{ fontWeight: 600 }}>
                         {order?.shipping_amount > 0 ? formatCurrency(order.shipping_amount) : 'Free'}
                       </Typography>
                     </Box>
-                    
+
                     {order?.discount_amount > 0 && (
                       <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                         <Typography variant="body2" color="#16A34A">Discount</Typography>
@@ -582,18 +581,18 @@ const OrderConfirmationPage = () => {
                         </Typography>
                       </Box>
                     )}
-                    
+
                     <Divider />
-                    
+
                     <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                       <Typography variant="h6" sx={{ fontWeight: 700 }}>Total</Typography>
                       <Typography variant="h6" sx={{ fontWeight: 700 }}>
                         {formatCurrency(order?.total_amount || 0)}
                       </Typography>
                     </Box>
-                    
+
                     <Divider />
-                    
+
                     <Box>
                       <Typography variant="body2" color="#6B7280" sx={{ mb: 1, display: 'flex', alignItems: 'center', gap: 1 }}>
                         <Payment fontSize="small" />
@@ -627,7 +626,7 @@ const OrderConfirmationPage = () => {
             <Typography variant="body2" color="#6B7280" sx={{ mb: 3 }}>
               If you have any questions about your order, please don't hesitate to contact our customer support team.
             </Typography>
-            
+
             <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
               <Button
                 variant="outlined"
@@ -645,7 +644,7 @@ const OrderConfirmationPage = () => {
               >
                 support@example.com
               </Button>
-              
+
               <Button
                 variant="outlined"
                 startIcon={<Phone />}

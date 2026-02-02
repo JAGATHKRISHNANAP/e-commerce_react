@@ -141,7 +141,7 @@
 // //             Showing {((currentPage - 1) * 20) + 1}-{Math.min(currentPage * 20, totalCount)} of {totalCount} results
 // //           </p>
 // //         </div>
-        
+
 // //         {totalPages > 1 && (
 // //           <div style={{
 // //             fontSize: '14px',
@@ -226,7 +226,7 @@
 // //                   1
 // //                 </button>
 // //               )
-              
+
 // //               if (startPage > 2) {
 // //                 pages.push(
 // //                   <span key="ellipsis1" style={{ 
@@ -273,7 +273,7 @@
 // //                   </span>
 // //                 )
 // //               }
-              
+
 // //               pages.push(
 // //                 <button
 // //                   key={totalPages}
@@ -419,7 +419,7 @@
 //     if (product.primary_image) {
 //       return product.primary_image;
 //     }
-    
+
 //     // Check for images array
 //     if (product.images && product.images.length > 0) {
 //       const primaryImage = product.images.find(img => img.is_primary);
@@ -428,12 +428,12 @@
 //       }
 //       return product.images[0].image_url;
 //     }
-    
+
 //     // Fallback to direct URL if available
 //     if (product.image_url) {
 //       return product.image_url;
 //     }
-    
+
 //     return null;
 //   };
 
@@ -731,7 +731,7 @@
 //           0% { opacity: 1; }
 //           100% { opacity: 0.5; }
 //         }
-        
+
 //         @media (max-width: 768px) {
 //           .products-grid {
 //             grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)) !important;
@@ -774,7 +774,7 @@ const ProductGrid = ({
     <div>
       <div className="products-grid" style={{
         display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
+        gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))',
         gap: '24px',
         padding: '20px 0'
       }}>

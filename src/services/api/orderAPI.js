@@ -29,5 +29,15 @@ export const orderAPI = {
     } catch (error) {
       throw error.response?.data || error;
     }
+  },
+
+  // Return an order
+  returnOrder: async (orderId) => {
+    try {
+      const response = await api.post(`/orders/${orderId}/return`);
+      return response.data;
+    } catch (error) {
+      throw error.response?.data || error;
+    }
   }
 };

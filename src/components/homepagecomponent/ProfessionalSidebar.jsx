@@ -81,9 +81,9 @@
 
 //   const handleFilterChange = (key, value) => {
 //     console.log(`Filter change: ${key} = ${value}`)
-    
+
 //     let cleanValue = value
-    
+
 //     if (key === 'subcategory_id' || key === 'category_id') {
 //       if (value === '' || value === null || value === undefined) {
 //         cleanValue = ''
@@ -104,21 +104,21 @@
 //         }
 //       }
 //     }
-    
+
 //     const newFilters = { ...localFilters, [key]: cleanValue }
-    
+
 //     if (key === 'category_id' && cleanValue !== localFilters.category_id) {
 //       newFilters.subcategory_id = ''
 //     }
-    
+
 //     setLocalFilters(newFilters)
-    
+
 //     // Debounce price changes
 //     if (key === 'min_price' || key === 'max_price') {
 //       if (window.priceFilterTimeout) {
 //         clearTimeout(window.priceFilterTimeout)
 //       }
-      
+
 //       window.priceFilterTimeout = setTimeout(() => {
 //         onFiltersChange(newFilters)
 //       }, 800)
@@ -136,13 +136,13 @@
 //       sort_by: 'name',
 //       sort_order: 'asc'
 //     }
-    
+
 //     setSubcategories([])
-    
+
 //     if (window.priceFilterTimeout) {
 //       clearTimeout(window.priceFilterTimeout)
 //     }
-    
+
 //     setLocalFilters(clearedFilters)
 //     onFiltersChange(clearedFilters)
 //   }
@@ -200,7 +200,7 @@
 //               <span style={{ fontSize: '20px' }}>🔍</span>
 //               Filters
 //             </h3>
-            
+
 //             {/* Mobile close button */}
 //             {window.innerWidth <= 1024 && (
 //               <button
@@ -223,7 +223,7 @@
 //               </button>
 //             )}
 //           </div>
-          
+
 //           {activeFiltersCount > 0 && (
 //             <div style={{
 //               display: 'flex',
@@ -574,7 +574,7 @@
 //         ▼
 //       </span>
 //     </button>
-    
+
 //     {expanded && (
 //       <div style={{
 //         background: '#FAFBFC',
@@ -635,7 +635,7 @@
 // src/components/homepagecomponent/ProfessionalSidebar.jsx - Updated with nested category structure
 import React, { useState, useEffect } from 'react'
 
-const ProfessionalSidebar = ({ isOpen, onClose, onFiltersChange, filters }) => {
+const ProfessionalSidebar = ({ isOpen, onClose, onFiltersChange, filters, sortOptions }) => {
   const [categories, setCategories] = useState([])
   const [subcategoriesByCategory, setSubcategoriesByCategory] = useState({})
   const [expandedCategories, setExpandedCategories] = useState({})
@@ -709,13 +709,13 @@ const ProfessionalSidebar = ({ isOpen, onClose, onFiltersChange, filters }) => {
 
   const handleCategoryClick = async (categoryId) => {
     const categoryIdStr = categoryId.toString()
-    
+
     // If clicking the same category that's already selected, deselect it
     if (localFilters.category_id === categoryIdStr) {
-      const newFilters = { 
-        ...localFilters, 
-        category_id: '', 
-        subcategory_id: '' 
+      const newFilters = {
+        ...localFilters,
+        category_id: '',
+        subcategory_id: ''
       }
       setLocalFilters(newFilters)
       onFiltersChange(newFilters)
@@ -727,10 +727,10 @@ const ProfessionalSidebar = ({ isOpen, onClose, onFiltersChange, filters }) => {
     }
 
     // Select new category and clear subcategory
-    const newFilters = { 
-      ...localFilters, 
-      category_id: categoryIdStr, 
-      subcategory_id: '' 
+    const newFilters = {
+      ...localFilters,
+      category_id: categoryIdStr,
+      subcategory_id: ''
     }
     setLocalFilters(newFilters)
     onFiltersChange(newFilters)
@@ -749,7 +749,7 @@ const ProfessionalSidebar = ({ isOpen, onClose, onFiltersChange, filters }) => {
 
   const handleSubcategoryClick = (subcategoryId) => {
     const subcategoryIdStr = subcategoryId.toString()
-    
+
     // If clicking the same subcategory, deselect it
     if (localFilters.subcategory_id === subcategoryIdStr) {
       const newFilters = { ...localFilters, subcategory_id: '' }
@@ -765,9 +765,9 @@ const ProfessionalSidebar = ({ isOpen, onClose, onFiltersChange, filters }) => {
 
   const handleFilterChange = (key, value) => {
     console.log(`Filter change: ${key} = ${value}`)
-    
+
     let cleanValue = value
-    
+
     if (key === 'min_price' || key === 'max_price') {
       if (value === '' || value === null || value === undefined) {
         cleanValue = ''
@@ -780,16 +780,16 @@ const ProfessionalSidebar = ({ isOpen, onClose, onFiltersChange, filters }) => {
         }
       }
     }
-    
+
     const newFilters = { ...localFilters, [key]: cleanValue }
     setLocalFilters(newFilters)
-    
+
     // Debounce price changes
     if (key === 'min_price' || key === 'max_price') {
       if (window.priceFilterTimeout) {
         clearTimeout(window.priceFilterTimeout)
       }
-      
+
       window.priceFilterTimeout = setTimeout(() => {
         onFiltersChange(newFilters)
       }, 800)
@@ -807,13 +807,13 @@ const ProfessionalSidebar = ({ isOpen, onClose, onFiltersChange, filters }) => {
       sort_by: 'name',
       sort_order: 'asc'
     }
-    
+
     setExpandedCategories({})
-    
+
     if (window.priceFilterTimeout) {
       clearTimeout(window.priceFilterTimeout)
     }
-    
+
     setLocalFilters(clearedFilters)
     onFiltersChange(clearedFilters)
   }
@@ -831,7 +831,7 @@ const ProfessionalSidebar = ({ isOpen, onClose, onFiltersChange, filters }) => {
       ...prev,
       [categoryIdStr]: !prev[categoryIdStr]
     }))
-    
+
     // Fetch subcategories if expanding and not already fetched
     if (!expandedCategories[categoryIdStr] && !subcategoriesByCategory[categoryIdStr]) {
       fetchSubcategories(categoryIdStr)
@@ -908,8 +908,8 @@ const ProfessionalSidebar = ({ isOpen, onClose, onFiltersChange, filters }) => {
                   }
                 }}
               >
-                <span style={{ 
-                  fontSize: '14px', 
+                <span style={{
+                  fontSize: '14px',
                   color: localFilters.category_id === '' ? '#1D4ED8' : '#374151',
                   fontWeight: localFilters.category_id === '' ? '600' : '400'
                 }}>
@@ -955,16 +955,16 @@ const ProfessionalSidebar = ({ isOpen, onClose, onFiltersChange, filters }) => {
                           }
                         }}
                       >
-                        <span style={{ 
-                          fontSize: '14px', 
+                        <span style={{
+                          fontSize: '14px',
                           color: isSelected ? '#1D4ED8' : '#374151',
                           fontWeight: isSelected ? '600' : '400'
                         }}>
                           {category.name}
                           {category.product_count && (
-                            <span style={{ 
-                              color: isSelected ? '#60A5FA' : '#9CA3AF', 
-                              fontSize: '13px', 
+                            <span style={{
+                              color: isSelected ? '#60A5FA' : '#9CA3AF',
+                              fontSize: '13px',
                               fontWeight: '400',
                               marginLeft: '4px'
                             }}>
@@ -973,7 +973,7 @@ const ProfessionalSidebar = ({ isOpen, onClose, onFiltersChange, filters }) => {
                           )}
                         </span>
                       </div>
-                      
+
                       {/* Expand/Collapse Button for Subcategories */}
                       {isSelected && (
                         <button
@@ -998,8 +998,8 @@ const ProfessionalSidebar = ({ isOpen, onClose, onFiltersChange, filters }) => {
 
                     {/* Subcategories */}
                     {isSelected && isExpanded && subcategories.length > 0 && (
-                      <div style={{ 
-                        background: '#F8FAFC', 
+                      <div style={{
+                        background: '#F8FAFC',
                         borderLeft: '4px solid #3B82F6',
                         marginLeft: '0'
                       }}>
@@ -1029,8 +1029,8 @@ const ProfessionalSidebar = ({ isOpen, onClose, onFiltersChange, filters }) => {
                             }
                           }}
                         >
-                          <span style={{ 
-                            fontSize: '13px', 
+                          <span style={{
+                            fontSize: '13px',
                             color: localFilters.subcategory_id === '' ? '#1E40AF' : '#64748B',
                             fontWeight: localFilters.subcategory_id === '' ? '600' : '400'
                           }}>
@@ -1063,16 +1063,16 @@ const ProfessionalSidebar = ({ isOpen, onClose, onFiltersChange, filters }) => {
                                 }
                               }}
                             >
-                              <span style={{ 
-                                fontSize: '13px', 
+                              <span style={{
+                                fontSize: '13px',
                                 color: isSubSelected ? '#1E40AF' : '#64748B',
                                 fontWeight: isSubSelected ? '600' : '400'
                               }}>
                                 {subcategory.name}
                                 {subcategory.product_count && (
-                                  <span style={{ 
-                                    color: isSubSelected ? '#60A5FA' : '#94A3B8', 
-                                    fontSize: '12px', 
+                                  <span style={{
+                                    color: isSubSelected ? '#60A5FA' : '#94A3B8',
+                                    fontSize: '12px',
                                     fontWeight: '400',
                                     marginLeft: '4px'
                                   }}>
@@ -1210,11 +1210,11 @@ const ProfessionalSidebar = ({ isOpen, onClose, onFiltersChange, filters }) => {
                       }}
                       style={{
                         padding: '8px 12px',
-                        background: localFilters.min_price === range.min && localFilters.max_price === range.max 
+                        background: localFilters.min_price === range.min && localFilters.max_price === range.max
                           ? '#EFF6FF' : '#F9FAFB',
-                        color: localFilters.min_price === range.min && localFilters.max_price === range.max 
+                        color: localFilters.min_price === range.min && localFilters.max_price === range.max
                           ? '#1D4ED8' : '#374151',
-                        border: `1px solid ${localFilters.min_price === range.min && localFilters.max_price === range.max 
+                        border: `1px solid ${localFilters.min_price === range.min && localFilters.max_price === range.max
                           ? '#DBEAFE' : '#E5E7EB'}`,
                         borderRadius: '6px',
                         fontSize: '13px',
@@ -1275,20 +1275,21 @@ const ProfessionalSidebar = ({ isOpen, onClose, onFiltersChange, filters }) => {
             onToggle={() => toggleSection('sort')}
           >
             <div style={{ padding: '0 24px 16px' }}>
-              {[
+              {(sortOptions || [
                 { label: 'Name: A to Z', sort_by: 'name', sort_order: 'asc' },
                 { label: 'Name: Z to A', sort_by: 'name', sort_order: 'desc' },
                 { label: 'Price: Low to High', sort_by: 'price', sort_order: 'asc' },
                 { label: 'Price: High to Low', sort_by: 'price', sort_order: 'desc' },
                 { label: 'Newest First', sort_by: 'created_at', sort_order: 'desc' },
                 { label: 'Oldest First', sort_by: 'created_at', sort_order: 'asc' }
-              ].map((option, index) => (
+              ]).map((option, index) => (
                 <FilterOption
                   key={index}
-                  checked={localFilters.sort_by === option.sort_by && localFilters.sort_order === option.sort_order}
+                  checked={localFilters.sort_by === option.sort_by && (option.sort_order ? localFilters.sort_order === option.sort_order : true)}
                   onChange={() => {
                     handleFilterChange('sort_by', option.sort_by)
-                    handleFilterChange('sort_order', option.sort_order)
+                    if (option.sort_order) handleFilterChange('sort_order', option.sort_order)
+                    else handleFilterChange('sort_order', '') // Clear sort_order if not specified
                   }}
                   label={option.label}
                 />
@@ -1337,7 +1338,7 @@ const FilterSection = ({ title, icon, expanded, onToggle, children }) => (
         ▼
       </span>
     </button>
-    
+
     {expanded && (
       <div style={{
         background: '#FAFBFC',

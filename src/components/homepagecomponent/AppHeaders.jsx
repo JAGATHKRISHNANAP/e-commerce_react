@@ -30,7 +30,7 @@
 // //   const handleSearchInputChange = async (e) => {
 // //     const value = e.target.value
 // //     setSearchInput(value)
-    
+
 // //     if (value.length >= 2) {
 // //       try {
 // //         const response = await fetch(`http://localhost:8000/api/v1/api/search/suggestions?q=${encodeURIComponent(value)}`)
@@ -338,7 +338,7 @@
 // //                     {user?.email || user?.phoneNumber || 'user@example.com'}
 // //                   </p>
 // //                 </div>
-                
+
 // //                 <div style={{ padding: '8px 0' }}>
 // //                   {[
 // //                     { icon: '👤', label: 'My Profile', action: () => {} },
@@ -373,13 +373,13 @@
 // //                       <span>{item.label}</span>
 // //                     </button>
 // //                   ))}
-                  
+
 // //                   <div style={{
 // //                     height: '1px',
 // //                     background: '#eee',
 // //                     margin: '8px 0'
 // //                   }} />
-                  
+
 // //                   <button
 // //                     onClick={handleLogout}
 // //                     disabled={isLoading}
@@ -479,7 +479,7 @@
 //   const handleSearchInputChange = async (e) => {
 //     const value = e.target.value
 //     setSearchInput(value)
-    
+
 //     if (value.length >= 2) {
 //       try {
 //         const response = await fetch(`http://localhost:8000/api/v1/api/search/suggestions?q=${encodeURIComponent(value)}`)
@@ -522,15 +522,15 @@
 //       <style>
 //         {`
 //           @import url('https://fonts.googleapis.com/css2?family=Amazon+Ember:wght@400;500;700&display=swap');
-          
+
 //           .header-container {
 //             font-family: 'Amazon Ember', Arial, sans-serif;
 //           }
-          
+
 //           .profile-dropdown-enter {
 //             animation: dropdownSlideIn 0.2s ease-out;
 //           }
-          
+
 //           @keyframes dropdownSlideIn {
 //             from {
 //               opacity: 0;
@@ -541,11 +541,11 @@
 //               transform: translateY(0) scale(1);
 //             }
 //           }
-          
+
 //           .search-suggestion:hover {
 //             background: linear-gradient(90deg, #f3f3f3 0%, #e8f4fd 100%) !important;
 //           }
-          
+
 //           @media (max-width: 768px) {
 //             .header-search {
 //               max-width: 200px;
@@ -557,7 +557,7 @@
 //               display: none;
 //             }
 //           }
-          
+
 //           @media (max-width: 480px) {
 //             .header-search {
 //               max-width: 150px;
@@ -898,7 +898,7 @@
 //                       </div>
 //                     </div>
 //                   </div>
-                  
+
 //                   {/* Menu Items */}
 //                   <div style={{ padding: '8px 0' }}>
 //                     {[
@@ -940,13 +940,13 @@
 //                         <span style={{ fontWeight: '400' }}>{item.label}</span>
 //                       </button>
 //                     ))}
-                    
+
 //                     <div style={{
 //                       height: '1px',
 //                       background: '#eee',
 //                       margin: '8px 0'
 //                     }} />
-                    
+
 //                     <button
 //                       onClick={handleLogout}
 //                       disabled={isLoading}
@@ -1028,7 +1028,7 @@
 //   const [cartCount, setCartCount] = useState(0);
 //   const dropdownRef = useRef(null)
 //   const searchRef = useRef(null)
-  
+
 
 //   console.log('Header rendered with searchQuery:', user)
 //   sessionStorage.setItem("customer_id", user?.customer_id);
@@ -1099,7 +1099,7 @@
 //   const handleSearchInputChange = async (e) => {
 //     const value = e.target.value
 //     setSearchInput(value)
-    
+
 //     if (value.length >= 2) {
 //       try {
 //         const response = await fetch(`http://localhost:8000/api/v1/api/search/suggestions?q=${encodeURIComponent(value)}`)
@@ -1146,15 +1146,15 @@
 //       {/* <style>
 //         {`
 //           @import url('https://fonts.googleapis.com/css2?family=Amazon+Ember:wght@400;500;700&display=swap');
-          
+
 //           .header-container {
 //             font-family: 'Amazon Ember', Arial, sans-serif;
 //           }
-          
+
 //           .profile-dropdown-enter {
 //             animation: dropdownSlideIn 0.2s ease-out;
 //           }
-          
+
 //           @keyframes dropdownSlideIn {
 //             from {
 //               opacity: 0;
@@ -1165,11 +1165,11 @@
 //               transform: translateY(0) scale(1);
 //             }
 //           }
-          
+
 //           .search-suggestion:hover {
 //             background: linear-gradient(90deg, #f3f3f3 0%, #e8f4fd 100%) !important;
 //           }
-          
+
 //           @media (max-width: 768px) {
 //             .header-search {
 //               max-width: 200px;
@@ -1181,7 +1181,7 @@
 //               display: none;
 //             }
 //           }
-          
+
 //           @media (max-width: 480px) {
 //             .header-search {
 //               max-width: 150px;
@@ -1527,7 +1527,7 @@
 //                       </div>
 //                     </div>
 //                   </div>
-                  
+
 //                   {/* Menu Items */}
 //                   <div style={{ padding: '8px 0' }}>
 //                     {[
@@ -1569,13 +1569,13 @@
 //                         <span style={{ fontWeight: '400' }}>{item.label}</span>
 //                       </button>
 //                     ))}
-                    
+
 //                     <div style={{
 //                       height: '1px',
 //                       background: '#eee',
 //                       margin: '8px 0'
 //                     }} />
-                    
+
 //                     <button
 //                       onClick={handleLogout}
 //                       disabled={isLoading}
@@ -1649,7 +1649,7 @@
 //   const [showSuggestions, setShowSuggestions] = useState(false)
 //   const [isLoadingSuggestions, setIsLoadingSuggestions] = useState(false)
 //   const [cartCount, setCartCount] = useState(0)
-  
+
 //   const dropdownRef = useRef(null)
 //   const searchRef = useRef(null)
 //   const suggestionTimeoutRef = useRef(null)
@@ -1674,7 +1674,7 @@
 //       if (onSearch) {
 //         onSearch(searchInput.trim())
 //       }
-      
+
 //       // Navigate to search results page with query
 //       navigate(`/search?q=${encodeURIComponent(searchInput.trim())}`)
 //       setShowSuggestions(false)
@@ -1705,15 +1705,15 @@
 //   const handleSearchInputChange = async (e) => {
 //     const value = e.target.value
 //     setSearchInput(value)
-    
+
 //     // Clear previous timeout
 //     if (suggestionTimeoutRef.current) {
 //       clearTimeout(suggestionTimeoutRef.current)
 //     }
-    
+
 //     if (value.length >= 2) {
 //       setIsLoadingSuggestions(true)
-      
+
 //       // Debounce the API call to Elasticsearch
 //       suggestionTimeoutRef.current = setTimeout(async () => {
 //         try {
@@ -1739,12 +1739,12 @@
 //   const handleSuggestionClick = (suggestion) => {
 //     setSearchInput(suggestion)
 //     setShowSuggestions(false)
-    
+
 //     // Call the onSearch prop if provided (for backward compatibility)
 //     if (onSearch) {
 //       onSearch(suggestion)
 //     }
-    
+
 //     // Navigate to search results page
 //     navigate(`/search?q=${encodeURIComponent(suggestion)}`)
 //   }
@@ -2175,7 +2175,7 @@
 //                       </div>
 //                     </div>
 //                   </div>
-                  
+
 //                   {/* Menu Items */}
 //                   <div style={{ padding: '8px 0' }}>
 //                     {[
@@ -2223,13 +2223,13 @@
 //                         <span style={{ fontWeight: '400' }}>{item.label}</span>
 //                       </button>
 //                     ))}
-                    
+
 //                     <div style={{
 //                       height: '1px',
 //                       background: '#eee',
 //                       margin: '8px 0'
 //                     }} />
-                    
+
 //                     <button
 //                       onClick={handleLogout}
 //                       disabled={isLoading}
@@ -2277,7 +2277,7 @@
 //           </div>
 //         </div>
 //       </header>
-      
+
 //       {/* Add CSS animation for cart pulse effect */}
 //       <style>
 //         {`
@@ -2310,7 +2310,7 @@
 //   const dispatch = useDispatch()
 //   const navigate = useNavigate()
 //   const { user, isLoading } = useSelector(state => state.auth)
-  
+
 //   // State management
 //   const [showProfileDropdown, setShowProfileDropdown] = useState(false)
 //   const [searchInput, setSearchInput] = useState(searchQuery || '')
@@ -2319,7 +2319,7 @@
 //   const [isLoadingSuggestions, setIsLoadingSuggestions] = useState(false)
 //   const [cartCount, setCartCount] = useState(0)
 //   const [isMobile, setIsMobile] = useState(false)
-  
+
 //   // Refs
 //   const dropdownRef = useRef(null)
 //   const searchRef = useRef(null)
@@ -2330,7 +2330,7 @@
 //     const checkScreenSize = () => {
 //       setIsMobile(window.innerWidth <= 768)
 //     }
-    
+
 //     checkScreenSize()
 //     window.addEventListener('resize', checkScreenSize)
 //     return () => window.removeEventListener('resize', checkScreenSize)
@@ -2374,15 +2374,15 @@
 //   const handleSearchInputChange = async (e) => {
 //     const value = e.target.value
 //     setSearchInput(value)
-    
+
 //     // Clear previous timeout
 //     if (suggestionTimeoutRef.current) {
 //       clearTimeout(suggestionTimeoutRef.current)
 //     }
-    
+
 //     if (value.length >= 2) {
 //       setIsLoadingSuggestions(true)
-      
+
 //       // Debounce the API call to Elasticsearch
 //       suggestionTimeoutRef.current = setTimeout(async () => {
 //         try {
@@ -2411,7 +2411,7 @@
 //       if (onSearch) {
 //         onSearch(searchInput.trim())
 //       }
-      
+
 //       // Navigate to search results page with query
 //       navigate(`/search?q=${encodeURIComponent(searchInput.trim())}`)
 //       setShowSuggestions(false)
@@ -2421,12 +2421,12 @@
 //   const handleSuggestionClick = (suggestion) => {
 //     setSearchInput(suggestion)
 //     setShowSuggestions(false)
-    
+
 //     // Call the onSearch prop if provided (for backward compatibility)
 //     if (onSearch) {
 //       onSearch(suggestion)
 //     }
-    
+
 //     // Navigate to search results page
 //     navigate(`/search?q=${encodeURIComponent(suggestion)}`)
 //   }
@@ -2613,7 +2613,7 @@
 //                     e.target.style.boxShadow = 'none'
 //                   }}
 //                 />
-                
+
 //                 {/* Search Icon */}
 //                 <div style={{
 //                   position: 'absolute',
@@ -3053,13 +3053,13 @@
 //                           {item.label}
 //                         </button>
 //                       ))}
-                      
+
 //                       <div style={{
 //                         height: '1px',
 //                         background: '#E5E7EB',
 //                         margin: '8px 0'
 //                       }} />
-                      
+
 //                       <button
 //                         onClick={handleLogout}
 //                         disabled={isLoading}
@@ -3319,7 +3319,7 @@
 //   const dispatch = useDispatch()
 //   const navigate = useNavigate()
 //   const { user, isLoading } = useSelector(state => state.auth)
-  
+
 //   // State management
 //   const [showProfileDropdown, setShowProfileDropdown] = useState(false)
 //   const [searchInput, setSearchInput] = useState(searchQuery || '')
@@ -3328,7 +3328,7 @@
 //   const [isLoadingSuggestions, setIsLoadingSuggestions] = useState(false)
 //   const [cartCount, setCartCount] = useState(0)
 //   const [isMobile, setIsMobile] = useState(false)
-  
+
 //   // Refs
 //   const dropdownRef = useRef(null)
 //   const searchRef = useRef(null)
@@ -3339,7 +3339,7 @@
 //     const checkScreenSize = () => {
 //       setIsMobile(window.innerWidth <= 768)
 //     }
-    
+
 //     checkScreenSize()
 //     window.addEventListener('resize', checkScreenSize)
 //     return () => window.removeEventListener('resize', checkScreenSize)
@@ -3383,15 +3383,15 @@
 //   const handleSearchInputChange = async (e) => {
 //     const value = e.target.value
 //     setSearchInput(value)
-    
+
 //     // Clear previous timeout
 //     if (suggestionTimeoutRef.current) {
 //       clearTimeout(suggestionTimeoutRef.current)
 //     }
-    
+
 //     if (value.length >= 2) {
 //       setIsLoadingSuggestions(true)
-      
+
 //       // Debounce the API call to Elasticsearch
 //       suggestionTimeoutRef.current = setTimeout(async () => {
 //         try {
@@ -3420,7 +3420,7 @@
 //       if (onSearch) {
 //         onSearch(searchInput.trim())
 //       }
-      
+
 //       // Navigate to search results page with query
 //       navigate(`/search?q=${encodeURIComponent(searchInput.trim())}`)
 //       setShowSuggestions(false)
@@ -3430,12 +3430,12 @@
 //   const handleSuggestionClick = (suggestion) => {
 //     setSearchInput(suggestion)
 //     setShowSuggestions(false)
-    
+
 //     // Call the onSearch prop if provided (for backward compatibility)
 //     if (onSearch) {
 //       onSearch(suggestion)
 //     }
-    
+
 //     // Navigate to search results page
 //     navigate(`/search?q=${encodeURIComponent(suggestion)}`)
 //   }
@@ -3624,7 +3624,7 @@
 //                     e.target.style.boxShadow = 'none'
 //                   }}
 //                 />
-                
+
 //                 {/* Search Icon */}
 //                 <div style={{
 //                   position: 'absolute',
@@ -4097,13 +4097,13 @@
 //                           {item.label}
 //                         </button>
 //                       ))}
-                      
+
 //                       <div style={{
 //                         height: '1px',
 //                         background: '#E5E7EB',
 //                         margin: '8px 0'
 //                       }} />
-                      
+
 //                       <button
 //                         onClick={handleLogout}
 //                         disabled={isLoading}
@@ -4354,7 +4354,7 @@ const Header = ({ onSearch, searchQuery, onToggleSidebar, sidebarOpen }) => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const { user, isLoading, isAuthenticated } = useSelector(state => state.auth)
-  
+
   // State management
   const [showProfileDropdown, setShowProfileDropdown] = useState(false)
   const [searchInput, setSearchInput] = useState(searchQuery || '')
@@ -4363,7 +4363,7 @@ const Header = ({ onSearch, searchQuery, onToggleSidebar, sidebarOpen }) => {
   const [isLoadingSuggestions, setIsLoadingSuggestions] = useState(false)
   const [cartCount, setCartCount] = useState(0)
   const [isMobile, setIsMobile] = useState(false)
-  
+
   // Refs
   const dropdownRef = useRef(null)
   const searchRef = useRef(null)
@@ -4374,7 +4374,7 @@ const Header = ({ onSearch, searchQuery, onToggleSidebar, sidebarOpen }) => {
     const checkScreenSize = () => {
       setIsMobile(window.innerWidth <= 768)
     }
-    
+
     checkScreenSize()
     window.addEventListener('resize', checkScreenSize)
     return () => window.removeEventListener('resize', checkScreenSize)
@@ -4421,15 +4421,15 @@ const Header = ({ onSearch, searchQuery, onToggleSidebar, sidebarOpen }) => {
   const handleSearchInputChange = async (e) => {
     const value = e.target.value
     setSearchInput(value)
-    
+
     // Clear previous timeout
     if (suggestionTimeoutRef.current) {
       clearTimeout(suggestionTimeoutRef.current)
     }
-    
+
     if (value.length >= 2) {
       setIsLoadingSuggestions(true)
-      
+
       // Debounce the API call to Elasticsearch
       suggestionTimeoutRef.current = setTimeout(async () => {
         try {
@@ -4458,7 +4458,7 @@ const Header = ({ onSearch, searchQuery, onToggleSidebar, sidebarOpen }) => {
       if (onSearch) {
         onSearch(searchInput.trim())
       }
-      
+
       // Navigate to search results page with query
       navigate(`/search?q=${encodeURIComponent(searchInput.trim())}`)
       setShowSuggestions(false)
@@ -4468,12 +4468,12 @@ const Header = ({ onSearch, searchQuery, onToggleSidebar, sidebarOpen }) => {
   const handleSuggestionClick = (suggestion) => {
     setSearchInput(suggestion)
     setShowSuggestions(false)
-    
+
     // Call the onSearch prop if provided (for backward compatibility)
     if (onSearch) {
       onSearch(suggestion)
     }
-    
+
     // Navigate to search results page
     navigate(`/search?q=${encodeURIComponent(suggestion)}`)
   }
@@ -4586,7 +4586,7 @@ const Header = ({ onSearch, searchQuery, onToggleSidebar, sidebarOpen }) => {
             )}
 
             {/* Logo */}
-            <div 
+            <div
               onClick={() => navigate('/')}
               style={{
                 display: 'flex',
@@ -4618,7 +4618,8 @@ const Header = ({ onSearch, searchQuery, onToggleSidebar, sidebarOpen }) => {
                     margin: '0',
                     letterSpacing: '-0.025em'
                   }}>
-                    E-commerce
+                    {/* E-commerce */}
+                    Elakkiya.com
                   </h1>
                   <p style={{
                     fontSize: '12px',
@@ -4626,7 +4627,7 @@ const Header = ({ onSearch, searchQuery, onToggleSidebar, sidebarOpen }) => {
                     margin: '0',
                     fontWeight: '500'
                   }}>
-                    Professional Shopping
+                    {/* Professional Shopping */}
                   </p>
                 </div>
               )}
@@ -4673,7 +4674,7 @@ const Header = ({ onSearch, searchQuery, onToggleSidebar, sidebarOpen }) => {
                     e.target.style.boxShadow = 'none'
                   }}
                 />
-                
+
                 {/* Search Icon */}
                 <div style={{
                   position: 'absolute',
@@ -4836,8 +4837,8 @@ const Header = ({ onSearch, searchQuery, onToggleSidebar, sidebarOpen }) => {
                       >
                         <span style={{ opacity: 0.5, fontSize: '12px' }}>🔍</span>
                         <span style={{ flex: 1 }}>{suggestion}</span>
-                        <span style={{ 
-                          opacity: 0.3, 
+                        <span style={{
+                          opacity: 0.3,
                           fontSize: '12px',
                           transform: 'rotate(-45deg)'
                         }}>↗</span>
@@ -4868,7 +4869,7 @@ const Header = ({ onSearch, searchQuery, onToggleSidebar, sidebarOpen }) => {
             paddingLeft: '16px'
           }}>
             {/* Enhanced Cart Icon */}
-            <button 
+            <button
               onClick={handleCartClick}
               style={{
                 display: 'flex',
@@ -5064,8 +5065,8 @@ const Header = ({ onSearch, searchQuery, onToggleSidebar, sidebarOpen }) => {
                           alignItems: 'center',
                           gap: '4px'
                         }}>
-                          Account & Lists 
-                          <span style={{ 
+                          Account & Lists
+                          <span style={{
                             fontSize: '10px',
                             transition: 'transform 0.2s ease',
                             transform: showProfileDropdown ? 'rotate(180deg)' : 'rotate(0deg)'
@@ -5134,27 +5135,39 @@ const Header = ({ onSearch, searchQuery, onToggleSidebar, sidebarOpen }) => {
                         {/* Menu Items */}
                         <div style={{ padding: '8px 0' }}>
                           {[
-                            { icon: '👤', label: 'Your Account', action: () => {
-                              navigate('/your-account')
-                              setShowProfileDropdown(false)
-                            }},
-                            { icon: '📦', label: 'Your Orders', action: () => {
-                              navigate('/orders')
-                              setShowProfileDropdown(false)
-                            }},
-                            { icon: '❤️', label: 'Your Wish List', action: () => {
-                              navigate('/wishlist')
-                              setShowProfileDropdown(false)
-                            }},
-                            { icon: '🔄', label: 'Your Subscriptions', action: () => {
-                              setShowProfileDropdown(false)
-                            }},
-                            { icon: '💳', label: 'Payment Options', action: () => {
-                              setShowProfileDropdown(false)
-                            }},
-                            { icon: '⚙️', label: 'Account Settings', action: () => {
-                              setShowProfileDropdown(false)
-                            }}
+                            {
+                              icon: '👤', label: 'Your Account', action: () => {
+                                navigate('/your-account')
+                                setShowProfileDropdown(false)
+                              }
+                            },
+                            {
+                              icon: '📦', label: 'Your Orders', action: () => {
+                                navigate('/orders')
+                                setShowProfileDropdown(false)
+                              }
+                            },
+                            {
+                              icon: '❤️', label: 'Your Wish List', action: () => {
+                                navigate('/wishlist')
+                                setShowProfileDropdown(false)
+                              }
+                            },
+                            {
+                              icon: '🔄', label: 'Your Subscriptions', action: () => {
+                                setShowProfileDropdown(false)
+                              }
+                            },
+                            {
+                              icon: '💳', label: 'Payment Options', action: () => {
+                                setShowProfileDropdown(false)
+                              }
+                            },
+                            {
+                              icon: '⚙️', label: 'Account Settings', action: () => {
+                                setShowProfileDropdown(false)
+                              }
+                            }
                           ].map((item, index) => (
                             <button
                               key={index}
@@ -5185,13 +5198,13 @@ const Header = ({ onSearch, searchQuery, onToggleSidebar, sidebarOpen }) => {
                               {item.label}
                             </button>
                           ))}
-                          
+
                           <div style={{
                             height: '1px',
                             background: '#E5E7EB',
                             margin: '8px 0'
                           }} />
-                          
+
                           <button
                             onClick={handleLogout}
                             disabled={isLoading}
@@ -5310,7 +5323,7 @@ const Header = ({ onSearch, searchQuery, onToggleSidebar, sidebarOpen }) => {
                     { icon: '👤', label: 'Profile', action: () => navigate('/your-account') },
                     { icon: '📦', label: 'Orders', action: () => navigate('/orders') },
                     { icon: '❤️', label: 'Wishlist', action: () => navigate('/wishlist') },
-                    { icon: '⚙️', label: 'Settings', action: () => {} }
+                    { icon: '⚙️', label: 'Settings', action: () => { } }
                   ].map((item, index) => (
                     <button
                       key={index}

@@ -2,14 +2,23 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AppHeader from '../components/homepagecomponent/AppHeaders';
 import { orderAPI } from '../services/api/orderAPI';
-import { Package, Truck, CheckCircle, AlertCircle, Clock, ChevronRight, Search } from 'lucide-react';
+import { showToast } from '../components/ui/Toast';
+import { Package, Truck, CheckCircle, AlertCircle, Clock, ChevronRight, Search, Info, XCircle, RotateCcw } from 'lucide-react';
 
 const YourOrderPage = () => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
+  const [activeTab, setActiveTab] = useState('active');
   const navigate = useNavigate();
+
+  const tabs = [
+    { id: 'active', label: 'Active Orders', statuses: ['pending', 'confirmed', 'processing', 'shipped'] },
+    { id: 'delivered', label: 'Delivered', statuses: ['delivered'] },
+    { id: 'cancelled', label: 'Cancelled', statuses: ['cancelled'] },
+    { id: 'returns', label: 'Returns', statuses: ['return_requested', 'returned'] }
+  ];
 
   useEffect(() => {
     fetchOrders();
@@ -39,6 +48,10 @@ const YourOrderPage = () => {
         return 'text-amber-600 bg-amber-50 border-amber-100';
       case 'cancelled':
         return 'text-red-600 bg-red-50 border-red-100';
+      case 'return_requested':
+        return 'text-orange-600 bg-orange-50 border-orange-100';
+      case 'returned':
+        return 'text-purple-600 bg-purple-50 border-purple-100';
       default:
         return 'text-gray-600 bg-gray-50 border-gray-100';
     }
@@ -50,6 +63,8 @@ const YourOrderPage = () => {
       case 'shipped': return <Truck size={16} className="mr-1.5" />;
       case 'processing': return <Clock size={16} className="mr-1.5" />;
       case 'cancelled': return <AlertCircle size={16} className="mr-1.5" />;
+      case 'return_requested': return <RotateCcw size={16} className="mr-1.5" />;
+      case 'returned': return <RotateCcw size={16} className="mr-1.5" />;
       default: return <Package size={16} className="mr-1.5" />;
     }
   };
@@ -63,13 +78,55 @@ const YourOrderPage = () => {
     });
   };
 
-  const filteredOrders = orders.filter(order =>
-    order.order_number?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    order.order_id?.toString().includes(searchTerm) ||
-    (order.order_items || order.items || []).some(item =>
-      (item.product_name || item.product?.name || item.name || '').toLowerCase().includes(searchTerm.toLowerCase())
-    )
-  );
+  const isReturnable = (order) => {
+    if (order.order_status?.toLowerCase() !== 'delivered') return false;
+    const deliveredDate = new Date(order.delivered_date || order.updated_at); // Fallback
+    const now = new Date();
+    const diffTime = Math.abs(now - deliveredDate);
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    return diffDays <= 9;
+  };
+
+  const handleCancelOrder = async (orderId) => {
+    if (!window.confirm('Are you sure you want to cancel this order?')) return;
+
+    try {
+      await orderAPI.cancelOrder(orderId);
+      showToast('Order cancelled successfully', 'success');
+      fetchOrders();
+    } catch (err) {
+      showToast(err.detail || 'Failed to cancel order', 'error');
+    }
+  };
+
+  const handleReturnOrder = async (orderId) => {
+    if (!window.confirm('Are you sure you want to return this order?')) return;
+
+    try {
+      await orderAPI.returnOrder(orderId);
+      showToast('Return request submitted successfully', 'success');
+      fetchOrders();
+    } catch (err) {
+      showToast(err.detail || 'Failed to submit return request', 'error');
+    }
+  };
+
+
+
+  const filteredOrders = orders.filter(order => {
+    const matchesSearch =
+      order.order_number?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      order.order_id?.toString().includes(searchTerm) ||
+      (order.order_items || order.items || []).some(item =>
+        (item.product_name || item.product?.name || item.name || '').toLowerCase().includes(searchTerm.toLowerCase())
+      );
+
+    const currentTab = tabs.find(t => t.id === activeTab);
+    const orderStatus = (order.order_status || order.status || '').toLowerCase();
+    const matchesTab = currentTab?.statuses.includes(orderStatus);
+
+    return matchesSearch && matchesTab;
+  });
 
   if (loading) {
     return (
@@ -109,6 +166,25 @@ const YourOrderPage = () => {
           </div>
         </div>
 
+        {/* Tabs */}
+        <div className="flex space-x-1 bg-white p-1 rounded-xl shadow-sm border border-gray-100 mb-6 overflow-x-auto">
+          {tabs.map((tab) => (
+            <button
+              key={tab.id}
+              onClick={() => setActiveTab(tab.id)}
+              className={`
+                flex-1 px-4 py-2.5 text-sm font-medium rounded-lg whitespace-nowrap transition-all duration-200
+                ${activeTab === tab.id
+                  ? 'bg-indigo-600 text-white shadow-md'
+                  : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
+                }
+              `}
+            >
+              {tab.label}
+            </button>
+          ))}
+        </div>
+
         {error ? (
           <div className="bg-red-50 border border-red-200 rounded-xl p-4 text-red-700 flex items-center shadow-sm">
             <AlertCircle className="mr-2" />
@@ -145,7 +221,12 @@ const YourOrderPage = () => {
                       <span className="text-gray-900 font-medium">{formatDate(order.order_date || order.created_at || order.date)}</span>
                     </div>
                     <div>
-                      <span className="block text-xs font-semibold text-gray-500 uppercase tracking-wide">Total</span>
+                      <div className="flex items-center gap-1">
+                        <span className="block text-xs font-semibold text-gray-500 uppercase tracking-wide">Total</span>
+                        <div title={`Subtotal: $${(order.subtotal || 0).toFixed(2)}\nTax: $${(order.tax_amount || 0).toFixed(2)}\nShipping: $${(order.shipping_amount || 0).toFixed(2)}\nDiscount: -$${(order.discount_amount || 0).toFixed(2)}`}>
+                          <Info size={14} className="text-gray-400 cursor-help" />
+                        </div>
+                      </div>
                       <span className="text-gray-900 font-medium">${typeof order.total_amount === 'number' ? order.total_amount.toFixed(2) : order.total_amount}</span>
                     </div>
                     <div>
@@ -160,6 +241,25 @@ const YourOrderPage = () => {
                       {getStatusIcon(order.order_status || order.status)}
                       <span className="uppercase">{order.order_status || order.status || 'Processing'}</span>
                     </div>
+
+                    {/* Action Buttons */}
+                    {['pending', 'confirmed', 'processing'].includes((order.order_status || order.status)?.toLowerCase()) && (
+                      <button
+                        onClick={() => handleCancelOrder(order.order_id || order.id)}
+                        className="flex items-center px-3 py-1 text-xs font-medium text-red-600 bg-red-50 hover:bg-red-100 border border-red-200 rounded-lg transition-colors duration-200"
+                      >
+                        <XCircle size={14} className="mr-1.5" /> Cancel
+                      </button>
+                    )}
+
+                    {isReturnable(order) && (
+                      <button
+                        onClick={() => handleReturnOrder(order.order_id || order.id)}
+                        className="flex items-center px-3 py-1 text-xs font-medium text-indigo-600 bg-indigo-50 hover:bg-indigo-100 border border-indigo-200 rounded-lg transition-colors duration-200"
+                      >
+                        <RotateCcw size={14} className="mr-1.5" /> Return
+                      </button>
+                    )}
 
                     <button
                       onClick={() => navigate(`/order-confirmation/${order.order_id || order.id || order._id}`)}
@@ -176,9 +276,9 @@ const YourOrderPage = () => {
                     <div key={item.order_item_id || index} className="flex flex-col sm:flex-row items-start sm:items-center py-4 border-b last:border-0 border-gray-100 gap-4 sm:gap-6 group">
                       {/* Product Image */}
                       <div className="relative h-24 w-24 sm:h-20 sm:w-20 flex-shrink-0 overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm group-hover:border-indigo-200 transition-colors duration-200">
-                        {item.product?.image_url || item.image_url ? (
+                        {item.product?.primary_image_url || item.product?.image_url || item.image_url ? (
                           <img
-                            src={item.product?.image_url || item.image_url}
+                            src={item.product?.primary_image_url || item.product?.image_url || item.image_url}
                             alt={item.product_name || item.product?.name || item.name}
                             className="h-full w-full object-cover object-center"
                             onError={(e) => {

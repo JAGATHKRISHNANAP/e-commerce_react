@@ -389,10 +389,10 @@ import {
   Chip,
   Stack
 } from '@mui/material';
-import { 
-  Receipt, 
-  LocalShipping, 
-  Security, 
+import {
+  Receipt,
+  LocalShipping,
+  Security,
   Shield,
   LocalOffer,
   Verified,
@@ -402,9 +402,9 @@ import {
 const OrderSummary = ({ cartData }) => {
   const calculateTotals = () => {
     if (!cartData?.items || cartData.items.length === 0) {
-      return { 
-        itemCount: 0, 
-        totalQuantity: 0, 
+      return {
+        itemCount: 0,
+        totalQuantity: 0,
         subtotal: 0,
         shipping: 0,
         tax: 0,
@@ -421,33 +421,32 @@ const OrderSummary = ({ cartData }) => {
       return sum + (parseFloat(item.product.price) * item.quantity);
     }, 0);
 
-    // Professional invoice calculations
+    // Professional invoice calculations (Standardized with Backend)
     const discount = subtotal * 0.15; // 15% discount
-    const platformFee = 29;
-    const shipping = 0; // Free shipping
-    const tax = (subtotal - discount) * 0.18; // 18% GST on discounted amount
-    const savings = discount + (subtotal > 499 ? 40 : 0); // Free delivery saves ₹40
-    const grandTotal = subtotal - discount + platformFee + shipping + tax;
+    const taxableAmount = subtotal - discount;
+    const tax = taxableAmount * 0.18; // 18% GST on discounted amount
+    const shipping = taxableAmount > 499 ? 0 : 40; // Free delivery > 499 (post-discount)
+    const savings = discount + (shipping === 0 && taxableAmount <= 499 ? 0 : 0);
+    const grandTotal = taxableAmount + tax + shipping;
 
-    return { 
-      itemCount, 
-      totalQuantity, 
-      subtotal, 
-      shipping, 
-      tax, 
+    return {
+      itemCount,
+      totalQuantity,
+      subtotal,
+      shipping,
+      tax,
       grandTotal,
       discount,
-      platformFee,
       savings
     };
   };
 
-  const { 
-    itemCount, 
-    totalQuantity, 
-    subtotal, 
-    shipping, 
-    tax, 
+  const {
+    itemCount,
+    totalQuantity,
+    subtotal,
+    shipping,
+    tax,
     grandTotal,
     discount,
     platformFee,
@@ -463,15 +462,15 @@ const OrderSummary = ({ cartData }) => {
 
   // Reusable row component for consistent styling
   const PriceRow = ({ label, amount, isDiscount = false, isBold = false, icon = null }) => (
-    <Box sx={{ 
-      display: 'flex', 
-      justifyContent: 'space-between', 
+    <Box sx={{
+      display: 'flex',
+      justifyContent: 'space-between',
       alignItems: 'center',
       py: 1.5
     }}>
-      <Typography 
-        variant="body2" 
-        sx={{ 
+      <Typography
+        variant="body2"
+        sx={{
           color: '#6B7280',
           fontWeight: isBold ? 600 : 400,
           fontSize: isBold ? '1rem' : '0.9rem',
@@ -483,9 +482,9 @@ const OrderSummary = ({ cartData }) => {
         {icon && icon}
         {label}
       </Typography>
-      <Typography 
-        variant="body2" 
-        sx={{ 
+      <Typography
+        variant="body2"
+        sx={{
           color: isDiscount ? '#16A34A' : (isBold ? '#111827' : '#374151'),
           fontWeight: isBold ? 700 : 500,
           fontSize: isBold ? '1rem' : '0.9rem'
@@ -560,10 +559,10 @@ const OrderSummary = ({ cartData }) => {
 
         {/* Order Items */}
         <Box sx={{ p: 3, pb: 2 }}>
-          <Typography 
-            variant="subtitle1" 
-            sx={{ 
-              fontWeight: 600, 
+          <Typography
+            variant="subtitle1"
+            sx={{
+              fontWeight: 600,
               mb: 2,
               color: '#374151',
               fontSize: '0.95rem'
@@ -599,18 +598,18 @@ const OrderSummary = ({ cartData }) => {
                   >
                     {item.product.name}
                   </Typography>
-                  <Box sx={{ 
-                    display: 'flex', 
-                    justifyContent: 'space-between', 
-                    alignItems: 'center' 
+                  <Box sx={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center'
                   }}>
                     <Typography variant="body2" sx={{ color: '#6B7280' }}>
                       {formatPrice(parseFloat(item.product.price))} × {item.quantity}
                     </Typography>
-                    <Typography 
-                      variant="body2" 
-                      sx={{ 
-                        fontWeight: 600, 
+                    <Typography
+                      variant="body2"
+                      sx={{
+                        fontWeight: 600,
                         color: '#111827',
                         fontSize: '0.95rem'
                       }}
@@ -628,10 +627,10 @@ const OrderSummary = ({ cartData }) => {
 
         {/* Price Breakdown */}
         <Box sx={{ px: 3, py: 2 }}>
-          <Typography 
-            variant="subtitle1" 
-            sx={{ 
-              fontWeight: 600, 
+          <Typography
+            variant="subtitle1"
+            sx={{
+              fontWeight: 600,
               mb: 2,
               color: '#374151',
               fontSize: '0.95rem'
@@ -639,17 +638,17 @@ const OrderSummary = ({ cartData }) => {
           >
             PRICE BREAKDOWN
           </Typography>
-          
+
           <Stack spacing={0}>
             {/* Subtotal */}
-            <PriceRow 
+            <PriceRow
               label={`Total MRP (${totalQuantity} ${totalQuantity === 1 ? 'item' : 'items'})`}
               amount={subtotal}
             />
 
             {/* Discount */}
             {discount > 0 && (
-              <PriceRow 
+              <PriceRow
                 label="Discount on MRP"
                 amount={discount}
                 isDiscount={true}
@@ -657,22 +656,18 @@ const OrderSummary = ({ cartData }) => {
               />
             )}
 
-            {/* Platform Fee */}
-            <PriceRow 
-              label="Platform Fee"
-              amount={platformFee}
-            />
+
 
             {/* Shipping */}
-            <Box sx={{ 
-              display: 'flex', 
-              justifyContent: 'space-between', 
+            <Box sx={{
+              display: 'flex',
+              justifyContent: 'space-between',
               alignItems: 'center',
               py: 1.5
             }}>
-              <Typography 
-                variant="body2" 
-                sx={{ 
+              <Typography
+                variant="body2"
+                sx={{
                   color: '#6B7280',
                   fontSize: '0.9rem',
                   display: 'flex',
@@ -685,9 +680,9 @@ const OrderSummary = ({ cartData }) => {
               </Typography>
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                 {subtotal > 499 && (
-                  <Typography 
-                    variant="body2" 
-                    sx={{ 
+                  <Typography
+                    variant="body2"
+                    sx={{
                       color: '#6B7280',
                       textDecoration: 'line-through',
                       fontSize: '0.85rem'
@@ -711,7 +706,7 @@ const OrderSummary = ({ cartData }) => {
             </Box>
 
             {/* Tax */}
-            <PriceRow 
+            <PriceRow
               label="Total Tax (GST 18%)"
               amount={tax}
             />
@@ -722,15 +717,15 @@ const OrderSummary = ({ cartData }) => {
 
         {/* Total Amount */}
         <Box sx={{ px: 3, py: 2.5 }}>
-          <Box sx={{ 
-            display: 'flex', 
-            justifyContent: 'space-between', 
+          <Box sx={{
+            display: 'flex',
+            justifyContent: 'space-between',
             alignItems: 'center',
             mb: 2
           }}>
-            <Typography 
-              variant="h6" 
-              sx={{ 
+            <Typography
+              variant="h6"
+              sx={{
                 color: '#111827',
                 fontWeight: 700,
                 fontSize: '1.125rem'
@@ -759,9 +754,9 @@ const OrderSummary = ({ cartData }) => {
               p: 2,
               mb: 2
             }}>
-              <Typography 
-                variant="body2" 
-                sx={{ 
+              <Typography
+                variant="body2"
+                sx={{
                   color: '#16A34A',
                   fontWeight: 600,
                   fontSize: '0.9rem',
@@ -777,9 +772,9 @@ const OrderSummary = ({ cartData }) => {
           )}
 
           {/* Security Message */}
-          <Box sx={{ 
-            display: 'flex', 
-            alignItems: 'flex-start', 
+          <Box sx={{
+            display: 'flex',
+            alignItems: 'flex-start',
             gap: 1,
             backgroundColor: '#F9FAFB',
             p: 2,
@@ -787,9 +782,9 @@ const OrderSummary = ({ cartData }) => {
             border: '1px solid #F3F4F6'
           }}>
             <Shield sx={{ fontSize: 18, color: '#6B7280', mt: 0.1 }} />
-            <Typography 
-              variant="caption" 
-              sx={{ 
+            <Typography
+              variant="caption"
+              sx={{
                 color: '#6B7280',
                 lineHeight: 1.4,
                 fontSize: '0.8rem'
@@ -804,10 +799,10 @@ const OrderSummary = ({ cartData }) => {
 
         {/* Delivery Information */}
         <Box sx={{ p: 3 }}>
-          <Typography 
-            variant="subtitle1" 
-            sx={{ 
-              fontWeight: 600, 
+          <Typography
+            variant="subtitle1"
+            sx={{
+              fontWeight: 600,
               mb: 2,
               color: '#374151',
               fontSize: '0.95rem'
@@ -815,24 +810,24 @@ const OrderSummary = ({ cartData }) => {
           >
             DELIVERY INFORMATION
           </Typography>
-          
+
           <Box sx={{
             backgroundColor: '#EFF6FF',
             border: '1px solid #DBEAFE',
             borderRadius: 1.5,
             p: 2.5
           }}>
-            <Box sx={{ 
-              display: 'flex', 
-              alignItems: 'center', 
-              gap: 1, 
+            <Box sx={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 1,
               mb: 1.5
             }}>
               <AccessTime sx={{ color: '#2563EB', fontSize: 20 }} />
-              <Typography 
-                variant="body2" 
-                sx={{ 
-                  fontWeight: 600, 
+              <Typography
+                variant="body2"
+                sx={{
+                  fontWeight: 600,
                   color: '#2563EB',
                   fontSize: '0.9rem'
                 }}
@@ -840,15 +835,15 @@ const OrderSummary = ({ cartData }) => {
                 Estimated Delivery Time
               </Typography>
             </Box>
-            <Typography 
-              variant="body2" 
-              sx={{ 
+            <Typography
+              variant="body2"
+              sx={{
                 color: '#6B7280',
                 lineHeight: 1.5,
                 fontSize: '0.85rem'
               }}
             >
-              Your order will be delivered within <strong>3-5 business days</strong> for standard delivery. 
+              Your order will be delivered within <strong>3-5 business days</strong> for standard delivery.
               Express delivery options available at checkout.
             </Typography>
           </Box>
