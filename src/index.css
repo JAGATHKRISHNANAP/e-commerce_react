@@ -1,6 +1,4 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
 body {
   margin: 0;
@@ -40,6 +38,7 @@ code {
     opacity: 0;
     transform: translateY(10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -47,12 +46,16 @@ code {
 }
 
 @keyframes shake {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateX(0);
   }
+
   25% {
     transform: translateX(-5px);
   }
+
   75% {
     transform: translateX(5px);
   }
@@ -62,33 +65,43 @@ code {
   0% {
     transform: translateX(-100%) skewX(-12deg);
   }
+
   100% {
     transform: translateX(200%) skewX(-12deg);
   }
 }
 
 @keyframes pulse {
-  0%, 100% {
+
+  0%,
+  100% {
     opacity: 1;
   }
+
   50% {
     opacity: 0.5;
   }
 }
 
 @keyframes float {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0px);
   }
+
   50% {
     transform: translateY(-10px);
   }
 }
 
 @keyframes glow {
-  0%, 100% {
+
+  0%,
+  100% {
     box-shadow: 0 0 5px rgba(59, 130, 246, 0.5);
   }
+
   50% {
     box-shadow: 0 0 20px rgba(59, 130, 246, 0.8), 0 0 30px rgba(59, 130, 246, 0.6);
   }
@@ -144,7 +157,7 @@ code {
 }
 
 /* Input field enhancements */
-input:focus + .floating-label {
+input:focus+.floating-label {
   transform: translateY(-1.5rem) scale(0.8);
   color: #3b82f6;
 }
@@ -178,13 +191,18 @@ input:focus + .floating-label {
 }
 
 @keyframes loading-dots {
-  0%, 20% {
+
+  0%,
+  20% {
     content: '.';
   }
+
   40% {
     content: '..';
   }
-  60%, 100% {
+
+  60%,
+  100% {
     content: '...';
   }
 }
