@@ -26,10 +26,10 @@
 
 //       // Fetch cart data and saved addresses
 //       const [cartResponse, addressResponse] = await Promise.all([
-//         fetch('http://localhost:8000/api/v1/cart', {
+//         fetch('http://65.1.248.179:8000/api/v1/cart', {
 //           headers: getAuthHeaders(),
 //         }),
-//         fetch('http://localhost:8000/api/v1/addresses', {
+//         fetch('http://65.1.248.179:8000/api/v1/addresses', {
 //           headers: getAuthHeaders(),
 //         }).catch(() => ({ ok: false })) // Handle if addresses endpoint doesn't exist
 //       ]);
@@ -58,7 +58,7 @@
 //   const submitOrder = async (orderData) => {
 //     try {
 //       setSubmitting(true);
-//       const response = await fetch('http://localhost:8000/api/v1/orders', {
+//       const response = await fetch('http://65.1.248.179:8000/api/v1/orders', {
 //         method: 'POST',
 //         headers: getAuthHeaders(),
 //         body: JSON.stringify(orderData),
@@ -121,10 +121,10 @@ export const useCheckout = () => {
 
       // Fetch cart data and addresses
       const [cartResponse, addressResponse] = await Promise.all([
-        fetch('http://localhost:8000/api/v1/cart', {
+        fetch('http://65.1.248.179:8000/api/v1/cart', {
           headers: getAuthHeaders(),
         }),
-        fetch('http://localhost:8000/api/v1/addresses', {
+        fetch('http://65.1.248.179:8000/api/v1/addresses', {
           headers: getAuthHeaders(),
         })
       ]);
@@ -154,7 +154,7 @@ export const useCheckout = () => {
 
   const addAddress = async (addressData) => {
     try {
-      const response = await fetch('http://localhost:8000/api/v1/addresses', {
+      const response = await fetch('http://65.1.248.179:8000/api/v1/addresses', {
         method: 'POST',
         headers: getAuthHeaders(),
         body: JSON.stringify(addressData),
@@ -177,7 +177,7 @@ export const useCheckout = () => {
   const submitOrder = async (orderData) => {
     try {
       setSubmitting(true);
-      const response = await fetch('http://localhost:8000/api/v1/orders', {
+      const response = await fetch('http://65.1.248.179:8000/api/v1/orders', {
         method: 'POST',
         headers: getAuthHeaders(),
         body: JSON.stringify(orderData),

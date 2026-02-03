@@ -26,7 +26,7 @@
 //       setLoading(true);
 //       setError(null);
 
-//       const response = await fetch(`http://localhost:8000/api/v1/products/${productId}`);
+//       const response = await fetch(`http://65.1.248.179:8000/api/v1/products/${productId}`);
 
 //       if (!response.ok) {
 //         if (response.status === 404) {
@@ -754,7 +754,7 @@
 //       setLoading(true);
 //       setError(null);
 
-//       const response = await fetch(`http://localhost:8000/api/v1/products/${productId}`);
+//       const response = await fetch(`http://65.1.248.179:8000/api/v1/products/${productId}`);
 
 //       if (!response.ok) {
 //         if (response.status === 404) {
@@ -1555,7 +1555,7 @@ const ProductDetailsPage = () => {
       setLoading(true);
       setError(null);
 
-      const response = await fetch(`http://localhost:8000/api/v1/products/${productId}`);
+      const response = await fetch(`http://65.1.248.179:8000/api/v1/products/${productId}`);
 
       if (!response.ok) {
         if (response.status === 404) {

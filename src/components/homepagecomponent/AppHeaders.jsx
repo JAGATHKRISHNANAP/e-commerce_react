@@ -33,7 +33,7 @@
 
 // //     if (value.length >= 2) {
 // //       try {
-// //         const response = await fetch(`http://localhost:8000/api/v1/api/search/suggestions?q=${encodeURIComponent(value)}`)
+// //         const response = await fetch(`http://65.1.248.179:8000/api/v1/api/search/suggestions?q=${encodeURIComponent(value)}`)
 // //         if (response.ok) {
 // //           const suggestions = await response.json()
 // //           setSearchSuggestions(suggestions)
@@ -482,7 +482,7 @@
 
 //     if (value.length >= 2) {
 //       try {
-//         const response = await fetch(`http://localhost:8000/api/v1/api/search/suggestions?q=${encodeURIComponent(value)}`)
+//         const response = await fetch(`http://65.1.248.179:8000/api/v1/api/search/suggestions?q=${encodeURIComponent(value)}`)
 //         if (response.ok) {
 //           const suggestions = await response.json()
 //           setSearchSuggestions(suggestions)
@@ -1057,7 +1057,7 @@
 //   //         return;
 //   //       }
 
-//   //       const response = await axios.get('http://localhost:8000/api/v1/cart/count', {
+//   //       const response = await axios.get('http://65.1.248.179:8000/api/v1/cart/count', {
 //   //         headers: {
 //   //           Authorization: `Bearer ${token}`
 //   //         }
@@ -1102,7 +1102,7 @@
 
 //     if (value.length >= 2) {
 //       try {
-//         const response = await fetch(`http://localhost:8000/api/v1/api/search/suggestions?q=${encodeURIComponent(value)}`)
+//         const response = await fetch(`http://65.1.248.179:8000/api/v1/api/search/suggestions?q=${encodeURIComponent(value)}`)
 //         if (response.ok) {
 //           const suggestions = await response.json()
 //           setSearchSuggestions(suggestions)

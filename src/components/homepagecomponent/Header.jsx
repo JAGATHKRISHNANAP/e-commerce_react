@@ -33,7 +33,7 @@ const Header = ({ onSearch, searchQuery }) => {
 
     if (value.length >= 2) {
       try {
-        const response = await fetch(`http://localhost:8000/api/v1/api/search/suggestions?q=${encodeURIComponent(value)}`)
+        const response = await fetch(`http://65.1.248.179:8000/api/v1/api/search/suggestions?q=${encodeURIComponent(value)}`)
         if (response.ok) {
           const suggestions = await response.json()
           setSearchSuggestions(suggestions)

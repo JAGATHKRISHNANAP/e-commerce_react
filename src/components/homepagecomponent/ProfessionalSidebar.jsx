@@ -40,7 +40,7 @@
 
 //   const fetchCategories = async () => {
 //     try {
-//       const response = await fetch('http://localhost:8000/api/v1/categories')
+//       const response = await fetch('http://65.1.248.179:8000/api/v1/categories')
 //       if (response.ok) {
 //         const data = await response.json()
 //         setCategories(data)
@@ -52,7 +52,7 @@
 
 //   const fetchSubcategories = async (categoryId) => {
 //     try {
-//       const response = await fetch(`http://localhost:8000/api/v1/categories/${categoryId}/subcategories`)
+//       const response = await fetch(`http://65.1.248.179:8000/api/v1/categories/${categoryId}/subcategories`)
 //       if (response.ok) {
 //         const data = await response.json()
 //         setSubcategories(data)
@@ -65,7 +65,7 @@
 
 //   const fetchPriceRange = async () => {
 //     try {
-//       const response = await fetch('http://localhost:8000/api/v1/price-range')
+//       const response = await fetch('http://65.1.248.179:8000/api/v1/price-range')
 //       if (response.ok) {
 //         const data = await response.json()
 //         setPriceRange({
@@ -662,7 +662,7 @@ const ProfessionalSidebar = ({ isOpen, onClose, onFiltersChange, filters, sortOp
 
   const fetchCategories = async () => {
     try {
-      const response = await fetch('http://localhost:8000/api/v1/categories')
+      const response = await fetch('http://65.1.248.179:8000/api/v1/categories')
       if (response.ok) {
         const data = await response.json()
         setCategories(data)
@@ -674,7 +674,7 @@ const ProfessionalSidebar = ({ isOpen, onClose, onFiltersChange, filters, sortOp
 
   const fetchSubcategories = async (categoryId) => {
     try {
-      const response = await fetch(`http://localhost:8000/api/v1/categories/${categoryId}/subcategories`)
+      const response = await fetch(`http://65.1.248.179:8000/api/v1/categories/${categoryId}/subcategories`)
       if (response.ok) {
         const data = await response.json()
         setSubcategoriesByCategory(prev => ({
@@ -693,7 +693,7 @@ const ProfessionalSidebar = ({ isOpen, onClose, onFiltersChange, filters, sortOp
 
   const fetchPriceRange = async () => {
     try {
-      const response = await fetch('http://localhost:8000/api/v1/price-range')
+      const response = await fetch('http://65.1.248.179:8000/api/v1/price-range')
       if (response.ok) {
         const data = await response.json()
         setPriceRange({

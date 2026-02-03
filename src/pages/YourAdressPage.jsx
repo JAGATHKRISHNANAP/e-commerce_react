@@ -58,7 +58,7 @@
 //   const [message, setMessage] = useState('');
 //   const [messageType, setMessageType] = useState('');
 
-//   const API_BASE_URL = 'http://localhost:8000/api/v1';
+//   const API_BASE_URL = 'http://65.1.248.179:8000/api/v1';
 
 //   // Load categories when component mounts
 //   useEffect(() => {
@@ -436,7 +436,7 @@ const AddProductWithImages = () => {
   const [message, setMessage] = useState('');
   const [messageType, setMessageType] = useState('');
 
-  const API_BASE_URL = 'http://localhost:8000/api/v1';
+  const API_BASE_URL = 'http://65.1.248.179:8000/api/v1';
 
   useEffect(() => {
     loadCategories();
@@ -1035,7 +1035,7 @@ export default AddProductWithImages;
 //       <div style={styles.imageContainer}>
 //         {product.primary_image_url ? (
 //           <img 
-//             src={`http://localhost:8000${product.primary_image_url}`}
+//             src={`http://65.1.248.179:8000${product.primary_image_url}`}
 //             alt={product.name}
 //             style={styles.image}
 //             onError={(e) => {
@@ -1086,7 +1086,7 @@ export default AddProductWithImages;
 //     total_count: 0
 //   });
 
-//   const API_BASE_URL = 'http://localhost:8000/api/v1';
+//   const API_BASE_URL = 'http://65.1.248.179:8000/api/v1';
 
 //   useEffect(() => {
 //     loadProducts();

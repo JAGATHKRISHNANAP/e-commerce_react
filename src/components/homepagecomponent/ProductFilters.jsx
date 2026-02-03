@@ -68,7 +68,7 @@
 
 //   const fetchCategories = async () => {
 //     try {
-//       const response = await fetch('http://localhost:8000/api/v1/categories')
+//       const response = await fetch('http://65.1.248.179:8000/api/v1/categories')
 //       if (response.ok) {
 //         const data = await response.json()
 //         setCategories(data)
@@ -80,7 +80,7 @@
 
 //   const fetchSubcategories = async (categoryId) => {
 //     try {
-//       const response = await fetch(`http://localhost:8000/api/v1/categories/${categoryId}/subcategories`)
+//       const response = await fetch(`http://65.1.248.179:8000/api/v1/categories/${categoryId}/subcategories`)
 //       if (response.ok) {
 //         const data = await response.json()
 //         setSubcategories(data)
@@ -93,7 +93,7 @@
 
 //   const fetchPriceRange = async () => {
 //     try {
-//       const response = await fetch('http://localhost:8000/api/v1/price-range')
+//       const response = await fetch('http://65.1.248.179:8000/api/v1/price-range')
 //       if (response.ok) {
 //         const data = await response.json()
 //         setPriceRange({
@@ -167,7 +167,7 @@
 //         params.append('sort_order', filters.sort_order)
 //       }
 
-//       const apiUrl = `http://localhost:8000/api/v1/products?${params.toString()}`
+//       const apiUrl = `http://65.1.248.179:8000/api/v1/products?${params.toString()}`
 //       console.log('API call:', apiUrl)
 
 //       // Make API call to fetch filtered products
@@ -500,7 +500,7 @@ const FixedProductFilters = ({ onFiltersChange, filters }) => {
 
   const fetchCategories = async () => {
     try {
-      const response = await fetch('http://localhost:8000/api/v1/categories')
+      const response = await fetch('http://65.1.248.179:8000/api/v1/categories')
       if (response.ok) {
         const data = await response.json()
         setCategories(data)
@@ -512,7 +512,7 @@ const FixedProductFilters = ({ onFiltersChange, filters }) => {
 
   const fetchSubcategories = async (categoryId) => {
     try {
-      const response = await fetch(`http://localhost:8000/api/v1/categories/${categoryId}/subcategories`)
+      const response = await fetch(`http://65.1.248.179:8000/api/v1/categories/${categoryId}/subcategories`)
       if (response.ok) {
         const data = await response.json()
         setSubcategories(data)
@@ -525,7 +525,7 @@ const FixedProductFilters = ({ onFiltersChange, filters }) => {
 
   const fetchPriceRange = async () => {
     try {
-      const response = await fetch('http://localhost:8000/api/v1/price-range')
+      const response = await fetch('http://65.1.248.179:8000/api/v1/price-range')
       if (response.ok) {
         const data = await response.json()
         setPriceRange({
@@ -544,7 +544,7 @@ const FixedProductFilters = ({ onFiltersChange, filters }) => {
       if (catId) params.append('category_id', catId)
       if (subcatId) params.append('subcategory_id', subcatId)
 
-      const response = await fetch(`http://localhost:8000/api/v1/products/filters?${params}`)
+      const response = await fetch(`http://65.1.248.179:8000/api/v1/products/filters?${params}`)
       if (response.ok) {
         const data = await response.json()
         setSpecificationFilters(data)

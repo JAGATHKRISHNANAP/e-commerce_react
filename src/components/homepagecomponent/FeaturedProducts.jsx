@@ -14,8 +14,8 @@ const FeaturedProducts = ({ onAddToCart, onViewDetails }) => {
   const fetchFeaturedProducts = async () => {
     try {
       setLoading(true)
-      const response = await fetch('http://localhost:8000/api/v1/products/featured?limit=8')
-      
+      const response = await fetch('http://65.1.248.179:8000/api/v1/products/featured?limit=8')
+
       if (response.ok) {
         const data = await response.json()
         setFeaturedProducts(data)

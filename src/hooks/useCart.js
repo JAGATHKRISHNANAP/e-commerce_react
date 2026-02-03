@@ -16,7 +16,7 @@
 // //         throw new Error('Authentication token not found');
 // //       }
 
-// //       const response = await fetch('http://localhost:8000/api/v1/cart', {
+// //       const response = await fetch('http://65.1.248.179:8000/api/v1/cart', {
 // //         method: 'GET',
 // //         headers: {
 // //           'Authorization': `Bearer ${token}`,
@@ -79,7 +79,7 @@
 //       setLoading(true);
 //       setError(null);
 
-//       const response = await fetch('http://localhost:8000/api/v1/cart', {
+//       const response = await fetch('http://65.1.248.179:8000/api/v1/cart', {
 //         method: 'GET',
 //         headers: getAuthHeaders(),
 //       });
@@ -107,7 +107,7 @@
 //   const removeItem = async (productId) => {
 //     try {
 //       setActionLoading(true);
-//       const response = await fetch(`http://localhost:8000/api/v1/cart/item/${productId}`, {
+//       const response = await fetch(`http://65.1.248.179:8000/api/v1/cart/item/${productId}`, {
 //         method: 'DELETE',
 //         headers: getAuthHeaders(),
 //       });
@@ -130,7 +130,7 @@
 //   const clearCart = async () => {
 //     try {
 //       setActionLoading(true);
-//       const response = await fetch('http://localhost:8000/api/v1/cart/clear', {
+//       const response = await fetch('http://65.1.248.179:8000/api/v1/cart/clear', {
 //         method: 'DELETE',
 //         headers: getAuthHeaders(),
 //       });
@@ -198,7 +198,7 @@ export const useCart = () => {
       setLoading(true);
       setError(null);
 
-      const response = await fetch('http://localhost:8000/api/v1/cart', {
+      const response = await fetch('http://65.1.248.179:8000/api/v1/cart', {
         method: 'GET',
         headers: getAuthHeaders(),
       });
@@ -226,7 +226,7 @@ export const useCart = () => {
   const removeItem = async (productId) => {
     try {
       setActionLoading(true);
-      const response = await fetch(`http://localhost:8000/api/v1/cart/item/${productId}`, {
+      const response = await fetch(`http://65.1.248.179:8000/api/v1/cart/item/${productId}`, {
         method: 'DELETE',
         headers: getAuthHeaders(),
       });
@@ -249,7 +249,7 @@ export const useCart = () => {
   const clearCart = async () => {
     try {
       setActionLoading(true);
-      const response = await fetch('http://localhost:8000/api/v1/cart/clear', {
+      const response = await fetch('http://65.1.248.179:8000/api/v1/cart/clear', {
         method: 'DELETE',
         headers: getAuthHeaders(),
       });
@@ -274,7 +274,7 @@ export const useCart = () => {
 const onUpdateItem = async (productId, quantity) => {
   try {
     setActionLoading(true);
-    const response = await fetch(`http://localhost:8000/api/v1/cart/item/${productId}`, {
+    const response = await fetch(`http://65.1.248.179:8000/api/v1/cart/item/${productId}`, {
       method: 'PUT',
       headers: {
         ...getAuthHeaders(),

@@ -209,7 +209,7 @@
 // // src/services/api/authAPI.js
 // import axios from 'axios'
 
-// const BASE_URL =  'http://localhost:8000/api/v1'
+// const BASE_URL =  'http://65.1.248.179:8000/api/v1'
 
 // // Create axios instance
 // const api = axios.create({
@@ -339,7 +339,7 @@
 // src/services/api/authAPI.js
 import axios from 'axios'
 
-const BASE_URL =  'http://localhost:8000/api/v1'
+const BASE_URL =  'http://65.1.248.179:8000/api/v1'
 
 // Create axios instance
 const api = axios.create({

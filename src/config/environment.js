@@ -1,7 +1,7 @@
 // Environment configuration
 export const config = {
   // API Configuration
-  API_BASE_URL: import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000/api/v1/api/v1',
+  API_BASE_URL: import.meta.env.VITE_API_BASE_URL || 'http://65.1.248.179:8000/api/v1/api/v1',
   
   // App Configuration
   APP_NAME: import.meta.env.VITE_APP_NAME || 'MyAuthApp',

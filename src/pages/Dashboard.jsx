@@ -460,7 +460,7 @@
 // // // //       if (filters.max_price) params.append('max_price', filters.max_price)
 // // // //       if (searchQuery) params.append('search', searchQuery)
 
-// // // //       const response = await fetch(`http://localhost:8000/api/v1/api/products?${params}`)
+// // // //       const response = await fetch(`http://65.1.248.179:8000/api/v1/api/products?${params}`)
 
 // // // //       if (!response.ok) {
 // // // //         throw new Error(`HTTP error! status: ${response.status}`)
@@ -792,7 +792,7 @@
 // // // //       if (filters.max_price) params.append('max_price', filters.max_price)
 // // // //       if (searchQuery) params.append('search', searchQuery)
 
-// // // //       const response = await fetch(`http://localhost:8000/api/v1/api/products?${params}`)
+// // // //       const response = await fetch(`http://65.1.248.179:8000/api/v1/api/products?${params}`)
 
 // // // //       if (!response.ok) {
 // // // //         throw new Error(`HTTP error! status: ${response.status}`)
@@ -1224,7 +1224,7 @@
 // // // //       if (filters.max_price) params.append('max_price', filters.max_price)
 // // // //       if (searchQuery) params.append('search', searchQuery)
 
-// // // //       const response = await fetch(`http://localhost:8000/api/v1/api/products?${params}`)
+// // // //       const response = await fetch(`http://65.1.248.179:8000/api/v1/api/products?${params}`)
 
 // // // //       if (!response.ok) {
 // // // //         throw new Error(`HTTP error! status: ${response.status}`)
@@ -1728,7 +1728,7 @@
 // // // //       if (filters.max_price) params.append('max_price', filters.max_price)
 // // // //       if (searchQuery) params.append('search', searchQuery)
 
-// // // //       const response = await fetch(`http://localhost:8000/api/v1/products?${params}`)
+// // // //       const response = await fetch(`http://65.1.248.179:8000/api/v1/products?${params}`)
 
 // // // //       if (!response.ok) {
 // // // //         throw new Error(`HTTP error! status: ${response.status}`)
@@ -2289,7 +2289,7 @@
 // // //       if (filters.max_price) params.append('max_price', filters.max_price)
 // // //       if (searchQuery) params.append('search', searchQuery)
 
-// // //       const response = await fetch(`http://localhost:8000/api/v1/products?${params}`)
+// // //       const response = await fetch(`http://65.1.248.179:8000/api/v1/products?${params}`)
 
 // // //       if (!response.ok) {
 // // //         throw new Error(`HTTP error! status: ${response.status}`)
@@ -2842,7 +2842,7 @@
 // //       if (filters.max_price) params.append('max_price', filters.max_price)
 // //       if (searchQuery) params.append('search', searchQuery)
 
-// //       const response = await fetch(`http://localhost:8000/api/v1/products?${params}`)
+// //       const response = await fetch(`http://65.1.248.179:8000/api/v1/products?${params}`)
 
 // //       if (!response.ok) {
 // //         throw new Error(`HTTP error! status: ${response.status}`)
@@ -3460,7 +3460,7 @@
 //       if (filtersToUse.max_price) params.append('max_price', filtersToUse.max_price)
 //       if (searchQuery) params.append('search', searchQuery)
 
-//       const response = await fetch(`http://localhost:8000/api/v1/products?${params}`)
+//       const response = await fetch(`http://65.1.248.179:8000/api/v1/products?${params}`)
 
 //       if (!response.ok) {
 //         throw new Error(`HTTP error! status: ${response.status}`)
@@ -4110,7 +4110,7 @@
 //         params.append('search', searchQuery.trim())
 //       }
 
-//       const apiUrl = `http://localhost:8000/api/v1/products?${params}`
+//       const apiUrl = `http://65.1.248.179:8000/api/v1/products?${params}`
 //       console.log('API URL:', apiUrl)
 
 //       const response = await fetch(apiUrl)
@@ -4743,7 +4743,7 @@ const Homepage = () => {
         params.append('search', searchQuery.trim())
       }
 
-      const apiUrl = `http://localhost:8000/api/v1/products?${params}`
+      const apiUrl = `http://65.1.248.179:8000/api/v1/products?${params}`
       console.log('API URL:', apiUrl)
 
       const response = await fetch(apiUrl)

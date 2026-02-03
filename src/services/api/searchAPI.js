@@ -1,7 +1,7 @@
 // src/services/api/searchAPI.js
 import axios from 'axios';
 
-const API_BASE_URL = 'http://localhost:8000/api/v1';
+const API_BASE_URL = 'http://65.1.248.179:8000/api/v1';
 
 // Create axios instance with auth
 const createAuthAxios = () => {

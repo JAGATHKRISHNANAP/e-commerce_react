@@ -36,7 +36,7 @@ export const CartProvider = ({ children }) => {
   const fetchCart = async () => {
     try {
       setLoading(true)
-      const response = await fetch(`http://localhost:8000/api/v1/api/cart/${sessionId}`)
+      const response = await fetch(`http://65.1.248.179:8000/api/v1/api/cart/${sessionId}`)
       if (response.ok) {
         const data = await response.json()
         setCartItems(data.items || [])
@@ -53,8 +53,8 @@ export const CartProvider = ({ children }) => {
   const addToCart = async (product, quantity = 1) => {
     try {
       setLoading(true)
-      
-      const response = await fetch('http://localhost:8000/api/v1/api/cart/add', {
+
+      const response = await fetch('http://65.1.248.179:8000/api/v1/api/cart/add', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -73,10 +73,10 @@ export const CartProvider = ({ children }) => {
 
       // Show success message
       showNotification(`✅ Added ${product.name} to cart!`, 'success')
-      
+
       // Refresh cart
       await fetchCart()
-      
+
       return true
     } catch (error) {
       console.error('Error adding to cart:', error)
@@ -90,8 +90,8 @@ export const CartProvider = ({ children }) => {
   const updateCartItem = async (cartItemId, quantity) => {
     try {
       setLoading(true)
-      
-      const response = await fetch(`http://localhost:8000/api/v1/api/cart/${cartItemId}`, {
+
+      const response = await fetch(`http://65.1.248.179:8000/api/v1/api/cart/${cartItemId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -110,7 +110,7 @@ export const CartProvider = ({ children }) => {
       // Refresh cart
       await fetchCart()
       showNotification('📝 Cart updated!', 'success')
-      
+
     } catch (error) {
       console.error('Error updating cart item:', error)
       showNotification(`❌ ${error.message}`, 'error')
@@ -122,8 +122,8 @@ export const CartProvider = ({ children }) => {
   const removeFromCart = async (cartItemId) => {
     try {
       setLoading(true)
-      
-      const response = await fetch(`http://localhost:8000/api/v1/api/cart/${cartItemId}`, {
+
+      const response = await fetch(`http://65.1.248.179:8000/api/v1/api/cart/${cartItemId}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -141,7 +141,7 @@ export const CartProvider = ({ children }) => {
       // Refresh cart
       await fetchCart()
       showNotification('🗑️ Item removed from cart', 'success')
-      
+
     } catch (error) {
       console.error('Error removing from cart:', error)
       showNotification(`❌ ${error.message}`, 'error')
@@ -153,8 +153,8 @@ export const CartProvider = ({ children }) => {
   const clearCart = async () => {
     try {
       setLoading(true)
-      
-      const response = await fetch(`http://localhost:8000/api/v1/api/cart/clear/${sessionId}`, {
+
+      const response = await fetch(`http://65.1.248.179:8000/api/v1/api/cart/clear/${sessionId}`, {
         method: 'DELETE'
       })
 
@@ -168,7 +168,7 @@ export const CartProvider = ({ children }) => {
       setCartCount(0)
       setCartTotal(0)
       showNotification('🧹 Cart cleared!', 'success')
-      
+
     } catch (error) {
       console.error('Error clearing cart:', error)
       showNotification(`❌ ${error.message}`, 'error')
@@ -197,7 +197,7 @@ export const CartProvider = ({ children }) => {
       max-width: 300px;
       word-wrap: break-word;
     `
-    
+
     notification.textContent = message
     document.body.appendChild(notification)
 
@@ -239,7 +239,7 @@ export const CartProvider = ({ children }) => {
   return (
     <CartContext.Provider value={value}>
       {children}
-      
+
       {/* Add CSS animations */}
       <style>{`
         @keyframes slideInRight {
